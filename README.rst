@@ -226,7 +226,7 @@ Let’s now try and simulate an attack which belongs to **Threat Campaigns** typ
 
    .. figure:: _figures/107.png 
 
-   `2.` Insert the Zone name to the following address and paste the address to your browser: 
+   `2.` Insert the Zone name to the following address and open it in your browser: 
 
    **http://na2-auction.{{ZONE_NAME}}/nginx.config** 
 
