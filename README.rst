@@ -194,6 +194,8 @@ Return to the F5 Cloud Services portal, open **Essential App Protect** tab, sele
 
 .. figure:: _figures/106.png 
 
+You will see the status of testing. 
+
 3. Update Monitoring to Blocking 
 ************************** 
 
