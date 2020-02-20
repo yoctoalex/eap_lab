@@ -93,7 +93,7 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <http://bit.ly/37hyQw3>`_.  
 
-`d)` Let’s now retrieve DNS Zone Name with the **Get DNS Zone (lab)** API Call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a ZONE name unique to your lab.  
+`d)` Let’s now retrieve DNS Zone Name with the **Get DNS Zone (lab)** API Call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab.  
 
 Request:  
 
@@ -103,11 +103,11 @@ The response will return your test DNS zone name and the status.
 
 .. figure:: _figures/27.jpg  
 
-Sending this request will automatically capture of the ZONE variables:  
+Sending this request will automatically capture of the Zone variables:  
 
 .. figure:: _figures/26.jpg  
 
-This Zone Name will be used for creating services in F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
+This Zone Name will be used for creating services in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
 
 DNS Service  
 ########### 
