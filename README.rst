@@ -182,7 +182,7 @@ Send the request and you will see the following response:
 
 .. figure:: _figures/103.png 
 
-Now your DNS settings are updated which can be seen in **Zone file** in **DNS** tab: 
+Now your DNS settings are updated which can be seen in **Zone file** in **DNS** tab back in the F5 Cloud Services portal: 
 
 .. figure:: _figures/104.png 
 
