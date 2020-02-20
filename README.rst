@@ -220,7 +220,7 @@ This attack combines valid URL path segments with invalid input to guess or brut
 
 These types of attacks are the category that F5 Labs tracks as coordinated campaigns that exploit known vulnerabilities. This particular attack simulates using a known Tomcat backdoor vulnerability. The complete list of such threats can be found `here <http://bit.ly/36bPmfG>`_.   
 
-Let’s now try and simulate an attack which belongs to **Threat Campaigns** type.  
+Let’s now try and simulate an attack. When attackers are trying to retrieve a configuration file nginx.conf for our application by guessing a path, we actively block them.   
 
    `1.` Copy Zone name in the F5 Cloud Service portal, **DNS** tab:  
 
@@ -234,13 +234,15 @@ Let’s now try and simulate an attack which belongs to **Threat Campaigns** typ
 
    .. figure:: _figures/108.png 
 
-   `3.` Now you can go back to the F5 Cloud Services portal and try to update blocking to monitoring only for all threat types: 
+   `3.` Now you can go back to the F5 Cloud Services portal and update blocking to monitoring only for all threat types: 
 
    .. figure:: _figures/109.png 
 
-   `4.` Update the address used in step 2 above to see that your app is only monitored but not blocked, and the files is downloaded:  
+   `4.` Update the address used in step 2 above to see that your app is only monitored but not blocked, and the file is downloaded:  
 
-   .. figure:: _figures/110.png 
+   .. figure:: _figures/110.png
+   
+   .. figure:: _figures/113.png
 
 5. View Events  
 ************ 
