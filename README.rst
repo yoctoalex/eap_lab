@@ -245,7 +245,7 @@ Let’s now try and simulate an attack. When attackers are trying to retrieve a 
 5. View Events  
 ************ 
 
-The results of the attacks will be shown in the Essential App Protect "VIEW EVENTS" section of the F5 Cloud Services portal. 
+The results of the attacks will be shown in the Essential App Protect **VIEW EVENTS** tab of the F5 Cloud Services portal. 
 
 .. figure:: _figures/111.png 
 
