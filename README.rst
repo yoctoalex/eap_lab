@@ -230,7 +230,7 @@ Let’s now try and simulate an attack which belongs to **Threat Campaigns** typ
 
    **http://na2-auction.{{ZONE_NAME}}/nginx.config** 
 
-   You will see the following response, which means that your app is monitored and blocked too:  
+   You will see the following response, which means that your app is both monitored and blocked:  
 
    .. figure:: _figures/108.png 
 
