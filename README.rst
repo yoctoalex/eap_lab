@@ -174,7 +174,7 @@ Now that your Essential App Protect instance is created, we need to change DNS s
 2. Update DNS Settings using CNAME  
 ******************************** 
 
-`a)` Go back to Postman to change the DNS settings. Paste CNAME you copied in item 1.f) above and paste into the body of  **Update EAP CNAME (lab)** request.  
+`a)` Go back to Postman to change the DNS settings. Paste CNAME you copied in item 1.g) above and paste into the body of  **Update EAP CNAME (lab)** request.  
 
 .. figure:: _figures/102.png 
 
