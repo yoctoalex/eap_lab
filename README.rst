@@ -55,7 +55,7 @@ You are now ready to interface with F5 Cloud Services using Postman.
 
 In order to create Essential App Protect instance in the F5 Cloud Services portal, you need first to create DNS service which will require a zone name. Use Postman and follow the steps below to get the Zone name.     
 
-`a)` Open the “F5 Cloud Services LAB” environment variables – by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click Enter after typing the values).  
+`a)` Open the “F5 Cloud Services LAB” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click Enter after typing the values).  
 
 .. figure:: _figures/92.png 
 
