@@ -102,51 +102,6 @@
 					"response": []
 				},
 				{
-					"name": "Get Roles",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "f3a46ee7-7b11-4c3f-89a0-7cdd4ca5a2c1",
-								"exec": [
-									"pm.test(\"Set Roles Environemnt\", function() {",
-									"    var jsonData = pm.response.json();",
-									"    for(var i=0; i<jsonData.roles.length; i++) {",
-									"        if (jsonData.roles[i].name === \"limited-user\") {",
-									"            pm.environment.set(\"LIMITED_USER_ROLE_ID\", jsonData.roles[i].id);",
-									"        }",
-									"    }",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{ACCESS_TOKEN}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-account/roles",
-							"protocol": "https",
-							"host": [
-								"{{HOSTNAME}}"
-							],
-							"path": [
-								"{{API_VERSION}}",
-								"svc-account",
-								"roles"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get DNS Zone (lab)",
 					"event": [
 						{
@@ -193,7 +148,7 @@
 					"response": []
 				},
 				{
-					"name": "Get User Membership",
+					"name": "Get User Membership (optional)",
 					"event": [
 						{
 							"listen": "test",
@@ -253,14 +208,6 @@
 									"        if (jsonData.Catalogs[i].service_type === \"waf\") {",
 									"            pm.environment.set(\"WAF_CATALOG_ID\", jsonData.Catalogs[i].catalog_id);",
 									"        }",
-									"        ",
-									"        if (jsonData.Catalogs[i].service_type === \"adns\") {",
-									"            pm.environment.set(\"DNS_CATALOG_ID\", jsonData.Catalogs[i].catalog_id);",
-									"        }",
-									"        ",
-									"        if (jsonData.Catalogs[i].service_type === \"gslb\") {",
-									"            pm.environment.set(\"GSLB_CATALOG_ID\", jsonData.Catalogs[i].catalog_id);",
-									"        }",
 									"    }",
 									"})"
 								],
@@ -291,51 +238,15 @@
 						}
 					},
 					"response": []
-				},
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Essential App Protect",
+			"item": [
 				{
-					"name": "Subscribe to Catalog",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{ACCESS_TOKEN}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"account_id\": \"{{ACCOUNT_ID}}\",\n    \"catalog_id\": \"<<replace with desired catalog_id>>\"\n}"
-						},
-						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-account/accounts/{{ACCOUNT_ID}}/catalogs",
-							"protocol": "https",
-							"host": [
-								"{{HOSTNAME}}"
-							],
-							"path": [
-								"{{API_VERSION}}",
-								"svc-account",
-								"accounts",
-								"{{ACCOUNT_ID}}",
-								"catalogs"
-							]
-						},
-						"description": "Hardcoded catalog ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Retrieve Previously Created Subscriptions",
+					"name": "Get EAP Subscription",
 					"event": [
 						{
 							"listen": "test",
@@ -347,13 +258,8 @@
 									"    for(var i=0; i < jsonData.subscriptions.length; i++) {",
 									"        const subscription = jsonData.subscriptions[i];",
 									"        const zoneName = pm.environment.get(\"ZONE_NAME\");",
-									"        if (subscription.service_type === \"adns\" && subscription.service_instance_name === zoneName) {",
-									"            pm.environment.set(\"DNS_SUBSCRIPTION_ID\", subscription.subscription_id);",
-									"        }",
-									"        if (subscription.service_type === \"gslb\" && subscription.service_instance_name === zoneName) {",
-									"            pm.environment.set(\"GSLB_SUBSCRIPTION_ID\", subscription.subscription_id);",
-									"        }",
-									"        if (subscription.service_type === \"waf\" && subscription.service_instance_name === (\"na2-auction.\" + zoneName)) {",
+									"        if (subscription.service_instance_name === `na2-auction.${zoneName}`) {",
+									"            pm.environment.set(\"WAF_SERVICE_INSTANCE_ID\", subscription.service_instance_id);",
 									"            pm.environment.set(\"WAF_SUBSCRIPTION_ID\", subscription.subscription_id);",
 									"            pm.environment.set(\"WAF_CNAME\", subscription.configuration.details.CNAMEValue);",
 									"        }",
@@ -380,7 +286,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions?account_id={{ACCOUNT_ID}}",
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions?account_id={{ACCOUNT_ID}}&service_type=waf",
 							"protocol": "https",
 							"host": [
 								"{{HOSTNAME}}"
@@ -394,153 +300,11 @@
 								{
 									"key": "account_id",
 									"value": "{{ACCOUNT_ID}}"
+								},
+								{
+									"key": "service_type",
+									"value": "waf"
 								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Essential App Protect",
-			"item": [
-				{
-					"name": "Create EAP Subscription",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
-								"exec": [
-									"pm.test(\"Set EAP subscription id variable\", function() {",
-									"    var jsonData = pm.response.json();",
-									"    pm.environment.set(\"WAF_SUBSCRIPTION_ID\", jsonData.subscription_id);",
-									"})",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{ACCESS_TOKEN}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{WAF_CATALOG_ID}}\",\n  \"service_instance_name\": \"na2-auction.{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"waf_service\": {\n      \"application\": {\n        \"remark\": \"na2-auction.{{ZONE_NAME}}\",\n        \"domain\": \"na2-auction.{{ZONE_NAME}}\",\n        \"waf_regions\": {\n          \"aws\": {\n            \"us-east-1\": {\n              \"endpoint\": {\n                \"ips\": [\n                  \"18.232.64.254\"\n                ],\n                \"port\": 80,\n                \"use_TLS\": false\n              }\n            }\n          }\n        }\n      },\n      \"policy\": {\n        \"encoding\": \"utf-8\",\n        \"threat_campaigns\": {\n          \"enabled\": true,\n          \"enforcement_mode\": \"transparent\"\n        },\n        \"compliance_enforcement\": {\n          \"data_guard\": {\n            \"enabled\": true,\n            \"cc\": true,\n            \"ssn\": true\n          }\n        },\n        \"high_risk_attack_mitigation\": {\n          \"enabled\": true,\n          \"enforcement_mode\": \"transparent\",\n          \"signature_enforcement\": {\n            \"enabled\": true\n          },\n          \"allowed_methods\": {\n            \"enabled\": true,\n            \"methods\": [\n              {\n                \"name\": \"GET\"\n              }\n            ]\n          },\n          \"disallowed_file_types\": {\n            \"enabled\": true,\n            \"file_types\": [\n              \"exe\",\n              \"config\"\n            ]\n          },\n          \"api_compliance_enforcement\": {\n            \"enabled\": true\n          },\n          \"http_compliance_enforcement\": {\n            \"enabled\": true\n          },\n          \"websocket_compliance_enforcement\": {\n            \"enabled\": true\n          },\n          \"geolocation_enforcement\": {\n            \"enabled\": true,\n            \"disallowed_country_codes\": [\n              \"AD\"\n            ]\n          },\n          \"ip_enforcement\": {\n            \"enabled\": true,\n            \"ips\": [\n              {\n                \"address\": \"1.2.3.4\",\n                \"description\": \"scanning\",\n                \"action\": \"block\",\n                \"log\": true\n              }\n            ]\n          }\n        },\n        \"malicious_ip_enforcement\": {\n          \"enabled\": true,\n          \"enforcement_mode\": \"transparent\",\n          \"ip_categories\": [\n            {\n              \"name\": \"spam_sources\",\n              \"block\": true,\n              \"log\": true\n            }\n          ]\n        }\n      },\n      \"industry\": \"finance\",\n      \"event_logging\": {\n        \"enabled\": true\n      }\n    }\n  },\n  \"service_type\": \"waf\"\n}"
-						},
-						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions",
-							"protocol": "https",
-							"host": [
-								"{{HOSTNAME}}"
-							],
-							"path": [
-								"{{API_VERSION}}",
-								"svc-subscription",
-								"subscriptions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Activate EAP Subscription",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{ACCESS_TOKEN}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"subscription_id\": \"{{WAF_SUBSCRIPTION_ID}}\",\n  \"omit_config\": true\n}"
-						},
-						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}/activate",
-							"protocol": "https",
-							"host": [
-								"{{HOSTNAME}}"
-							],
-							"path": [
-								"{{API_VERSION}}",
-								"svc-subscription",
-								"subscriptions",
-								"{{WAF_SUBSCRIPTION_ID}}",
-								"activate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get EAP Subscription",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
-								"exec": [
-									"pm.test(\"Set EAP variables\", function() {",
-									"    var jsonData = pm.response.json();",
-									"    pm.environment.set(\"WAF_SERVICE_INSTANCE_ID\", jsonData.service_instance_id);",
-									"    pm.environment.set(\"WAF_CNAME\", jsonData.configuration.details.CNAMEValue);",
-									"})",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{ACCESS_TOKEN}}"
-							}
-						],
-						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}",
-							"protocol": "https",
-							"host": [
-								"{{HOSTNAME}}"
-							],
-							"path": [
-								"{{API_VERSION}}",
-								"svc-subscription",
-								"subscriptions",
-								"{{WAF_SUBSCRIPTION_ID}}"
 							]
 						}
 					},
@@ -560,7 +324,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Bearer {{ACCESS_TOKEN}}"
+								"value": "Bearer {{LIMITED_ACCESS_TOKEN}}"
 							}
 						],
 						"body": {
@@ -581,6 +345,417 @@
 					"response": []
 				},
 				{
+					"name": "Attack: Threat Campaign",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/3.0 (compatible; Indy Library)",
+								"type": "text"
+							},
+							{
+								"key": "X-Virtual-Server-Port",
+								"value": "8080",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic Og==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://na2-auction.{{ZONE_NAME}}/manager/html",
+							"protocol": "http",
+							"host": [
+								"na2-auction",
+								"{{ZONE_NAME}}"
+							],
+							"path": [
+								"manager",
+								"html"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Monitor to Block",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_id\": \"{{ACCOUNT_ID}}\",\n    \"catalog_id\": \"{{WAF_CATALOG_ID}}\",\n    \"service_instance_name\": \"na2-auction.{{ZONE_NAME}}\",\n    \"configuration\": {\n        \"waf_service\": {\n            \"application\": {\n                \"remark\": \"na2-auction.{{ZONE_NAME}}\",\n                \"domain\": \"na2-auction.{{ZONE_NAME}}\",\n                \"waf_regions\": {\n                    \"aws\": {\n                        \"us-east-1\": {\n                            \"endpoint\": {\n                                \"ips\": [\n                                    \"18.232.64.254\"\n                                ],\n                                \"port\": 80,\n                                \"use_TLS\": false\n                            }\n                        }\n                    }\n                }\n            },\n            \"policy\": {\n                \"encoding\": \"utf-8\",\n                \"threat_campaigns\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\"\n                },\n                \"compliance_enforcement\": {\n                    \"data_guard\": {\n                        \"enabled\": true,\n                        \"cc\": true,\n                        \"ssn\": true\n                    },\n                    \"sensitive_parameters\": {\n                        \"enabled\": true,\n                        \"parameters\": [\n                            \"cc_id\",\n                            \"creditcard\",\n                            \"passwd\",\n                            \"password\"\n                        ],\n                        \"xml_attributes\": [],\n                        \"xml_elements\": []\n                    }\n                },\n                \"high_risk_attack_mitigation\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"signature_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"allowed_methods\": {\n                        \"enabled\": true,\n                        \"methods\": [\n                            {\n                                \"name\": \"GET\"\n                            },\n                            {\n                                \"name\": \"POST\"\n                            },\n                            {\n                                \"name\": \"HEAD\"\n                            }\n                        ]\n                    },\n                    \"disallowed_file_types\": {\n                        \"enabled\": true,\n                        \"file_types\": [\n                            \"back\",\n                            \"bat\",\n                            \"bck\",\n                            \"bin\",\n                            \"cfg\",\n                            \"cmd\",\n                            \"com\",\n                            \"config\",\n                            \"dat\",\n                            \"dll\",\n                            \"eml\",\n                            \"exe\",\n                            \"exe1\",\n                            \"exe_renamed\",\n                            \"hta\",\n                            \"htr\",\n                            \"htw\",\n                            \"ida\",\n                            \"idc\",\n                            \"idq\",\n                            \"ini\",\n                            \"old\",\n                            \"sav\",\n                            \"save\"\n                        ]\n                    },\n                    \"api_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"http_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"websocket_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"geolocation_enforcement\": {\n                        \"disallowed_country_codes\": [\n                            \"CU\",\n                            \"IR\",\n                            \"KP\",\n                            \"LY\",\n                            \"SD\",\n                            \"SY\"\n                        ],\n                        \"enabled\": true\n                    },\n                    \"ip_enforcement\": {\n                        \"enabled\": true,\n                        \"ips\": []\n                    }\n                },\n                \"malicious_ip_enforcement\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"ip_categories\": [\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"mobile_threats\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"cloud_services\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"anonymous_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"phishing_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"infected_sources\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"denial_of_service\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"scanners\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"bot_nets\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"web_attacks\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"windows_exploits\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"spam_sources\"\n                        }\n                    ]\n                }\n            },\n            \"event_logging\": {\n                \"enabled\": true\n            }\n        }\n    },\n    \"service_type\": \"waf\"\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{WAF_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attack: Illegal Filetype",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows; U; Windows NT 5.1; pt-PT; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://na2-auction.{{ZONE_NAME}}/nginx.config",
+							"protocol": "http",
+							"host": [
+								"na2-auction",
+								"{{ZONE_NAME}}"
+							],
+							"path": [
+								"nginx.config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attack: SQL Injection",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows; U; Windows NT 5.1; pt-PT; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://na2-auction.{{ZONE_NAME}}/vulnerabilities/sqli/?id=%25%27+or+0%3D0&Submit=Submit",
+							"protocol": "http",
+							"host": [
+								"na2-auction",
+								"{{ZONE_NAME}}"
+							],
+							"path": [
+								"vulnerabilities",
+								"sqli",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "%25%27+or+0%3D0"
+								},
+								{
+									"key": "Submit",
+									"value": "Submit"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Block country list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_id\": \"{{ACCOUNT_ID}}\",\n    \"catalog_id\": \"{{WAF_CATALOG_ID}}\",\n    \"service_instance_name\": \"na2-auction.{{ZONE_NAME}}\",\n    \"configuration\": {\n        \"waf_service\": {\n            \"application\": {\n                \"remark\": \"na2-auction.{{ZONE_NAME}}\",\n                \"domain\": \"na2-auction.{{ZONE_NAME}}\",\n                \"waf_regions\": {\n                    \"aws\": {\n                        \"us-east-1\": {\n                            \"endpoint\": {\n                                \"ips\": [\n                                    \"18.232.64.254\"\n                                ],\n                                \"port\": 80,\n                                \"use_TLS\": false\n                            }\n                        }\n                    }\n                }\n            },\n            \"policy\": {\n                \"encoding\": \"utf-8\",\n                \"threat_campaigns\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\"\n                },\n                \"compliance_enforcement\": {\n                    \"data_guard\": {\n                        \"enabled\": true,\n                        \"cc\": true,\n                        \"ssn\": true\n                    },\n                    \"sensitive_parameters\": {\n                        \"enabled\": true,\n                        \"parameters\": [\n                            \"cc_id\",\n                            \"creditcard\",\n                            \"passwd\",\n                            \"password\"\n                        ],\n                        \"xml_attributes\": [],\n                        \"xml_elements\": []\n                    }\n                },\n                \"high_risk_attack_mitigation\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"signature_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"allowed_methods\": {\n                        \"enabled\": true,\n                        \"methods\": [\n                            {\n                                \"name\": \"GET\"\n                            },\n                            {\n                                \"name\": \"POST\"\n                            },\n                            {\n                                \"name\": \"HEAD\"\n                            }\n                        ]\n                    },\n                    \"disallowed_file_types\": {\n                        \"enabled\": true,\n                        \"file_types\": [\n                            \"back\",\n                            \"bat\",\n                            \"bck\",\n                            \"bin\",\n                            \"cfg\",\n                            \"cmd\",\n                            \"com\",\n                            \"config\",\n                            \"dat\",\n                            \"dll\",\n                            \"eml\",\n                            \"exe\",\n                            \"exe1\",\n                            \"exe_renamed\",\n                            \"hta\",\n                            \"htr\",\n                            \"htw\",\n                            \"ida\",\n                            \"idc\",\n                            \"idq\",\n                            \"ini\",\n                            \"old\",\n                            \"sav\",\n                            \"save\"\n                        ]\n                    },\n                    \"api_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"http_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"websocket_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"geolocation_enforcement\": {\n                        \"disallowed_country_codes\": [\n                            \"US\",\n                            \"DE\",\n                            \"GB\"\n                        ],\n                        \"enabled\": true\n                    },\n                    \"ip_enforcement\": {\n                        \"enabled\": true,\n                        \"ips\": []\n                    }\n                },\n                \"malicious_ip_enforcement\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"ip_categories\": [\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"mobile_threats\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"cloud_services\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"anonymous_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"phishing_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"infected_sources\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"denial_of_service\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"scanners\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"bot_nets\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"web_attacks\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"windows_exploits\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"spam_sources\"\n                        }\n                    ]\n                }\n            },\n            \"event_logging\": {\n                \"enabled\": true\n            }\n        }\n    },\n    \"service_type\": \"waf\"\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{WAF_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Country Blocking (lab)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"domain\": \"na2-auction.{{ZONE_NAME}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/proxy/northamerica",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"proxy",
+								"northamerica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update IP Enforcement Rules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_id\": \"{{ACCOUNT_ID}}\",\n    \"catalog_id\": \"{{WAF_CATALOG_ID}}\",\n    \"service_instance_name\": \"na2-auction.{{ZONE_NAME}}\",\n    \"configuration\": {\n        \"waf_service\": {\n            \"application\": {\n                \"remark\": \"na2-auction.{{ZONE_NAME}}\",\n                \"domain\": \"na2-auction.{{ZONE_NAME}}\",\n                \"waf_regions\": {\n                    \"aws\": {\n                        \"us-east-1\": {\n                            \"endpoint\": {\n                                \"ips\": [\n                                    \"18.232.64.254\"\n                                ],\n                                \"port\": 80,\n                                \"use_TLS\": false\n                            }\n                        }\n                    }\n                }\n            },\n            \"policy\": {\n                \"encoding\": \"utf-8\",\n                \"threat_campaigns\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\"\n                },\n                \"compliance_enforcement\": {\n                    \"data_guard\": {\n                        \"enabled\": true,\n                        \"cc\": true,\n                        \"ssn\": true\n                    },\n                    \"sensitive_parameters\": {\n                        \"enabled\": true,\n                        \"parameters\": [\n                            \"cc_id\",\n                            \"creditcard\",\n                            \"passwd\",\n                            \"password\"\n                        ],\n                        \"xml_attributes\": [],\n                        \"xml_elements\": []\n                    }\n                },\n                \"high_risk_attack_mitigation\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"signature_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"allowed_methods\": {\n                        \"enabled\": true,\n                        \"methods\": [\n                            {\n                                \"name\": \"GET\"\n                            },\n                            {\n                                \"name\": \"POST\"\n                            },\n                            {\n                                \"name\": \"HEAD\"\n                            }\n                        ]\n                    },\n                    \"disallowed_file_types\": {\n                        \"enabled\": true,\n                        \"file_types\": [\n                            \"back\",\n                            \"bat\",\n                            \"bck\",\n                            \"bin\",\n                            \"cfg\",\n                            \"cmd\",\n                            \"com\",\n                            \"config\",\n                            \"dat\",\n                            \"dll\",\n                            \"eml\",\n                            \"exe\",\n                            \"exe1\",\n                            \"exe_renamed\",\n                            \"hta\",\n                            \"htr\",\n                            \"htw\",\n                            \"ida\",\n                            \"idc\",\n                            \"idq\",\n                            \"ini\",\n                            \"old\",\n                            \"sav\",\n                            \"save\"\n                        ]\n                    },\n                    \"api_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"http_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"websocket_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"geolocation_enforcement\": {\n                        \"disallowed_country_codes\": [\n                            \"CU\",\n                            \"IR\",\n                            \"KP\",\n                            \"LY\",\n                            \"SD\",\n                            \"SY\"\n                        ],\n                        \"enabled\": true\n                    },\n                    \"ip_enforcement\": {\n                        \"enabled\": true,\n                        \"ips\": [\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"127.0.0.1\",\n                                \"description\": \"localhost\",\n                                \"log\": true\n                            },\n                            {\n                                \"action\": \"allow\",\n                                \"address\": \"192.168.100.50\",\n                                \"description\": \"dev environment\",\n                                \"log\": false\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"11.11.11.10\",\n                                \"description\": \"spam bot\",\n                                \"log\": false\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"192.168.1.10\",\n                                \"description\": \"hacker net\",\n                                \"log\": true\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"12.23.34.59\",\n                                \"description\": \"anonymous proxies\",\n                                \"log\": false\n                            }\n                        ]\n                    }\n                },\n                \"malicious_ip_enforcement\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"ip_categories\": [\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"mobile_threats\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"cloud_services\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"anonymous_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"phishing_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"infected_sources\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"denial_of_service\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"scanners\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"bot_nets\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"web_attacks\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"windows_exploits\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"spam_sources\"\n                        }\n                    ]\n                }\n            },\n            \"event_logging\": {\n                \"enabled\": true\n            }\n        }\n    },\n    \"service_type\": \"waf\"\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{WAF_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customize blocked page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"account_id\": \"{{ACCOUNT_ID}}\",\r\n    \"catalog_id\": \"{{WAF_CATALOG_ID}}\",\r\n    \"service_instance_name\": \"na2-auction.{{ZONE_NAME}}\",\r\n    \"configuration\": {\r\n        \"waf_service\": {\r\n            \"application\": {\r\n                \"remark\": \"na2-auction.{{ZONE_NAME}}\",\r\n                \"domain\": \"na2-auction.{{ZONE_NAME}}\",\r\n                \"waf_regions\": {\r\n                    \"aws\": {\r\n                        \"us-east-1\": {\r\n                            \"endpoint\": {\r\n                                \"ips\": [\r\n                                    \"18.232.64.254\"\r\n                                ],\r\n                                \"port\": 80,\r\n                                \"use_TLS\": false\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            },\r\n            \"policy\": {\r\n                \"encoding\": \"utf-8\",\r\n                \"threat_campaigns\": {\r\n                    \"enabled\": true,\r\n                    \"enforcement_mode\": \"blocking\"\r\n                },\r\n                \"mitigation\": {\r\n                    \"type\": \"response_page\",\r\n                    \"response_page_html\": \"Blocked!\"\r\n                },\r\n                \"compliance_enforcement\": {\r\n                    \"data_guard\": {\r\n                        \"enabled\": true,\r\n                        \"cc\": true,\r\n                        \"ssn\": true\r\n                    },\r\n                    \"sensitive_parameters\": {\r\n                        \"enabled\": true,\r\n                        \"parameters\": [\r\n                            \"cc_id\",\r\n                            \"creditcard\",\r\n                            \"passwd\",\r\n                            \"password\"\r\n                        ],\r\n                        \"xml_attributes\": [],\r\n                        \"xml_elements\": []\r\n                    }\r\n                },\r\n                \"high_risk_attack_mitigation\": {\r\n                    \"enabled\": true,\r\n                    \"enforcement_mode\": \"blocking\",\r\n                    \"signature_enforcement\": {\r\n                        \"enabled\": true\r\n                    },\r\n                    \"allowed_methods\": {\r\n                        \"enabled\": true,\r\n                        \"methods\": [\r\n                            {\r\n                                \"name\": \"GET\"\r\n                            },\r\n                            {\r\n                                \"name\": \"POST\"\r\n                            },\r\n                            {\r\n                                \"name\": \"HEAD\"\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"disallowed_file_types\": {\r\n                        \"enabled\": true,\r\n                        \"file_types\": [\r\n                            \"back\",\r\n                            \"bat\",\r\n                            \"bck\",\r\n                            \"bin\",\r\n                            \"cfg\",\r\n                            \"cmd\",\r\n                            \"com\",\r\n                            \"config\",\r\n                            \"dat\",\r\n                            \"dll\",\r\n                            \"eml\",\r\n                            \"exe\",\r\n                            \"exe1\",\r\n                            \"exe_renamed\",\r\n                            \"hta\",\r\n                            \"htr\",\r\n                            \"htw\",\r\n                            \"ida\",\r\n                            \"idc\",\r\n                            \"idq\",\r\n                            \"ini\",\r\n                            \"old\",\r\n                            \"sav\",\r\n                            \"save\"\r\n                        ]\r\n                    },\r\n                    \"api_compliance_enforcement\": {\r\n                        \"enabled\": true\r\n                    },\r\n                    \"http_compliance_enforcement\": {\r\n                        \"enabled\": true\r\n                    },\r\n                    \"websocket_compliance_enforcement\": {\r\n                        \"enabled\": true\r\n                    },\r\n                    \"geolocation_enforcement\": {\r\n                        \"disallowed_country_codes\": [\r\n                            \"CU\",\r\n                            \"IR\",\r\n                            \"KP\",\r\n                            \"LY\",\r\n                            \"SD\",\r\n                            \"SY\"\r\n                        ],\r\n                        \"enabled\": true\r\n                    },\r\n                    \"ip_enforcement\": {\r\n                        \"enabled\": true,\r\n                        \"ips\": [\r\n                            {\r\n                                \"action\": \"block\",\r\n                                \"address\": \"127.0.0.1\",\r\n                                \"description\": \"localhost\",\r\n                                \"log\": true\r\n                            },\r\n                            {\r\n                                \"action\": \"allow\",\r\n                                \"address\": \"192.168.100.50\",\r\n                                \"description\": \"dev environment\",\r\n                                \"log\": false\r\n                            },\r\n                            {\r\n                                \"action\": \"block\",\r\n                                \"address\": \"11.11.11.10\",\r\n                                \"description\": \"spam bot\",\r\n                                \"log\": false\r\n                            },\r\n                            {\r\n                                \"action\": \"block\",\r\n                                \"address\": \"192.168.1.10\",\r\n                                \"description\": \"hacker net\",\r\n                                \"log\": true\r\n                            },\r\n                            {\r\n                                \"action\": \"block\",\r\n                                \"address\": \"12.23.34.59\",\r\n                                \"description\": \"anonymous proxies\",\r\n                                \"log\": false\r\n                            }\r\n                        ]\r\n                    }\r\n                },\r\n                \"malicious_ip_enforcement\": {\r\n                    \"enabled\": true,\r\n                    \"enforcement_mode\": \"blocking\",\r\n                    \"ip_categories\": [\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"mobile_threats\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"cloud_services\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"anonymous_proxies\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"phishing_proxies\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"infected_sources\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"denial_of_service\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"scanners\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"bot_nets\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"web_attacks\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"windows_exploits\"\r\n                        },\r\n                        {\r\n                            \"block\": true,\r\n                            \"log\": true,\r\n                            \"name\": \"spam_sources\"\r\n                        }\r\n                    ]\r\n                }\r\n            },\r\n            \"event_logging\": {\r\n                \"enabled\": true\r\n            }\r\n        }\r\n    },\r\n    \"service_type\": \"waf\"\r\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{WAF_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new endpoints",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_id\": \"{{ACCOUNT_ID}}\",\n    \"catalog_id\": \"{{WAF_CATALOG_ID}}\",\n    \"service_instance_name\": \"na2-auction.{{ZONE_NAME}}\",\n    \"configuration\": {\n        \"waf_service\": {\n            \"application\": {\n                \"remark\": \"na2-auction.{{ZONE_NAME}}\",\n                \"domain\": \"na2-auction.{{ZONE_NAME}}\",\n                \"waf_regions\": {\n                    \"aws\": {\n                        \"us-east-1\": {\n                            \"endpoint\": {\n                                \"ips\": [\n                                    \"18.232.64.254\"\n                                ],\n                                \"port\": 80,\n                                \"use_TLS\": false\n                            }\n                        },\n                        \"eu-central-1\": {\n                            \"endpoint\": {\n                                \"ips\": [\n                                    \"54.206.13.195\"\n                                ],\n                                \"port\": 80,\n                                \"use_TLS\": false\n                            }\n                        }\n                    }\n                }\n            },\n            \"policy\": {\n                \"encoding\": \"utf-8\",\n                \"threat_campaigns\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\"\n                },\n                \"mitigation\": {\n                    \"type\": \"response_page\",\n                    \"response_page_html\": \"Blocked!\"\n                },\n                \"compliance_enforcement\": {\n                    \"data_guard\": {\n                        \"enabled\": true,\n                        \"cc\": true,\n                        \"ssn\": true\n                    },\n                    \"sensitive_parameters\": {\n                        \"enabled\": true,\n                        \"parameters\": [\n                            \"cc_id\",\n                            \"creditcard\",\n                            \"passwd\",\n                            \"password\"\n                        ],\n                        \"xml_attributes\": [],\n                        \"xml_elements\": []\n                    }\n                },\n                \"high_risk_attack_mitigation\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"signature_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"allowed_methods\": {\n                        \"enabled\": true,\n                        \"methods\": [\n                            {\n                                \"name\": \"GET\"\n                            },\n                            {\n                                \"name\": \"POST\"\n                            },\n                            {\n                                \"name\": \"HEAD\"\n                            }\n                        ]\n                    },\n                    \"disallowed_file_types\": {\n                        \"enabled\": true,\n                        \"file_types\": [\n                            \"back\",\n                            \"bat\",\n                            \"bck\",\n                            \"bin\",\n                            \"cfg\",\n                            \"cmd\",\n                            \"com\",\n                            \"config\",\n                            \"dat\",\n                            \"dll\",\n                            \"eml\",\n                            \"exe\",\n                            \"exe1\",\n                            \"exe_renamed\",\n                            \"hta\",\n                            \"htr\",\n                            \"htw\",\n                            \"ida\",\n                            \"idc\",\n                            \"idq\",\n                            \"ini\",\n                            \"old\",\n                            \"sav\",\n                            \"save\"\n                        ]\n                    },\n                    \"api_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"http_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"websocket_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"geolocation_enforcement\": {\n                        \"disallowed_country_codes\": [\n                            \"CU\",\n                            \"IR\",\n                            \"KP\",\n                            \"LY\",\n                            \"SD\",\n                            \"SY\"\n                        ],\n                        \"enabled\": true\n                    },\n                    \"ip_enforcement\": {\n                        \"enabled\": true,\n                        \"ips\": [\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"127.0.0.1\",\n                                \"description\": \"localhost\",\n                                \"log\": true\n                            },\n                            {\n                                \"action\": \"allow\",\n                                \"address\": \"192.168.100.50\",\n                                \"description\": \"dev environment\",\n                                \"log\": false\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"11.11.11.10\",\n                                \"description\": \"spam bot\",\n                                \"log\": false\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"192.168.1.10\",\n                                \"description\": \"hacker net\",\n                                \"log\": true\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"12.23.34.59\",\n                                \"description\": \"anonymous proxies\",\n                                \"log\": false\n                            }\n                        ]\n                    }\n                },\n                \"malicious_ip_enforcement\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"ip_categories\": [\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"mobile_threats\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"cloud_services\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"anonymous_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"phishing_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"infected_sources\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"denial_of_service\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"scanners\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"bot_nets\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"web_attacks\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"windows_exploits\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"spam_sources\"\n                        }\n                    ]\n                }\n            },\n            \"event_logging\": {\n                \"enabled\": true\n            }\n        }\n    },\n    \"service_type\": \"waf\"\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{WAF_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Second Endpoint (lab)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/proxy/eu",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"proxy",
+								"eu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Start EAP Attack (lab)",
 					"request": {
 						"method": "POST",
@@ -594,7 +769,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Bearer {{ACCESS_TOKEN}}"
+								"value": "Bearer {{LIMITED_ACCESS_TOKEN}}"
 							}
 						],
 						"body": {
@@ -653,7 +828,106 @@
 					"response": []
 				},
 				{
-					"name": "Update Monitor to Block",
+					"name": "Get SSL Certificate (lab)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0cc231c9-8d23-473b-a56a-f224ec37ccb8",
+								"exec": [
+									"pm.test(\"Set certificate and key\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"CERTIFICATE\", jsonData.cert.replace(/(\\r\\n|\\n|\\r)/gm, \"\\\\n\"));",
+									"    pm.environment.set(\"PRIVATE_KEY\", jsonData.key.replace(/(\\r\\n|\\n|\\r)/gm, \"\\\\n\"));",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/certificate",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"certificate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload SSL Certificate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
+								"exec": [
+									"pm.test(\"Set certificate ID\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"CERTIFICATE_ID\", jsonData.id);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"certificate\": \"{{CERTIFICATE}}\",\n  \"private_key\": \"{{PRIVATE_KEY}}\",\n  \"passphrase\": \"\",\n  \"certificate_chain\": \"\"\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-certificates/certificates",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-certificates",
+								"certificates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update EAP SSL Certificate",
 					"event": [
 						{
 							"listen": "test",
@@ -683,7 +957,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{WAF_CATALOG_ID}}\",\n  \"service_instance_name\": \"na2-auction.{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"waf_service\": {\n      \"application\": {\n        \"remark\": \"na2-auction.{{ZONE_NAME}}\",\n        \"domain\": \"na2-auction.{{ZONE_NAME}}\",\n        \"waf_regions\": {\n          \"aws\": {\n            \"us-east-1\": {\n              \"endpoint\": {\n                \"ips\": [\n                  \"18.232.64.254\"\n                ],\n                \"port\": 80,\n                \"use_TLS\": false\n              }\n            }\n          }\n        }\n      },\n      \"policy\": {\n        \"encoding\": \"utf-8\",\n        \"threat_campaigns\": {\n          \"enabled\": true,\n          \"enforcement_mode\": \"blocking\"\n        },\n        \"compliance_enforcement\": {\n          \"data_guard\": {\n            \"enabled\": true,\n            \"cc\": true,\n            \"ssn\": true\n          }\n        },\n        \"high_risk_attack_mitigation\": {\n          \"enabled\": true,\n          \"enforcement_mode\": \"blocking\",\n          \"signature_enforcement\": {\n            \"enabled\": true\n          },\n          \"allowed_methods\": {\n            \"enabled\": true,\n            \"methods\": [\n              {\n                \"name\": \"GET\"\n              }\n            ]\n          },\n          \"disallowed_file_types\": {\n            \"enabled\": true,\n            \"file_types\": [\n              \"exe\",\n              \"config\"\n            ]\n          },\n          \"api_compliance_enforcement\": {\n            \"enabled\": true\n          },\n          \"http_compliance_enforcement\": {\n            \"enabled\": true\n          },\n          \"websocket_compliance_enforcement\": {\n            \"enabled\": true\n          },\n          \"geolocation_enforcement\": {\n            \"enabled\": true,\n            \"disallowed_country_codes\": [\n              \"AD\"\n            ]\n          },\n          \"ip_enforcement\": {\n            \"enabled\": true,\n            \"ips\": [\n              {\n                \"address\": \"1.2.3.4\",\n                \"description\": \"scanning\",\n                \"action\": \"block\",\n                \"log\": true\n              }\n            ]\n          }\n        },\n        \"malicious_ip_enforcement\": {\n          \"enabled\": true,\n          \"enforcement_mode\": \"blocking\",\n          \"ip_categories\": [\n            {\n              \"name\": \"spam_sources\",\n              \"block\": true,\n              \"log\": true\n            }\n          ]\n        }\n      },\n      \"industry\": \"finance\",\n      \"event_logging\": {\n        \"enabled\": true\n      }\n    }\n  },\n  \"service_type\": \"waf\"\n}"
+							"raw": "{\n    \"account_id\": \"{{ACCOUNT_ID}}\",\n    \"catalog_id\": \"{{WAF_CATALOG_ID}}\",\n    \"service_instance_name\": \"na2-auction.{{ZONE_NAME}}\",\n    \"configuration\": {\n        \"waf_service\": {\n            \"application\": {\n                \"remark\": \"na2-auction.{{ZONE_NAME}}\",\n                \"domain\": \"na2-auction.{{ZONE_NAME}}\",\n                \"tls\": {\n\t\t\t\t\t\"certificate_id\": \"{{CERTIFICATE_ID}}\",\n\t\t\t\t\t\"enabled\": true\n\t\t\t\t},\n                \"waf_regions\": {\n                    \"aws\": {\n                        \"us-east-1\": {\n                            \"endpoint\": {\n                                \"ips\": [\n                                    \"18.232.64.254\"\n                                ],\n                                \"port\": 80,\n                                \"use_TLS\": false\n                            }\n                        },\n                        \"eu-central-1\": {\n                            \"endpoint\": {\n                                \"ips\": [\n                                    \"54.206.13.195\"\n                                ],\n                                \"port\": 80,\n                                \"use_TLS\": false\n                            }\n                        }\n                    }\n                }\n            },\n            \"policy\": {\n                \"encoding\": \"utf-8\",\n                \"threat_campaigns\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\"\n                },\n                \"mitigation\": {\n                    \"type\": \"response_page\",\n                    \"response_page_html\": \"Blocked!\"\n                },\n                \"compliance_enforcement\": {\n                    \"data_guard\": {\n                        \"enabled\": true,\n                        \"cc\": true,\n                        \"ssn\": true\n                    },\n                    \"sensitive_parameters\": {\n                        \"enabled\": true,\n                        \"parameters\": [\n                            \"cc_id\",\n                            \"creditcard\",\n                            \"passwd\",\n                            \"password\"\n                        ],\n                        \"xml_attributes\": [],\n                        \"xml_elements\": []\n                    }\n                },\n                \"high_risk_attack_mitigation\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"signature_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"allowed_methods\": {\n                        \"enabled\": true,\n                        \"methods\": [\n                            {\n                                \"name\": \"GET\"\n                            },\n                            {\n                                \"name\": \"POST\"\n                            },\n                            {\n                                \"name\": \"HEAD\"\n                            }\n                        ]\n                    },\n                    \"disallowed_file_types\": {\n                        \"enabled\": true,\n                        \"file_types\": [\n                            \"back\",\n                            \"bat\",\n                            \"bck\",\n                            \"bin\",\n                            \"cfg\",\n                            \"cmd\",\n                            \"com\",\n                            \"config\",\n                            \"dat\",\n                            \"dll\",\n                            \"eml\",\n                            \"exe\",\n                            \"exe1\",\n                            \"exe_renamed\",\n                            \"hta\",\n                            \"htr\",\n                            \"htw\",\n                            \"ida\",\n                            \"idc\",\n                            \"idq\",\n                            \"ini\",\n                            \"old\",\n                            \"sav\",\n                            \"save\"\n                        ]\n                    },\n                    \"api_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"http_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"websocket_compliance_enforcement\": {\n                        \"enabled\": true\n                    },\n                    \"geolocation_enforcement\": {\n                        \"disallowed_country_codes\": [\n                            \"CU\",\n                            \"IR\",\n                            \"KP\",\n                            \"LY\",\n                            \"SD\",\n                            \"SY\"\n                        ],\n                        \"enabled\": true\n                    },\n                    \"ip_enforcement\": {\n                        \"enabled\": true,\n                        \"ips\": [\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"127.0.0.1\",\n                                \"description\": \"localhost\",\n                                \"log\": true\n                            },\n                            {\n                                \"action\": \"allow\",\n                                \"address\": \"192.168.100.50\",\n                                \"description\": \"dev environment\",\n                                \"log\": false\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"11.11.11.10\",\n                                \"description\": \"spam bot\",\n                                \"log\": false\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"192.168.1.10\",\n                                \"description\": \"hacker net\",\n                                \"log\": true\n                            },\n                            {\n                                \"action\": \"block\",\n                                \"address\": \"12.23.34.59\",\n                                \"description\": \"anonymous proxies\",\n                                \"log\": false\n                            }\n                        ]\n                    }\n                },\n                \"malicious_ip_enforcement\": {\n                    \"enabled\": true,\n                    \"enforcement_mode\": \"blocking\",\n                    \"ip_categories\": [\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"mobile_threats\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"cloud_services\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"anonymous_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"phishing_proxies\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"infected_sources\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"denial_of_service\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"scanners\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"bot_nets\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"web_attacks\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"windows_exploits\"\n                        },\n                        {\n                            \"block\": true,\n                            \"log\": true,\n                            \"name\": \"spam_sources\"\n                        }\n                    ]\n                }\n            },\n            \"event_logging\": {\n                \"enabled\": true\n            }\n        }\n    },\n    \"service_type\": \"waf\"\n}"
 						},
 						"url": {
 							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}",
@@ -700,104 +974,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Attack: SQL Injection",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "User-Agent",
-								"value": "Mozilla/5.0 (Windows; U; Windows NT 5.1; pt-PT; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://na2-auction.{{ZONE_NAME}}/vulnerabilities/sqli/?id=%25%27+or+0%3D0&Submit=Submit",
-							"protocol": "http",
-							"host": [
-								"na2-auction",
-								"{{ZONE_NAME}}"
-							],
-							"path": [
-								"vulnerabilities",
-								"sqli",
-								""
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "%25%27+or+0%3D0"
-								},
-								{
-									"key": "Submit",
-									"value": "Submit"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Attack: Illegal Filetype",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "User-Agent",
-								"value": "Mozilla/5.0 (Windows; U; Windows NT 5.1; pt-PT; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://na2-auction.{{ZONE_NAME}}/nginx.config",
-							"protocol": "http",
-							"host": [
-								"na2-auction",
-								"{{ZONE_NAME}}"
-							],
-							"path": [
-								"nginx.config"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Attack: Threat Campaign",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "User-Agent",
-								"value": "Mozilla/3.0 (compatible; Indy Library)",
-								"type": "text"
-							},
-							{
-								"key": "X-Virtual-Server-Port",
-								"value": "8080",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic Og==",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://na2-auction.{{ZONE_NAME}}/manager/html",
-							"protocol": "http",
-							"host": [
-								"na2-auction",
-								"{{ZONE_NAME}}"
-							],
-							"path": [
-								"manager",
-								"html"
-							]
-						}
-					},
-					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -805,6 +981,40 @@
 		{
 			"name": "Clean Up",
 			"item": [
+				{
+					"name": "Reset DNS Record (lab)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"na2-auction\",\n\t\"type\": \"A\",\n\t\"value\": \"18.232.64.254\"\n}"
+						},
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/record",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"record"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Retire EAP Subscription",
 					"event": [
@@ -850,6 +1060,50 @@
 								"subscriptions",
 								"{{WAF_SUBSCRIPTION_ID}}",
 								"retire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove certificate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-certificates/{{CERTIFICATE_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-certificates",
+								"{{CERTIFICATE_ID}}"
 							]
 						}
 					},
