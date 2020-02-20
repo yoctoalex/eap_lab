@@ -171,7 +171,7 @@ Copy CNAME and click **Done**.
 
 Now that your Essential App Protect instance is created, we need to change DNS settings using CNAME and start routing the traffic through Essential App Protect. To do that follow the steps below.  
 
-2. Updating DNS Settings using CNAME  
+2. Update DNS Settings using CNAME  
 ******************************** 
 
 `a)` Go back to Postman to change the DNS settings. Paste CNAME you copied in item 1.f) above and paste into the body of  **Update EAP CNAME (lab)** request.  
@@ -208,15 +208,15 @@ There are three types of attacks:
 
 `a)` SQL Injection 
 
-This attack inserts a SQL query via the input data field in the web application. Such attacks could potentially read sensitive data, modify and destroy it. More detailed information can be found here. 
+This attack inserts a SQL query via the input data field in the web application. Such attacks could potentially read sensitive data, modify and destroy it. More detailed information can be found `here <http://bit.ly/2RfmXkw>`_.
 
 `b)` Illegal Filetype 
 
-This attack combines valid URL path segments with invalid input to guess or brute-force download of sensitive files or data. More detailed information can be found here. 
+This attack combines valid URL path segments with invalid input to guess or brute-force download of sensitive files or data. More detailed information can be found `here <http://bit.ly/30NrAFF>`_.  
 
 `c)` Threat Campaign 
 
-These types of attacks are the category that F5 Labs tracks as coordinated campaigns that exploit known vulnerabilities. This particular attack simulates using a known Tomcat backdoor vulnerability. The complete list of such threats can be found here. 
+These types of attacks are the category that F5 Labs tracks as coordinated campaigns that exploit known vulnerabilities. This particular attack simulates using a known Tomcat backdoor vulnerability. The complete list of such threats can be found `here <http://bit.ly/36bPmfG>`_.   
 
 Let’s now try and simulate an attack which belongs to **Threat Campaigns** type.  
 
