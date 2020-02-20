@@ -3,7 +3,7 @@ Agility LAB: Essential App Protect
 
 .. contents:: Table of Contents   
 
-Environment Set Up  
+Environment Setup  
 ############################### 
 
 1. F5 Cloud Services Portal 
