@@ -165,7 +165,7 @@ As you can see, the endpoint belongs to North America, US East (N. Virginia) and
 
 .. figure:: _figures/99.png 
 
-Copy CNAME and click **Done**.  
+`g)` Copy CNAME and click **Done**.  
 
 .. figure:: _figures/101.png  
 
