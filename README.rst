@@ -240,8 +240,6 @@ Let’s now try and simulate an attack. When attackers are trying to retrieve a 
 
    `4.` Update the address used in step 2 above to see that your app is only monitored but not blocked, and the file is downloaded:  
 
-   .. figure:: _figures/110.png
-   
    .. figure:: _figures/113.png
 
 5. View Events  
