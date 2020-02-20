@@ -1,4 +1,4 @@
-Agility LAB: Essential App Protect Lab  
+Agility LAB: Essential App Protect   
 =========================================== 
 
 .. contents:: Table of Contents   
