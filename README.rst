@@ -132,7 +132,7 @@ Let’s now return to the F5 Cloud Services portal and create Secondary DNS Zone
 Essential App Protect 
 ################## 
 
-1. Create Essential App Protect Service via UI  
+1. Create Essential App Protect Service via the F5 Cloud Services Portal  
 ************************************* 
 
 `a)` You will need a domain name to create Essential App Protect service. To get it, open **DNS** tab in the F5 Cloud Services portal and click the zone we’ve just created. 
