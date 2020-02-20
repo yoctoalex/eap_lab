@@ -228,7 +228,7 @@ Let’s now try and simulate an attack which belongs to **Threat Campaigns** typ
 
    `2.` Insert the Zone name to the following address and paste the address to your browser: 
 
-   ** ** 
+   **http://na2-auction.{{ZONE_NAME}}/nginx.config** 
 
    You will see the following response, which means that your app is monitored and blocked too:  
 
