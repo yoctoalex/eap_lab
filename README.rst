@@ -73,7 +73,7 @@ These tokens are then stored for subsequent calls using a function inside Postma
 
 .. figure:: _figures/9.jpg  
 
-**NOTE**: If any of the subsequent Postman calls return a blank response or "status": "unauthorized" response (see the screenshot below), it means your user token has expired and you will need to re-login. To do that you just need to re-send the **Login** request.  
+**NOTE**: If any of the subsequent Postman calls return a blank response or **"status": "unauthorized" response** (see the screenshot below), it means your user token has expired and you will need to re-login. To do that you just need to re-send the **Login** request.  
 
 .. figure:: _figures/10.jpg  
 
