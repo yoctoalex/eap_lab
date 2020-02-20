@@ -48,7 +48,7 @@ You will now see your collection (left side) with calls in several categories, a
 
 .. figure:: _figures/91.png 
 
-You are now ready to interface with the F5 Cloud Services using Postman. 
+You are now ready to interface with F5 Cloud Services using Postman. 
 
 3. Zone Name  
 ********** 
