@@ -19,7 +19,7 @@ In order to subscribe and use F5 Cloud Services, you need to go to the F5 Cloud 
 
 In order to make F5 Cloud Services available, you need to subscribe to them.   
 
-   `1.` Click **Your F5 Cloud** tab in the left navigation panel and you will see the available service, as well as services you have subscription to, if any. Then click **Subscribe** for **DNS**, **DNS Load Balancer** and **Essential App Protect** services.   
+   `1.` Click **Your F5 Cloud** tab in the left navigation panel and you will see the available services, as well as services you have subscription to, if any. Then click **Subscribe** for **DNS**, **DNS Load Balancer** and **Essential App Protect** services.   
 
    .. figure:: _figures/2.png  
 
