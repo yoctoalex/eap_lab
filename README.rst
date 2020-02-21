@@ -22,7 +22,7 @@ The following diagram captures the core components of this Lab:
 
  .. figure:: _figures/Diagram.png
 
-1. F5 Cloud Services Portal 
+2. F5 Cloud Services Portal 
 *************************** 
 
 `a)` Login   
@@ -51,7 +51,7 @@ In order to make F5 Cloud Services available, you need to subscribe to them.
 
    .. figure:: _figures/5.png 
 
-2. Postman Configuration  
+3. Postman Configuration  
 ********************* 
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in.  
@@ -66,7 +66,7 @@ You will now see your collection (left side) with calls in several categories, a
 
 You are now ready to interface with F5 Cloud Services using Postman. 
 
-3. Zone Name  
+4. Zone Name  
 ********** 
 
 In order to create Essential App Protect instance in the F5 Cloud Services portal, you need first to create DNS service which will require a zone name. Use Postman and follow the steps below to get the Zone name.     
