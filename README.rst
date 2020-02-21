@@ -6,6 +6,22 @@ Agility LAB: Essential App Protect
 Environment Setup  
 ############################### 
 
+Lab Environment Overview
+###############################
+
+1. APIs and Services 
+*********************
+
+This Lab utilizes standard *F5 Cloud Services API*, as well as a *Lab Service API*, which was custom-built just for executing this lab: 
+
+* **F5 Cloud Services API**: create, use, and remove the services in scope of this lab 
+
+* **Lab service API**: facilitates auxiliary functions for the lab only: creating DNS entries, sending targeted requests & traffic to the apps/services, etc.  
+
+The following diagram captures the core components of this Lab: 
+
+ .. figure:: _figures/Diagram.png
+
 1. F5 Cloud Services Portal 
 *************************** 
 
