@@ -167,19 +167,19 @@ Essential App Protect
 
 The system will gather app endpoint and region detail, show them and ask you to **Save & Continue**.  
 
-.. figure:: _figures/98.png 
+.. figure:: _figures/118.png 
 
 As you can see, the endpoint belongs to North America, US East (N. Virginia) and is deployed on Amazon AWS.  
 
-`e)` The system will ask you to provide a SSL/TLS certificate. Let’s tick “I will provide certificate details later” and **Save & Continue**.  
+`d)` The system will ask you to provide a SSL/TLS certificate. Let’s tick “I will provide certificate details later” and **Save & Continue**.  
 
 .. figure:: _figures/99.png 
 
-`f)` Enable all the options and click **Save & Continue**. 
+`e)` Enable all the options and click **Save & Continue**. 
 
-.. figure:: _figures/99.png 
+.. figure:: _figures/100.png 
 
-`g)` Copy CNAME and click **Done**.  
+`f)` Click **Done**.  
 
 .. figure:: _figures/101.png  
 
