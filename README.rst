@@ -3,6 +3,12 @@ Agility LAB: Essential App Protect
 
 .. contents:: Table of Contents   
 
+Pre-Requisites
+###############
+
+- Any modern browser: for working with the UI (and this document)
+- Postman: for working with the API of the F5 Cloud Services
+
 Lab Environment Overview
 ###############################
 
@@ -38,7 +44,7 @@ Once you've logged in with an account, you will be using the user name and passw
 
 In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs.
 
-   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to click **Subscribe** to **DNS** and **Essential App Protect** services.   
+   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to click **Subscribe** to **Essential App Protect** services.   
 
    .. figure:: _figures/2.png  
 
@@ -69,14 +75,14 @@ You will now see your collection (left side) with calls in several categories, a
 
 You are now ready to interface with the F5 Cloud Services using Postman. 
 
-3. Zone Name  
-********** 
+3. Record Name  
+************** 
 
-In order to create Essential App Protect instance in the F5 Cloud Services portal, you need first to create DNS service which will require a zone name. Use Postman and follow the steps below to get the Zone name from the Lab service API.     
+In order to create Essential App Protect instance in the F5 Cloud Services portal, you need to have a record name to be used as your domain name. Use Postman and follow the steps below to get the Record name from the Lab service API.     
 
 `a)` Open the “F5 Cloud Services EAP LAB” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values).  
 
-.. figure:: _figures/92.png 
+.. figure:: _figures/114.png 
 
 Repeat the same for the “USER_PASSWORD”.  
 
