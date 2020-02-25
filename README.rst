@@ -188,21 +188,29 @@ Now that your Essential App Protect instance is created, we need to change DNS s
 2. Update DNS Settings using CNAME  
 ******************************** 
 
-`a)` Go back to Postman to change the DNS settings. Paste CNAME you copied in item 1.g) above and paste into the body of  **Update EAP CNAME (lab)** request.  
+`a)` Go back to Postman to change the DNS settings. Send the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
 
-.. figure:: _figures/102.png 
+**SCREENSHOT**
 
-Send the request and you will see the following response: 
+The response will return all information on your subscription: 
 
-.. figure:: _figures/103.png 
+**SCREENSHOT**
 
-Now your DNS settings are updated which can be seen in **Zone file** in **DNS** tab back in the F5 Cloud Services portal: 
+The retrieved ID and CNAME are then stored for subsequent calls using a function inside Postman to set environment variables. You can see the test function in the **Tests** tab:
 
-.. figure:: _figures/104.png 
+**SCREENSHOT**
 
-App traffic now goes through Essential App Protect instance and is actively protected. 
+`b)` Send the **Update EAP DNS Record (lab)** to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
 
-`b)` Let’s now test if CNAME change is completed correctly.   
+**SCREENSHOT** 
+
+The response will show the updated value: 
+
+**SCREENSHOT** 
+
+Now your DNS settings are updated and app traffic goes through Essential App Protect instance and is actively protected. 
+
+`c)` Let’s now test if CNAME change is completed correctly.   
 
 Return to the F5 Cloud Services portal, open **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open **DNS Settings** tab and click **Test updated DNS**.  
 
