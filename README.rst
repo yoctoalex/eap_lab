@@ -218,51 +218,89 @@ Return to the F5 Cloud Services portal, open **Essential App Protect** tab, sele
 
 You will see the status of testing. 
 
-3. Update Monitoring to Blocking 
-************************** 
-
-By default, all the threats of your app are only monitored without any actions taken. To start blocking them, go to **PROTECT APPLICATION** tab, then open the type of attack you want to block, toggle **Blocking Mode** on and click **Update** to save the settings:  
-
-.. figure:: _figures/105.png 
-
-4. Attacks  
-******** 
+3. Attacks  
+*********** 
 
 There are three types of attacks:  
 
-`a)` SQL Injection 
+`1)` SQL Injection 
 
 This attack inserts a SQL query via the input data field in the web application. Such attacks could potentially read sensitive data, modify and destroy it. More detailed information can be found `here <http://bit.ly/2RfmXkw>`_.
 
-`b)` Illegal Filetype 
+`2)` Illegal Filetype 
 
 This attack combines valid URL path segments with invalid input to guess or brute-force download of sensitive files or data. More detailed information can be found `here <http://bit.ly/30NrAFF>`_.  
 
-`c)` Threat Campaign 
+`3)` Threat Campaign 
 
 These types of attacks are the category that F5 Labs tracks as coordinated campaigns that exploit known vulnerabilities. This particular attack simulates using a known Tomcat backdoor vulnerability. The complete list of such threats can be found `here <http://bit.ly/36bPmfG>`_.   
 
-Let’s now try and simulate an attack. When attackers are trying to retrieve a configuration file nginx.conf for our application by guessing a path, we actively block them.   
+Let’s now try and simulate an attack.
 
-   `1.` Copy Zone name in the F5 Cloud Service portal, **DNS** tab:  
+Go back to Postman and send the **Attack: Threat Campaign** request. 
 
-   .. figure:: _figures/107.png 
+**SCREENSHOT** 
 
-   `2.` Insert the Zone name to the following address and open it in your browser: 
+The attack will be shown in the Essential App Protect "VIEW EVENTS" section of the F5 Cloud Services portal.
 
-   **http://na2-auction.{{ZONE_NAME}}/nginx.config** 
+**SCREENSHOT** 
 
-   You will see the following response, which means that your app is both monitored and blocked:  
+You can see that its status is "Not blocked" for now. 
 
-   .. figure:: _figures/108.png 
+4. Update Monitoring to Blocking via UI 
+******************************** 
 
-   `3.` Now you can go back to the F5 Cloud Services portal and update blocking to monitoring only for all threat types: 
+By default, all the threats of your app are only monitored without any actions taken. You can change mornitoring to blocking either via UI or via Postman. 
 
-   .. figure:: _figures/109.png 
+`a)` To start blocking attacks, go to the **PROTECT APPLICATION** tab, then open the type of attack you want to block, toggle **Blocking Mode** on and click **Update** to save the settings:  
 
-   `4.` Update the address used in step 2 above to see that your app is only monitored but not blocked, and the file is downloaded:  
+.. figure:: _figures/105.png 
 
-   .. figure:: _figures/113.png
+`b)` Testing the status 
+
+Now that the protection mode is "blocking", you can re-send the **Attack: Threat Campaign** request in Postman. After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attack with the "Blocked" status:
+
+.. figure:: _figures/119.png
+
+5. Update Monitoring to Blocking via Postman 
+******************************** 
+
+Let's first deactivate the blocking mode in the F5 UI.
+
+`a)` Go to the **PROTECT APPLICATION** tab, then open the attacks you want to monitor, toggle **Blocking Mode** off and click **Update**.
+
+**SCREENSHOT** 
+
+`b)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved in steps above. 
+
+**SCREENSHOT** 
+
+You will see the new "blocked" status of attacks in the response. 
+
+**SCREENSHOT** 
+
+You can also notice that their status changed in the F5 UI:
+
+**SCREENSHOT** 
+
+`c)` Testing the status 
+
+Now that the protection mode is "blocking", you can send the **Attack: Illegal Filetype** and **Attack: SQL Injection** requests in Postman. 
+
+**SCREENSHOT** 
+
+After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attacks with the "Blocked" status:
+
+**SCREENSHOT** 
+
+6. Block Country List
+****************************
+
+
+
+
+
+
 
 5. View Events  
 ************ 
