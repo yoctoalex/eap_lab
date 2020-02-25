@@ -118,21 +118,21 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <http://bit.ly/37hyQw3>`_.  
 
-`d)` Let’s now retrieve DNS Zone Name with the **Get EAP record (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab.  
+`d)` Let’s now retrieve EAP Record Name with the **Get EAP record (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in F5 Cloud Services UI.  
 
 Request:  
 
 .. figure:: _figures/74.png  
 
-The response will return your test DNS zone name and the status.  
+The response will return your record name and the status.  
 
 .. figure:: _figures/27.jpg  
 
-Sending this request will automatically capture of the Zone variables:  
+Sending this request will automatically capture of the Record variables:  
 
 .. figure:: _figures/26.jpg  
 
-This Zone Name will be used for creating services in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
+This Record Name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
 
 
 DNS Service  
