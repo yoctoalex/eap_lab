@@ -134,32 +134,24 @@ Sending this request will automatically capture of the Record variables:
 
 This Record Name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
 
+`e)` Get User Membership to F5 Cloud Services accounts
 
-DNS Service  
-########### 
+In Postman, send the **Get User Membership** request which returns info on your user’s access to Cloud Services accounts.
 
-1. Create Secondary DNS Zone 
-**************************** 
+**TO BE UPDATED** 
 
-Let’s now return to the F5 Cloud Services portal and create Secondary DNS Zone.   
+`f)` Retrieve information on available catalogs and their IDs
 
-`a)` Go to **DNS** tab and click **Create**.  
+Select the **Get Catalogs** request and click **Send** to retrieve data about the available Catalogs and their IDs.
 
-.. figure:: _figures/10.png  
+**TO BE UPDATED** 
 
-`b)` Paste **Zone name** retrieved in step 3.d) above and indicate ** 54.211.12.173 ** as DNS Primary Server IP. Other values are optional. Then click **Get Zone File**.    
-
-.. figure:: _figures/11.png   
-
-`c)` This will retrieve the zone file from your primary DNS server. Click **Deploy** and then **Done**. This will create Secondary DNS Zone.     
-
-.. figure:: _figures/94.png 
 
 Essential App Protect 
-################## 
+##################### 
 
 1. Create Essential App Protect Service via the F5 Cloud Services Portal  
-************************************* 
+**************************************************************** 
 
 `a)` You will need a domain name to create Essential App Protect service. To get it, open **DNS** tab in the F5 Cloud Services portal and click the zone we’ve just created. 
 
