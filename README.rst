@@ -320,8 +320,33 @@ Let's open the F5 UI and go to VIEW EVENTS section to see the newly blocked atta
 
 .. figure:: _figures/122.png
 
-7. Updating IP Enforcement Rules 
+7. Updating IP Enforcement Rules via Postman  
 ********************************
+
+If you need to block or allow requests from specific ID addresses, it can be done in two way: via Postman or UI. If you prefer to do it via Postman, then follow the steps below. If your choice is UI, then procede to the next section.
+
+Go to Postman and send the **Update IP Enforcement Rules** request which uses your "account_id" and "EAP record".
+
+**SCREENSHOT** 
+
+In the response you will see four blocked IPs and one allowed IP. 
+
+**SCREENSHOT** 
+
+8. Updating IP Enforcement Rules via F5 UI  
+******************************************
+
+`a)` Select **PROTECT APPLICATION** in the Essential App Protect tab, select **High-risk Attack Mitigation** and then **Manage rules**. 
+
+.. figure:: _figures/123.png 
+
+`b)` Fill in the required info and click **Update**:
+
+**SCREENSHOT** 
+
+9. Customize blocked page 
+***************************
+
 
 
 
