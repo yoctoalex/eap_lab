@@ -151,23 +151,19 @@ Essential App Protect
 ##################### 
 
 1. Create Essential App Protect Service via the F5 Cloud Services Portal  
-**************************************************************** 
+************************************************************************ 
 
-`a)` You will need a domain name to create Essential App Protect service. To get it, open **DNS** tab in the F5 Cloud Services portal and click the zone we’ve just created. 
+`a)` You will need a record name to be used as **Fully Qualified Domain Name (FQDN)** to create Essential App Protect service. To get it, open the **Get EAP record (lab)** request in Postman and copy **"record"** value from the response: 
 
-.. figure:: _figures/95.png 
+.. figure:: _figures/115.png
 
-`b)` Scroll down to copy the domain name for the NA2 endpoint: 
+`b)` Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**. 
 
-.. figure:: _figures/96.png 
+.. figure:: _figures/116.png
 
-`c)` Go to **Essential App Protect** tab, select **All my applications** in the dropdown menu and click **Create**. 
+`c)` Paste the record name you copied in step 1.a) above and click **Save & Continue**.  
 
-.. figure:: _figures/90.png 
-
-`d)` Paste the domain name you copied in step 1.b) above and click **Save & Continue**.  
-
-.. figure:: _figures/97.png 
+.. figure:: _figures/117.png 
 
 The system will gather app endpoint and region detail, show them and ask you to **Save & Continue**.  
 
