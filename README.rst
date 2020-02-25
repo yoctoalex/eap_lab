@@ -3,9 +3,6 @@ Agility LAB: Essential App Protect
 
 .. contents:: Table of Contents   
 
-Environment Setup  
-############################### 
-
 Lab Environment Overview
 ###############################
 
@@ -22,36 +19,42 @@ The following diagram captures the core components of this Lab:
 
  .. figure:: _figures/Diagram.png
 
-2. F5 Cloud Services Portal 
+
+Lab Environment Setup  
+############################### 
+
+1. F5 Cloud Services Portal 
 *************************** 
 
 `a)` Login   
 
-In order to subscribe and use F5 Cloud Services, you need to go to the F5 Cloud Services portal and `log in <http://bit.ly/f5csreg>`_.  
+In order to use F5 Cloud Services, you need to be logged in with a valid user account. If you need to sign up, or if you already have one, proceed to the `F5 Cloud Services portal <http://bit.ly/f5csreg>`_.  
 
 .. figure:: _figures/1.png  
 
+Once you've logged in with an account, you will be using the user name and password values in the lab to authenticate with the F5 Cloud Services and the API.
+
 `b)` Subscribe to Catalogs   
 
-In order to make F5 Cloud Services available, you need to subscribe to them.   
+In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs.
 
-   `1.` Click **Your F5 Cloud** tab in the left navigation panel and you will see the available services, as well as services you have subscription to, if any. Then click **Subscribe** for **DNS** and **Essential App Protect** services.   
+   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to click **Subscribe** to **DNS** and **Essential App Protect** services.   
 
    .. figure:: _figures/2.png  
 
-   `2.` You will be asked to add your payment card to cover service usage. Note that you pay only for what you use.   
+   `2.` You will be asked to add your payment card to cover service usage (you only pay for what you use). Note that if you're running this lab at the Agility event, you will be provided with Trial/Free access to the F5 Cloud Servies (speak to the Lab facilitator if you don't have access).   
 
    .. figure:: _figures/3.png  
 
-   After successful subscribing, your services will appear in **Your F5 Cloud** tab. You will also see their current status.   
+   After successful subscribing, your services will appear in the **Your F5 Cloud** tab. You will also see their current status.   
 
    .. figure:: _figures/4.png  
 
-   If you need to check your payment information, it is available in **Accounts** tab, **Payment** section.   
+   If you need to check your payment information, it is available in the **Accounts** tab, **Payment** section.   
 
    .. figure:: _figures/5.png 
 
-3. Postman Configuration  
+2. Postman Configuration  
 ********************* 
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in.  
@@ -64,14 +67,14 @@ You will now see your collection (left side) with calls in several categories, a
 
 .. figure:: _figures/91.png 
 
-You are now ready to interface with F5 Cloud Services using Postman. 
+You are now ready to interface with the F5 Cloud Services using Postman. 
 
-4. Zone Name  
+3. Zone Name  
 ********** 
 
-In order to create Essential App Protect instance in the F5 Cloud Services portal, you need first to create DNS service which will require a zone name. Use Postman and follow the steps below to get the Zone name.     
+In order to create Essential App Protect instance in the F5 Cloud Services portal, you need first to create DNS service which will require a zone name. Use Postman and follow the steps below to get the Zone name from the Lab service API.     
 
-`a)` Open the “F5 Cloud Services EAP LAB” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click Enter after typing the values).  
+`a)` Open the “F5 Cloud Services EAP LAB” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values).  
 
 .. figure:: _figures/92.png 
 
@@ -89,7 +92,7 @@ These tokens are then stored for subsequent calls using a function inside Postma
 
 .. figure:: _figures/9.jpg  
 
-**NOTE**: If any of the subsequent Postman calls return a blank response or **"status": "unauthorized" response** (see the screenshot below), it means your user token has expired and you will need to re-login. To do that you just need to re-send the **Login** request.  
+**NOTE**: If any of the subsequent Postman calls return a blank response or **"status": "unauthorized"** response (see the screenshot below), it means your user token has expired and you will need to re-login. To do that you just need to re-send the **Login** request.  
 
 .. figure:: _figures/10.jpg  
 
@@ -124,6 +127,7 @@ Sending this request will automatically capture of the Zone variables:
 .. figure:: _figures/26.jpg  
 
 This Zone Name will be used for creating services in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
+
 
 DNS Service  
 ########### 
