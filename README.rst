@@ -366,6 +366,26 @@ If you prefer to customize your blocked page, you can do it using Postman.
 10. Add New Endpoints 
 *********************
 
+If you need to add new endpoints, you can do it via Postman.
+
+Send the **Add new endpoints** request in Postman which uses your **account_id** and **EAP record**. 
+
+**SCREENSHOT** 
+
+You will see the Endpoint added in the returned response:
+
+**SCREENSHOT from postman** 
+
+You will also see the new endpoint in the F5 UI:
+
+.. figure:: _figures/126.png
+
+11. Testing New Endpoint
+************************
+
+
+
+
 
 
 
