@@ -8,6 +8,7 @@ Pre-Requisites
 
 - Any modern browser: for working with the UI (and this document)
 - Postman: for working with the API of the F5 Cloud Services
+- Opera browser: for simulating geo-location specific traffic
 
 Lab Environment Overview
 ###############################
@@ -146,6 +147,14 @@ Select the **Get Catalogs** request and click **Send** to retrieve data about th
 
 **TO BE UPDATED** 
 
+4. Opera with VPN to Test New Endpoints 
+****************************************
+
+You will need the Opera browser to test proximity rules we will set later.
+
+Open the Opera browser, click **Settings, Advanced, Features** and then **Enable VPN**.
+
+**SCREENSHOT**
 
 Essential App Protect 
 ##################### 
@@ -320,7 +329,7 @@ Let's open the F5 UI and go to VIEW EVENTS section to see the newly blocked atta
 
 .. figure:: _figures/122.png
 
-7. Updating IP Enforcement Rules via Postman  
+7. Update IP Enforcement Rules via Postman  
 ********************************
 
 If you need to block or allow requests from specific ID addresses, it can be done in two way: via Postman or UI. If you prefer to do it via Postman, then follow the steps below. If your choice is UI, then procede to the next section.
@@ -333,7 +342,7 @@ In the response you will see four blocked IPs and one allowed IP.
 
 **SCREENSHOT** 
 
-8. Updating IP Enforcement Rules via F5 UI  
+8. Update IP Enforcement Rules via F5 UI  
 ******************************************
 
 `a)` Select **PROTECT APPLICATION** in the Essential App Protect tab, select **High-risk Attack Mitigation** and then **Manage rules**. 
@@ -372,7 +381,7 @@ Send the **Add new endpoints** request in Postman which uses your **account_id**
 
 **SCREENSHOT** 
 
-You will see the Endpoint added in the returned response:
+You will see the Endpoint added in the returned response located in Europe (Frankfurt) and deployed on AWS:
 
 **SCREENSHOT from postman** 
 
@@ -380,8 +389,36 @@ You will also see the new endpoint in the F5 UI:
 
 .. figure:: _figures/126.png
 
-11. Testing New Endpoint
-************************
+11. Test New Endpoint via Postman
+***********************************
+
+Let's now test the endpoint we've just created via Postman.
+
+Send the **Test Second Endpoint (lab)** request which uses your "EAP record". 
+
+**SCREENSHOT from postman** 
+
+Here's what you should see in the response:
+
+**SCREENSHOT from postman** 
+
+12. Test New Endpoint via the Opera Browser 
+******************************************
+
+Open the Opera browser, click **VPN** and select **Europe**. This will simulate your entering http://auction.cloudservicesdemo.net/ from Europe.
+
+**SCREENSHOT from OPERA** 
+
+You will see that you are switched to the European endpoint. 
+
+Now select **Americas**. This will simulate your entering http://auction.cloudservicesdemo.net/ from America.
+
+**SCREENSHOT from OPERA** 
+
+You will see that you are switched to the American endpoint. 
+
+13. Start EAP Attack (lab) 
+*************************
 
 
 
@@ -390,20 +427,30 @@ You will also see the new endpoint in the F5 UI:
 
 
 
-
-
-
-
-
-
-5. View Events  
+14. View Events via Postman  
 ************ 
+
+
+
+
+15. View Events via UI  
+**************************** 
 
 The results of the attacks will be shown in the Essential App Protect **VIEW EVENTS** tab of the F5 Cloud Services portal. 
 
 .. figure:: _figures/111.png 
 
-6.  Clean Up  
+
+16. Specify SSL Certificate via Postman
+***************************
+
+`a)` Get SSL Certificate 
+
+`b)` Upload 
+
+`c)` Update 
+
+17.  Clean Up  
 ********** 
 
 In order to delete Essential App Protect instance, go to **Essential App Protect** tab, select **All my applications** in the dropdown menu, tick your application and click **Delete**. Now just confirm your choice. 
