@@ -296,6 +296,34 @@ After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the
 6. Block Country List
 ****************************
 
+`a)` If you would like to block requests on a country-basis, go to Postman and sent the **Block country list** request which will use your "account_id" and "EAP record":
+
+**SCREENSHOT** 
+
+The response will show the countries blocked: 
+
+**SCREENSHOT with US + DE + GB blocked**
+
+`b)` Let's to to F5 UI and see the updated geolocation enforcemenet:
+
+.. figure:: _figures/120.png  
+
+Click **Manage countries** to see the countries that are blocked: 
+
+.. figure:: _figures/121.png
+
+`c)` Let's test how country-base blocking works. Go back to Postman and send the **Test Country Blocking (lab)** request which uses your "EAP record". 
+
+**SCREENSHOT** 
+
+Let's open the F5 UI and go to VIEW EVENTS section to see the newly blocked attack based on geolocation: 
+
+.. figure:: _figures/122.png
+
+7. Updating IP Enforcement Rules 
+********************************
+
+
 
 
 
