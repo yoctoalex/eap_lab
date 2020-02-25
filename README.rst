@@ -347,6 +347,27 @@ In the response you will see four blocked IPs and one allowed IP.
 9. Customize blocked page 
 ***************************
 
+If you prefer to customize your blocked page, you can do it using Postman. 
+
+`a)` First, let's see the page prior to sending the request. To do that, let's simulate an attack. Paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser. The result will be the following:
+
+.. figure:: _figures/124.png 
+
+`b)` Go back to Postman and send the **Customize blocked page** request which uses your **account_id** and **EAP record**. 
+ 
+**SCREENSHOT** 
+
+`c)` Refresh the page in the browser opened one step above and you will see:
+
+.. figure:: _figures/125.png 
+
+**Note**: It may take up to 1 minute. 
+
+10. Add New Endpoints 
+*********************
+
+
+
 
 
 
