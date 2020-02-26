@@ -172,7 +172,8 @@ Essential App Protect
 
 .. figure:: _figures/116.png
 
-`c)` Paste the record name you copied in step 1.a) above into "Fully Qualified Domain Name (FQDN)" field and click **Save & Continue**.  
+`c)` Paste the record name you copied in step 1.a) above into "Fully Qualified Domain Name (FQDN)" field and click **Save & Continue**.
+
 .. figure:: _figures/117.png 
 
 Using record IP, the system will look for the nearest instance, gather app endpoint and region detail, show them and ask you to **Save & Continue**.  
