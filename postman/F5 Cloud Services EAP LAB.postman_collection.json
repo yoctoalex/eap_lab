@@ -354,18 +354,7 @@
 							"script": {
 								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
 								"exec": [
-									"pm.test(\"Find previously created subscription\", function() {",
-									"    const jsonData = pm.response.json();",
-									"    for(var i=0; i < jsonData.subscriptions.length; i++) {",
-									"        const subscription = jsonData.subscriptions[i];",
-									"        const eapRecord = pm.environment.get(\"EAP_RECORD\");",
-									"        if (subscription.service_instance_name === eapRecord) {",
-									"            pm.environment.set(\"WAF_SERVICE_INSTANCE_ID\", subscription.service_instance_id);",
-									"            pm.environment.set(\"WAF_SUBSCRIPTION_ID\", subscription.subscription_id);",
-									"            pm.environment.set(\"WAF_CNAME\", subscription.configuration.details.CNAMEValue);",
-									"        }",
-									"    }",
-									"})"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -387,7 +376,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions?account_id={{ACCOUNT_ID}}&service_type=waf",
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}",
 							"protocol": "https",
 							"host": [
 								"{{HOSTNAME}}"
@@ -395,17 +384,8 @@
 							"path": [
 								"{{API_VERSION}}",
 								"svc-subscription",
-								"subscriptions"
-							],
-							"query": [
-								{
-									"key": "account_id",
-									"value": "{{ACCOUNT_ID}}"
-								},
-								{
-									"key": "service_type",
-									"value": "waf"
-								}
+								"subscriptions",
+								"{{WAF_SUBSCRIPTION_ID}}"
 							]
 						}
 					},
