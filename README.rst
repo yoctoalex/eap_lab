@@ -125,7 +125,9 @@ Request:
 
 .. figure:: _figures/74.png  
 
-The response will return your record name, its status, current type and IP. Note that in subsequent requests record type will be changed to CNAME in order to change DNS settings and let traffic go through Essential App Protect. Record IP will be used by the F5 Cloud Services portal to find the nearest available instance when creating Essential App Protect service.    
+The response will return your record name, its status, current type and IP. 
+
+Note that in subsequent requests record type will be changed to CNAME in order to change DNS settings and let traffic go through Essential App Protect. Record IP will be used by the F5 Cloud Services portal to find the nearest available instance when creating Essential App Protect service.    
 
 **SCREENSHOT** 
 
@@ -173,7 +175,7 @@ Essential App Protect
 `c)` Paste the record name you copied in step 1.a) above into "Fully Qualified Domain Name (FQDN)" field and click **Save & Continue**.  
 .. figure:: _figures/117.png 
 
-The system will gather app endpoint and region detail, show them and ask you to **Save & Continue**.  
+Using record IP, the system will look for the nearest instance, gather app endpoint and region detail, show them and ask you to **Save & Continue**.  
 
 .. figure:: _figures/118.png 
 
