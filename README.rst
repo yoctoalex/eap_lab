@@ -241,6 +241,16 @@ The response will show that record type is changed from "A" to "CNAME" (see step
 
 .. figure:: _figures/128.png
 
+`f)` Test via Browser
+
+Let's now test the updated DNS setting via browser. Return to the F5 Cloud Services portal, open the **DNS Settings** tab and copy the CNAME.
+
+.. figure:: _figures/130.png
+
+Paste it into your browser and you will see the NA2 instance of the Auction website and all of the requests will now be flowing through the Essential App Protect. However, any malicious requests will not be blocked, as we have not turned on "Blocking" mode yet.
+
+.. figure:: _figures/131.png
+
 3. Attacks  
 *********** 
 
