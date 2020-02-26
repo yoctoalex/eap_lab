@@ -518,21 +518,43 @@ Now select **Americas**. This will simulate your entering http://auction.cloudse
 
 You will see that you are switched to the American endpoint. 
 
-16. Start EAP Attack (lab) 
+16. Attacks via browser 
 *************************
 
+Let's now simulate some attacks. 
 
+`a)` In order to simulate Illegal File type, paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser and the page will be blocked:
 
+.. figure:: _figures/153.png 
 
+Now let's go back to F5 Ui and see the dashboard with the new attack:
 
+.. figure:: _figures/154.png 
 
+You can see the type of attack and some more detailed information in the "VIEW EVENTS" tab:
 
+.. figure:: _figures/155.png 
+
+`b)` Let's now simulate SQL Injection. **TBC** 
+
+17. Check the Map
+****************
+
+Now let’s see the map of our attacks on the F5 Cloud Services portal. You need to select Essential App Protect tab where you will see the dashboard.
+
+For now, all attacks are not blocked. We will block them sending the Update Monitor to Block request in one of the following steps.
+
+18. Start EAP Attack (lab) via Postman 
+*************************
+
+Let’s now return to Postman and simulate the attacks by sending the Start EAP Attack (lab) request.
+
+ First, let's see the page prior to sending the request. To do that, let's simulate an attack. Paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser. The result will be the following:
+ 
+You will see “ok” status which means that your zone is being attacked. In the F5 Cloud Services portal you can see the results of the attacks: their types, severity and some other information (see the next step).
 
 14. View Events via Postman  
 ************ 
-
-
-
 
 15. View Events via UI  
 **************************** 
