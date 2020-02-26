@@ -319,7 +319,7 @@ All the attacks can be seen in the "VIEW EVENTS" section of the F5 Cloud Service
 As you can see, our "Illegal file type" attack has appeared on the list and its status is "Not blocked" for now.  
 
 6. Update Monitoring to Blocking via UI 
-******************************** 
+*************************************** 
 
 By default, all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via UI or via Postman. In order to do so via Postman, proceed to the following section. 
 
@@ -333,16 +333,19 @@ Now that the protection mode is "blocking", you can re-send the **Attack: Illega
 
 .. figure:: _figures/119.png
 
-5. Update Monitoring to Blocking via Postman 
-******************************** 
+You may send the **Attack: Threat Campaign** and **Attack: SQL Injection** requests in Postman as well. 
 
-Let's first deactivate the blocking mode in the F5 UI.
+**SCREeNSHOT OF POSTMAN**
 
-`a)` Go to the **PROTECT APPLICATION** tab, then open the attacks you want to monitor, toggle **Blocking Mode** off and click **Update**.
+Then go back to the F5 UI, "VIEW EVENTS" section and see that their status is "blocked": 
 
-**SCREENSHOT** 
+.. figure:: _figures/141.png
 
-`b)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved in steps above. 
+
+7. Update Monitoring to Blocking via Postman 
+******************************************** 
+
+`a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved in steps above. 
 
 **SCREENSHOT** 
 
@@ -352,36 +355,70 @@ You will see the new "blocked" status of attacks in the response.
 
 You can also notice that their status changed in the F5 UI:
 
-**SCREENSHOT** 
+.. figure:: _figures/139.png
 
-`c)` Testing the status 
+`b)` Testing the status 
 
-Now that the protection mode is "blocking", you can send the **Attack: Illegal Filetype** and **Attack: SQL Injection** requests in Postman. 
+Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** and **Attack: SQL Injection** requests in Postman. 
 
 **SCREENSHOT** 
 
 After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attacks with the "Blocked" status:
 
-**SCREENSHOT** 
+.. figure:: _figures/140.png
 
-6. Block Country List
+8. Geolocation Enforcement via UI
 ****************************
 
-`a)` If you would like to block requests on a country-basis, go to Postman and sent the **Block country list** request which will use your "account_id" and "EAP record":
+You can create a list of countries whose traffic is to be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
+
+`a)` Go back to F5 UI, "PROTECT APPLICATION", then go to the **High-risk Attack Mitigation** tab and click **Manage countries**. 
+
+.. figure:: _figures/142.png
+
+`b)` Add "France"  as a country whose requests you want to deny and click **Update**.
+
+.. figure:: _figures/143.png
+
+`c)` Test via the Opera Browser 
+
+   `1.` Let's now see how the new rule for geolocation enforcement works. Open the Opera browser, click **VPN** and select **Europe**: 
+
+   .. figure:: _figures/144.png
+
+   `2.` Copy your domain in the **General** tab of "PROTECT APPLICATION" in F5 UI:
+
+   .. figure:: _figures/147.png
+
+   `3.` And paste it to the Opera browser to see the following response:
+
+   .. figure:: _figures/148.png
+
+   `4.` Let's go back to F5 UI, "VIEW EVENTS" and see the attack:
+
+   .. figure:: _figures/145.png
+   
+   As you can see, the reason for being blocked is "Access from disallowed Geolocation".
+ 
+   
+9. Geolocation Enforcement via Postman
+****************************
+
+`a)` If you would like to block requests on a country-basis via Postman, then sent the **Block country list** request which will use your "account_id" and "EAP record":
 
 **SCREENSHOT** 
 
 The response will show the countries blocked: 
 
-**SCREENSHOT with US + DE + GB blocked**
+.. figure:: _figures/149.png
 
-`b)` Let's to to F5 UI and see the updated geolocation enforcemenet:
+`b)` Let's go to F5 UI and see the updated geolocation enforcemenet:
 
-.. figure:: _figures/120.png  
+.. figure:: _figures/121.png  
 
 Click **Manage countries** to see the countries that are blocked: 
 
-.. figure:: _figures/121.png
+.. figure:: _figures/120.png
 
 `c)` Let's test how country-base blocking works. Go back to Postman and send the **Test Country Blocking (lab)** request which uses your "EAP record". 
 
@@ -391,7 +428,8 @@ Let's open the F5 UI and go to VIEW EVENTS section to see the newly blocked atta
 
 .. figure:: _figures/122.png
 
-7. Update IP Enforcement Rules via Postman  
+
+10. Update IP Enforcement Rules via Postman  
 ********************************
 
 If you need to block or allow requests from specific ID addresses, it can be done in two way: via Postman or UI. If you prefer to do it via Postman, then follow the steps below. If your choice is UI, then procede to the next section.
