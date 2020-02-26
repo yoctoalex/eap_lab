@@ -428,7 +428,6 @@ Let's open the F5 UI and go to VIEW EVENTS section to see the newly blocked atta
 
 .. figure:: _figures/122.png
 
-
 10. Update IP Enforcement Rules via UI  
 ********************************
 
@@ -442,7 +441,6 @@ If you need to block specific IP addresses or add them to the whitelist, you can
 
 .. figure:: _figures/151.png
 
-
 11. Update IP Enforcement Rules via Postman  
 ********************************
 
@@ -454,18 +452,7 @@ In the response you will see four blocked IPs and one allowed IP.
 
 .. figure:: _figures/152.png
 
-12. Update IP Enforcement Rules via F5 UI  
-******************************************
-
-`a)` Select **PROTECT APPLICATION** in the Essential App Protect tab, select **High-risk Attack Mitigation** and then **Manage rules**. 
-
-.. figure:: _figures/123.png 
-
-`b)` Fill in the required info and click **Update**:
-
-**SCREENSHOT** 
-
-9. Customize blocked page 
+12. Customize Blocked Page 
 ***************************
 
 If you prefer to customize your blocked page, you can do it using Postman. 
@@ -482,9 +469,9 @@ If you prefer to customize your blocked page, you can do it using Postman.
 
 .. figure:: _figures/125.png 
 
-**Note**: It may take up to 1 minute. 
+**Note**: It may take up to a few minutes due to updating the service. 
 
-10. Add New Endpoints 
+13. Add New Endpoints 
 *********************
 
 If you need to add new endpoints, you can do it via Postman.
