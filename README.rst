@@ -306,30 +306,30 @@ This attack combines valid URL path segments with invalid input to guess or brut
 
 These types of attacks are the category that F5 Labs tracks as coordinated campaigns that exploit known vulnerabilities. This particular attack simulates using a known Tomcat backdoor vulnerability. The complete list of such threats can be found `here <http://bit.ly/36bPmfG>`_.   
 
-Let’s now try and simulate an attack.
+Let’s now simulate an attack.
 
-Go back to Postman and send the **Attack: Threat Campaign** request. 
-
-**SCREENSHOT** 
-
-The attack will be shown in the Essential App Protect "VIEW EVENTS" section of the F5 Cloud Services portal.
+Go back to Postman and send the **Attack: Illegal Filetype** request. 
 
 **SCREENSHOT** 
 
-You can see that its status is "Not blocked" for now. 
+All the attacks can be seen in the "VIEW EVENTS" section of the F5 Cloud Services portal.
 
-4. Update Monitoring to Blocking via UI 
+.. figure:: _figures/138.png
+
+As you can see, our "Illegal file type" attack has appeared on the list and its status is "Not blocked" for now.  
+
+6. Update Monitoring to Blocking via UI 
 ******************************** 
 
-By default, all the threats of your app are only monitored without any actions taken. You can change mornitoring to blocking either via UI or via Postman. 
+By default, all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via UI or via Postman. In order to do so via Postman, proceed to the following section. 
 
-`a)` To start blocking attacks, go to the **PROTECT APPLICATION** tab, then open the type of attack you want to block, toggle **Blocking Mode** on and click **Update** to save the settings:  
+`a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open each type of attack one by one and toggle **Blocking Mode** on. Click **Update** for each attack type to save the settings:  
 
 .. figure:: _figures/105.png 
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can re-send the **Attack: Threat Campaign** request in Postman. After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attack with the "Blocked" status:
+Now that the protection mode is "blocking", you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attack with the "Blocked" status:
 
 .. figure:: _figures/119.png
 
