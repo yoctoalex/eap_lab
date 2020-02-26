@@ -76,7 +76,7 @@ You will now see your collection (left side) with calls in several categories, a
 
 You are now ready to interface with the F5 Cloud Services using Postman. 
 
-3. Record Name  
+3. Domain Name  
 ************** 
 
 In order to create Essential App Protect instance in the F5 Cloud Services portal, you need to have a record name to be used as your domain name. Use Postman and follow the steps below to get the Record name from the Lab service API.     
@@ -125,9 +125,9 @@ Request:
 
 .. figure:: _figures/74.png  
 
-The response will return your record name and the status.  
+The response will return your record name, its status, current type and IP. Note that in subsequent requests record type will be changed to CNAME in order to change DNS settings and let traffic go through Essential App Protect. Record IP will be used by the F5 Cloud Services portal to find the nearest available instance when creating Essential App Protect service.    
 
-.. figure:: _figures/27.jpg  
+**SCREENSHOT** 
 
 Sending this request will automatically capture of the Record variables:  
 
@@ -162,16 +162,15 @@ Essential App Protect
 1. Create Essential App Protect Service via the F5 Cloud Services Portal  
 ************************************************************************ 
 
-`a)` You will need a record name to be used as **Fully Qualified Domain Name (FQDN)** to create Essential App Protect service. To get it, open the **Get EAP record (lab)** request in Postman and copy **"record"** value from the response: 
+`a)` In order to create Essential App Protect service, open the **Get EAP record (lab)** request in Postman and copy **"record"** name in the response.  
 
-.. figure:: _figures/115.png
+**SCREENSHOT 115**
 
 `b)` Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**. 
 
 .. figure:: _figures/116.png
 
-`c)` Paste the record name you copied in step 1.a) above and click **Save & Continue**.  
-
+`c)` Paste the record name you copied in step 1.a) above into "Fully Qualified Domain Name (FQDN)" field and click **Save & Continue**.  
 .. figure:: _figures/117.png 
 
 The system will gather app endpoint and region detail, show them and ask you to **Save & Continue**.  
