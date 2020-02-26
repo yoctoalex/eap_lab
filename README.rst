@@ -251,7 +251,45 @@ Paste it into your browser and you will see the NA2 instance of the Auction webs
 
 .. figure:: _figures/131.png
 
-3. Attacks  
+3. Review the JSON via UI 
+******************
+
+If you would like to see the full configuration of your Essential App Protect or edit some properties, you can review the JSON either via UI or via Postman. If you prefer to do that via Postman, then proceed to the next section. 
+
+In order to view the JSON via the F5 Cloud Servcies portal, open **PROTECT APPLICATION** and go to the **JSON configuration** tab. 
+
+.. figure:: _figures/132.png
+
+Let's take a look at different sections available in the JSON. In order to collapse or expand a section, click the small arrows next to the line numbers. 
+
+The main sections are "application", "event_logging" and "policy".
+
+.. figure:: _figures/133.png
+
+In the "application" section, we can see our instance domain, region it belongs to, IP endpoints  and port. 
+
+.. figure:: _figures/134.png
+
+We can also learn all the information about our protection and its settings, as well as about each attack type in ""policy" section:
+
+.. figure:: _figures/135.png
+
+More detailed information on attack types can be found in one of the following sections. 
+
+4. Review the JSON via Postman 
+*******************************
+
+If your prefer to use Postman to review the JSON, go back to Postman and send the **Get JSON** request:
+
+.. figure:: _figures/136.png
+
+You will see the JSON in the response: 
+
+.. figure:: _figures/137.png
+
+The returned JSON provides information on subcription_id and user_id, instance name, as well as all configuration details (CNAME, domain, etc) and protection settings. 
+
+5. Attacks  
 *********** 
 
 There are three types of attacks:  
