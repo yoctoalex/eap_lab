@@ -203,13 +203,13 @@ Now that your Essential App Protect instance is created, we need to change DNS s
 
 .. figure:: _figures/127.png 
 
-As you can see, it's not successful. To fix the issue, we need to update DNS settings using Postman.
+As you can see, it's not successful. We will update DNS settings using Postman to fix that.
 
 `b)` Go back to Postman to change the DNS settings. Send the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
 
 **SCREENSHOT**
 
-The response will return all information on your subscription: 
+The response will return all information on your instance which we have created via UI: 
 
 **SCREENSHOT**
 
@@ -217,23 +217,29 @@ The retrieved ID and CNAME are then stored for subsequent calls using a function
 
 **SCREENSHOT**
 
-`b)` Send the **Update EAP DNS Record (lab)** to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
+`c)` Send the **Update EAP DNS Record (lab)** to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
 
 **SCREENSHOT** 
 
-The response will show the updated value: 
+The response will show the updated type (""CNAME") and value: 
 
 **SCREENSHOT** 
 
-Now your DNS settings are updated and app traffic goes through Essential App Protect instance and is actively protected. 
-
-`c)` Let’s now test if CNAME change is completed correctly.   
+`d)` Let’s now test if CNAME change is completed correctly.   
 
 Return to the F5 Cloud Services portal, open **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open **DNS Settings** tab and click **Test updated DNS**.  
 
 .. figure:: _figures/106.png 
 
-You will see the status of testing. 
+You will see successful status of testing.
+
+`e)` Let's now go back to Postman and re-send the **Get EAP record (lab)** request to see the current type of the record. 
+
+.. figure:: _figures/129.png
+
+The response will show that record type is changed from "A" to "CNAME" (see step 3.d) above), as well as "value" is updated, which means that app traffic now goes through Essential App Protect instance and is actively protected.   
+
+.. figure:: _figures/128.png
 
 3. Attacks  
 *********** 
