@@ -429,20 +429,32 @@ Let's open the F5 UI and go to VIEW EVENTS section to see the newly blocked atta
 .. figure:: _figures/122.png
 
 
-10. Update IP Enforcement Rules via Postman  
+10. Update IP Enforcement Rules via UI  
 ********************************
 
-If you need to block or allow requests from specific ID addresses, it can be done in two way: via Postman or UI. If you prefer to do it via Postman, then follow the steps below. If your choice is UI, then procede to the next section.
+If you need to block specific IP addresses or add them to the whitelist, you can do it in two way: via Postman or UI. If you prefer to do it via Postman, then proceed to the next section. If your choice is UI, then follow the steps below: 
 
-Go to Postman and send the **Update IP Enforcement Rules** request which uses your "account_id" and "EAP record".
+`a)` Go to "PROTECT APPLICATION" -> the **High-risk Attack Mitigation** tab and click **Manage rules**. 
+
+.. figure:: _figures/150.png
+
+`b)` Add "127.0.0.1", "11.11.11.10", "192.168.1.10", "12.23.34.59" IPs for blocking and "192.168.100.50" to the whitelist Click **Update**. 
+
+.. figure:: _figures/151.png
+
+
+11. Update IP Enforcement Rules via Postman  
+********************************
+
+`a)` Go to Postman and send the **Update IP Enforcement Rules** request which uses your "account_id" and "EAP record".
 
 **SCREENSHOT** 
 
 In the response you will see four blocked IPs and one allowed IP. 
 
-**SCREENSHOT** 
+.. figure:: _figures/152.png
 
-8. Update IP Enforcement Rules via F5 UI  
+12. Update IP Enforcement Rules via F5 UI  
 ******************************************
 
 `a)` Select **PROTECT APPLICATION** in the Essential App Protect tab, select **High-risk Attack Mitigation** and then **Manage rules**. 
