@@ -186,11 +186,11 @@ As you can see, the endpoint belongs to North America, US East (N. Virginia) and
 
 .. figure:: _figures/99.png 
 
-`e)` Enable all the options and click **Save & Continue**. 
+`e)` Enable all the methods of protection and click **Save & Continue**. In case you need to update this property, you can do it later in "PROTECT APPLICATION" section. 
 
 .. figure:: _figures/100.png 
 
-`f)` Click **Done**.  
+`f)` Click **Done** and Essential App Protect service will be created and ready for use.  
 
 .. figure:: _figures/101.png  
 
@@ -199,7 +199,13 @@ Now that your Essential App Protect instance is created, we need to change DNS s
 2. Update DNS Settings using CNAME  
 ******************************** 
 
-`a)` Go back to Postman to change the DNS settings. Send the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
+`a)` Let's test if DNS settings are updated and the traffic is protected by Essential App Protect. In the F5 Cloud Services portal, open the **DNS Settings** tab in **PROTECT APPLICATION** and click **Test updated DNS**.
+
+.. figure:: _figures/127.png 
+
+As you can see, it's not successful. To fix the issue, we need to update DNS settings using Postman.
+
+`b)` Go back to Postman to change the DNS settings. Send the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
 
 **SCREENSHOT**
 
