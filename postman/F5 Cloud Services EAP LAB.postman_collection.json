@@ -102,7 +102,7 @@
 					"response": []
 				},
 				{
-					"name": "Get EAP record (lab)",
+					"name": "Get FQDN Record type (lab)",
 					"event": [
 						{
 							"listen": "test",
@@ -312,7 +312,7 @@
 					"response": []
 				},
 				{
-					"name": "Update EAP DNS Record (lab)",
+					"name": "Update CNAME Record (lab)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -347,35 +347,89 @@
 					"response": []
 				},
 				{
-					"name": "Attack: Threat Campaign",
+					"name": "Get JSON",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"exec": [
+									"pm.test(\"Find previously created subscription\", function() {",
+									"    const jsonData = pm.response.json();",
+									"    for(var i=0; i < jsonData.subscriptions.length; i++) {",
+									"        const subscription = jsonData.subscriptions[i];",
+									"        const eapRecord = pm.environment.get(\"EAP_RECORD\");",
+									"        if (subscription.service_instance_name === eapRecord) {",
+									"            pm.environment.set(\"WAF_SERVICE_INSTANCE_ID\", subscription.service_instance_id);",
+									"            pm.environment.set(\"WAF_SUBSCRIPTION_ID\", subscription.subscription_id);",
+									"            pm.environment.set(\"WAF_CNAME\", subscription.configuration.details.CNAMEValue);",
+									"        }",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions?account_id={{ACCOUNT_ID}}&service_type=waf",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions"
+							],
+							"query": [
+								{
+									"key": "account_id",
+									"value": "{{ACCOUNT_ID}}"
+								},
+								{
+									"key": "service_type",
+									"value": "waf"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attack: Illegal Filetype",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "User-Agent",
-								"value": "Mozilla/3.0 (compatible; Indy Library)",
-								"type": "text"
-							},
-							{
-								"key": "X-Virtual-Server-Port",
-								"value": "8080",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic Og==",
+								"value": "Mozilla/5.0 (Windows; U; Windows NT 5.1; pt-PT; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://{{EAP_RECORD}}/manager/html",
+							"raw": "http://{{EAP_RECORD}}/nginx.config",
 							"protocol": "http",
 							"host": [
 								"{{EAP_RECORD}}"
 							],
 							"path": [
-								"manager",
-								"html"
+								"nginx.config"
 							]
 						}
 					},
@@ -431,24 +485,35 @@
 					"response": []
 				},
 				{
-					"name": "Attack: Illegal Filetype",
+					"name": "Attack: Threat Campaign",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "User-Agent",
-								"value": "Mozilla/5.0 (Windows; U; Windows NT 5.1; pt-PT; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)",
+								"value": "Mozilla/3.0 (compatible; Indy Library)",
+								"type": "text"
+							},
+							{
+								"key": "X-Virtual-Server-Port",
+								"value": "8080",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic Og==",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://{{EAP_RECORD}}/nginx.config",
+							"raw": "http://{{EAP_RECORD}}/manager/html",
 							"protocol": "http",
 							"host": [
 								"{{EAP_RECORD}}"
 							],
 							"path": [
-								"nginx.config"
+								"manager",
+								"html"
 							]
 						}
 					},
@@ -989,6 +1054,98 @@
 								"svc-subscription",
 								"subscriptions",
 								"{{WAF_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suspend EAP Subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}/suspend",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{WAF_SUBSCRIPTION_ID}}",
+								"suspend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate EAP Subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f64d5b3-d495-483c-afb4-7254931b00c0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}/suspend",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{WAF_SUBSCRIPTION_ID}}",
+								"suspend"
 							]
 						}
 					},
