@@ -474,7 +474,7 @@ If you prefer to customize your blocked page, you can do it using Postman.
 13. Add New Endpoints 
 *********************
 
-If you need to add new endpoints, you can do it via Postman.
+Let's imagine your website is active both in the USA and in Europe. But for now, you have only one IP endpoint added to Essential App Protect - in North America, US East (N. Virginia). If you need to add the second one, you can do it via Postman.
 
 Send the **Add new endpoints** request in Postman which uses your **account_id** and **EAP record**. 
 
@@ -486,9 +486,11 @@ You will see the Endpoint added in the returned response located in Europe (Fran
 
 You will also see the new endpoint in the F5 UI:
 
-.. figure:: _figures/126.png
+**SCREENSHOT from UI** 
 
-11. Test New Endpoint via Postman
+Note that this operation may take up to a few minutes due to service deployment. 
+
+14. Test New Endpoint via Postman
 ***********************************
 
 Let's now test the endpoint we've just created via Postman.
@@ -499,9 +501,9 @@ Send the **Test Second Endpoint (lab)** request which uses your "EAP record".
 
 Here's what you should see in the response:
 
-**SCREENSHOT from postman** 
+**SCREENSHOT from postman with highlight of INSTANCE** 
 
-12. Test New Endpoint via the Opera Browser 
+**15. Test New Endpoint via the Opera Browser** 
 ******************************************
 
 Open the Opera browser, click **VPN** and select **Europe**. This will simulate your entering http://auction.cloudservicesdemo.net/ from Europe.
@@ -516,7 +518,7 @@ Now select **Americas**. This will simulate your entering http://auction.cloudse
 
 You will see that you are switched to the American endpoint. 
 
-13. Start EAP Attack (lab) 
+16. Start EAP Attack (lab) 
 *************************
 
 
