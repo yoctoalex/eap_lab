@@ -76,10 +76,10 @@ You will now see your collection (left side) with calls in several categories, a
 
 You are now ready to interface with the F5 Cloud Services using Postman. 
 
-3. Domain Name  
-************** 
+3. Fully Qualified Domain Name (FQDN) 
+**************************** 
 
-In order to create Essential App Protect instance in the F5 Cloud Services portal, you need to have a record name to be used as your domain name. Use Postman and follow the steps below to get the Record name from the Lab service API.     
+In order to create Essential App Protect instance in the F5 Cloud Services portal, you need to have a FQDN. Use Postman and follow the steps below to get FQDN from the Lab service API.     
 
 `a)` Open the “F5 Cloud Services EAP LAB” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values).  
 
@@ -119,35 +119,54 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <http://bit.ly/37hyQw3>`_.  
 
-`d)` Let’s now retrieve EAP Record Name with the **Get EAP record (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in F5 Cloud Services UI.  
-
+`d)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in F5 Cloud Services UI.  
 Request:  
 
 .. figure:: _figures/74.png  
 
 The response will return your record name, its status, current type and IP. 
 
-Note that in subsequent requests record type will be changed to CNAME in order to change DNS settings and let traffic go through Essential App Protect. Record IP will be used by the F5 Cloud Services portal to find the nearest available instance when creating Essential App Protect service.    
+.. figure:: _figures/156.png
 
-**SCREENSHOT** 
+Note that in subsequent requests record type will be changed to CNAME in order to change DNS settings and let traffic go through Essential App Protect. Record IP will be used by the F5 Cloud Services portal to find the nearest available instance when creating Essential App Protect service.    
 
 Sending this request will automatically capture of the Record variables:  
 
 .. figure:: _figures/26.jpg  
 
-This Record Name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
+This record name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
 
 `e)` Get User Membership to F5 Cloud Services accounts
 
-In Postman, send the **Get User Membership** request which returns info on your user’s access to Cloud Services accounts.
+In Postman, send the **Get User Membership (optional)** request which returns info on your user’s access to Cloud Services accounts.
 
-**TO BE UPDATED** 
+.. figure:: _figures/157.png
+
+You will see account ids, names, roles and other information in the body of response. 
+
+.. figure:: _figures/158.png
+
+Your "account_id" will be retrieved using "account_name" and used in the subsequent requests.
+
+.. figure:: _figures/159.png
+
+More detailed information on this API request can be found `here <http://bit.ly/2Gfu1r3>`_. 
 
 `f)` Retrieve information on available catalogs and their IDs
 
 Select the **Get Catalogs** request and click **Send** to retrieve data about the available Catalogs and their IDs.
 
-**TO BE UPDATED** 
+.. figure:: _figures/160.png
+
+You can see available catalogs:
+
+.. figure:: _figures/161.png
+
+The retrieved IDs are then stored for subsequent calls using a function inside Postman to set environment variables. You can see the test function in the "Tests" tab:
+
+.. figure:: _figures/162.png
+
+More detailed information on this API request can be found `here <http://bit.ly/36j1Yl4>`_. 
 
 4. Opera with VPN to Test New Endpoints 
 ****************************************
@@ -156,7 +175,7 @@ You will need the Opera browser to test proximity rules we will set later.
 
 Open the Opera browser, click **Settings, Advanced, Features** and then **Enable VPN**.
 
-**SCREENSHOT**
+.. figure:: _figures/163.png
 
 Essential App Protect 
 ##################### 
