@@ -401,23 +401,23 @@ After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new a
 8. Geolocation Enforcement via UI
 ****************************
 
-You can create a list of countries whose traffic is to be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
+You can create a list of countries traffic from which will be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
 
-`a)` Go back to F5 UI, "PROTECT APPLICATION", then go to the **High-risk Attack Mitigation** tab and click **Manage countries**. 
+`a)` Go back to F5 UI, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click **Manage countries**. 
 
 .. figure:: _figures/142.png
 
-`b)` Add "France"  as a country whose requests you want to deny and click **Update**.
+`b)` Add "United States"  as a country whose requests you want to deny and click **Update**.
 
 .. figure:: _figures/143.png
 
 `c)` Test via the Opera Browser 
 
-   `1.` Let's now see how the new rule for geolocation enforcement works. Open the Opera browser, click **VPN** and select **Europe**: 
+   `1.` Let's now see how the new rule for geolocation enforcement works. Open the Opera browser, click **VPN** and select **Americas**: 
 
    .. figure:: _figures/144.png
 
-   `2.` Copy your domain in the **General** tab of "PROTECT APPLICATION" in F5 UI:
+   `2.` Copy your DNS updated with CNAME in the **DNS Settings** tab of **PROTECT APPLICATION** in F5 UI:
 
    .. figure:: _figures/147.png
 
@@ -425,7 +425,7 @@ You can create a list of countries whose traffic is to be blocked via UI or via 
 
    .. figure:: _figures/148.png
 
-   `4.` Let's go back to F5 UI, "VIEW EVENTS" and see the attack:
+   `4.` Let's go back to F5 UI, **VIEW EVENTS** and see the attack:
 
    .. figure:: _figures/145.png
    
