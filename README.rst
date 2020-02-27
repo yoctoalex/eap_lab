@@ -513,7 +513,7 @@ Note that this operation may take up to a few minutes due to its deployment.
 
 Let's now test the endpoint we've just created via Postman.
 
-Send the **Test Second Endpoint (lab)** request which uses your "EAP record". 
+Send the **Test Second Endpoint (lab)** request: 
 
 **SCREENSHOT from postman** 
 
@@ -536,7 +536,7 @@ Now select **Americas**. This will simulate your entering http://auction.cloudse
 
 You will see that you are switched to the American endpoint. 
 
-16. Attacks via browser 
+16. Attacks via Browser 
 *************************
 
 Let's now simulate some attacks. 
@@ -553,7 +553,15 @@ You can see the type of attack and some more detailed information in the "VIEW E
 
 .. figure:: _figures/155.png 
 
-`b)` Let's now simulate SQL Injection. **TBC** 
+`b)` Let's now simulate SQL Injection attack via browser and our F5 account. Sign out of your F5 Cloud Services account: 
+
+.. figure:: _figures/184.png 
+
+Fill in **' OR 1=1; '** as login email and fill in any password. Click **Log In**.
+
+.. figure:: _figures/185.png 
+
+And you will see that SQL Injection attack type is blocked.  
 
 17. Check the Map
 ****************
