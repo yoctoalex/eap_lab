@@ -183,9 +183,9 @@ Essential App Protect
 1. Create Essential App Protect Service via the F5 Cloud Services Portal  
 ************************************************************************ 
 
-`a)` In order to create Essential App Protect service, open the **Get EAP record (lab)** request in Postman and copy **"record"** name in the response.  
+`a)` In order to create Essential App Protect service, open the **Get FQDN Record type (lab)** request in Postman and copy "record" name in the response.  
 
-**SCREENSHOT 115**
+.. figure:: _figures/115.png
 
 `b)` Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**. 
 
@@ -205,7 +205,7 @@ As you can see, the endpoint belongs to North America, US East (N. Virginia) and
 
 .. figure:: _figures/99.png 
 
-`e)` Enable all the methods of protection and click **Save & Continue**. In case you need to update this property, you can do it later in "PROTECT APPLICATION" section. 
+`e)` Enable all the methods of protection and click **Save & Continue**. In case you need to update this property, you can do it later in the **PROTECT APPLICATION** section. 
 
 .. figure:: _figures/100.png 
 
@@ -213,7 +213,7 @@ As you can see, the endpoint belongs to North America, US East (N. Virginia) and
 
 .. figure:: _figures/101.png  
 
-Now that your Essential App Protect instance is created, we need to change DNS settings using CNAME and start routing the traffic through Essential App Protect. To do that follow the steps below.  
+Now that your Essential App Protect instance is created, we need to change DNS settings using CNAME and start routing the traffic through Essential App Protect. In order to do that follow the steps below.  
 
 2. Update DNS Settings using CNAME  
 ******************************** 
