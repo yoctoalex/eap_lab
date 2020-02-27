@@ -37,7 +37,7 @@ Lab Environment Setup
 
 In order to use F5 Cloud Services, you need to be logged in with a valid user account. If you need to sign up, or if you already have one, proceed to the `F5 Cloud Services portal <http://bit.ly/f5csreg>`_.  
 
-.. figure:: _figures/1.png  
+.. figure:: _figures/1-1.png  
 
 Once you've logged in with an account, you will be using the user name and password values in the lab to authenticate with the F5 Cloud Services and the API.
 
@@ -76,10 +76,10 @@ You will now see your collection (left side) with calls in several categories, a
 
 You are now ready to interface with the F5 Cloud Services using Postman. 
 
-3. Domain Name  
-************** 
+3. Fully Qualified Domain Name (FQDN) 
+**************************** 
 
-In order to create Essential App Protect instance in the F5 Cloud Services portal, you need to have a record name to be used as your domain name. Use Postman and follow the steps below to get the Record name from the Lab service API.     
+In order to create Essential App Protect instance in the F5 Cloud Services portal, you need to have a FQDN. Use Postman and follow the steps below to get FQDN from the Lab service API.     
 
 `a)` Open the “F5 Cloud Services EAP LAB” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values).  
 
@@ -119,35 +119,54 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <http://bit.ly/37hyQw3>`_.  
 
-`d)` Let’s now retrieve EAP Record Name with the **Get EAP record (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in F5 Cloud Services UI.  
-
+`d)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in F5 Cloud Services UI.  
 Request:  
 
 .. figure:: _figures/74.png  
 
 The response will return your record name, its status, current type and IP. 
 
-Note that in subsequent requests record type will be changed to CNAME in order to change DNS settings and let traffic go through Essential App Protect. Record IP will be used by the F5 Cloud Services portal to find the nearest available instance when creating Essential App Protect service.    
+.. figure:: _figures/156.png
 
-**SCREENSHOT** 
+Note that in subsequent requests record type will be changed to CNAME in order to change DNS settings and let traffic go through Essential App Protect. Record IP will be used by the F5 Cloud Services portal to find the nearest available instance when creating Essential App Protect service.    
 
 Sending this request will automatically capture of the Record variables:  
 
 .. figure:: _figures/26.jpg  
 
-This Record Name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
+This record name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
 
 `e)` Get User Membership to F5 Cloud Services accounts
 
-In Postman, send the **Get User Membership** request which returns info on your user’s access to Cloud Services accounts.
+In Postman, send the **Get User Membership (optional)** request which returns info on your user’s access to Cloud Services accounts.
 
-**TO BE UPDATED** 
+.. figure:: _figures/157.png
+
+You will see account ids, names, roles and other information in the body of response. 
+
+.. figure:: _figures/158.png
+
+Your "account_id" will be retrieved using "account_name" and used in the subsequent requests.
+
+.. figure:: _figures/159.png
+
+More detailed information on this API request can be found `here <http://bit.ly/2Gfu1r3>`_. 
 
 `f)` Retrieve information on available catalogs and their IDs
 
 Select the **Get Catalogs** request and click **Send** to retrieve data about the available Catalogs and their IDs.
 
-**TO BE UPDATED** 
+.. figure:: _figures/160.png
+
+You can see available catalogs:
+
+.. figure:: _figures/161.png
+
+The retrieved IDs are then stored for subsequent calls using a function inside Postman to set environment variables. You can see the test function in the "Tests" tab:
+
+.. figure:: _figures/162.png
+
+More detailed information on this API request can be found `here <http://bit.ly/36j1Yl4>`_. 
 
 4. Opera with VPN to Test New Endpoints 
 ****************************************
@@ -156,7 +175,7 @@ You will need the Opera browser to test proximity rules we will set later.
 
 Open the Opera browser, click **Settings, Advanced, Features** and then **Enable VPN**.
 
-**SCREENSHOT**
+.. figure:: _figures/163.png
 
 Essential App Protect 
 ##################### 
@@ -164,9 +183,9 @@ Essential App Protect
 1. Create Essential App Protect Service via the F5 Cloud Services Portal  
 ************************************************************************ 
 
-`a)` In order to create Essential App Protect service, open the **Get EAP record (lab)** request in Postman and copy **"record"** name in the response.  
+`a)` In order to create Essential App Protect service, open the **Get FQDN Record type (lab)** request in Postman and copy "record" name in the response.  
 
-**SCREENSHOT 115**
+.. figure:: _figures/115.png
 
 `b)` Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**. 
 
@@ -186,7 +205,7 @@ As you can see, the endpoint belongs to North America, US East (N. Virginia) and
 
 .. figure:: _figures/99.png 
 
-`e)` Enable all the methods of protection and click **Save & Continue**. In case you need to update this property, you can do it later in "PROTECT APPLICATION" section. 
+`e)` Enable all the methods of protection and click **Save & Continue**. In case you need to update this property, you can do it later in the **PROTECT APPLICATION** section. 
 
 .. figure:: _figures/100.png 
 
@@ -194,7 +213,7 @@ As you can see, the endpoint belongs to North America, US East (N. Virginia) and
 
 .. figure:: _figures/101.png  
 
-Now that your Essential App Protect instance is created, we need to change DNS settings using CNAME and start routing the traffic through Essential App Protect. To do that follow the steps below.  
+Now that your Essential App Protect instance is created, we need to change DNS settings using CNAME and start routing the traffic through Essential App Protect. In order to do that follow the steps below.  
 
 2. Update DNS Settings using CNAME  
 ******************************** 
@@ -207,33 +226,35 @@ As you can see, it's not successful. We will update DNS settings using Postman t
 
 `b)` Go back to Postman to change the DNS settings. Send the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
 
-**SCREENSHOT**
+.. figure:: _figures/164.png
 
 The response will return all information on your instance which we have created via UI: 
 
-**SCREENSHOT**
+.. figure:: _figures/165.png
 
-The retrieved ID and CNAME are then stored for subsequent calls using a function inside Postman to set environment variables. You can see the test function in the **Tests** tab:
+The retrieved CNAME will be used to update DNS settings:
 
-**SCREENSHOT**
+.. figure:: _figures/166.png
 
-`c)` Send the **Update EAP DNS Record (lab)** to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
+More detailed information on this API request can be found `here <http://bit.ly/38xUHjc>`_.  
 
-**SCREENSHOT** 
+`c)` Send the **Update CNAME Record (lab)** request to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
+
+.. figure:: _figures/167.png
 
 The response will show the updated type (""CNAME") and value: 
 
-**SCREENSHOT** 
+.. figure:: _figures/168.png
 
-`d)` Let’s now test if CNAME change is completed correctly.   
+`d)` Test CNAME change via UI   
 
-Return to the F5 Cloud Services portal, open **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open **DNS Settings** tab and click **Test updated DNS**.  
+Return to the F5 Cloud Services portal, open the **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open the **DNS Settings** tab and click **Test updated DNS**.  
 
 .. figure:: _figures/106.png 
 
 You will see successful status of testing.
 
-`e)` Let's now go back to Postman and re-send the **Get EAP record (lab)** request to see the current type of the record. 
+`e)` Let's now go back to Postman and re-send the **Get FQDN Record type (lab)** request to see the current type of the record. 
 
 .. figure:: _figures/129.png
 
@@ -270,7 +291,7 @@ In the "application" section, we can see our instance domain, region it belongs 
 
 .. figure:: _figures/134.png
 
-We can also learn all the information about our protection and its settings, as well as about each attack type in ""policy" section:
+We can also learn all the information about our protection and its settings, as well as about each attack type in "policy" section:
 
 .. figure:: _figures/135.png
 
@@ -283,11 +304,13 @@ If your prefer to use Postman to review the JSON, go back to Postman and send th
 
 .. figure:: _figures/136.png
 
-You will see the JSON in the response: 
+The response will retrieve the JSON containing all the Essential App Protect instance information: 
 
 .. figure:: _figures/137.png
 
-The returned JSON provides information on subcription_id and user_id, instance name, as well as all configuration details (CNAME, domain, etc) and protection settings. 
+The returned JSON provides some general information on subcription_id, user_id, and instance name, as well as all configuration details (CNAME, domain, etc) and protection settings. 
+
+.. figure:: _figures/169.png
 
 5. Attacks  
 *********** 
@@ -310,18 +333,18 @@ Let’s now simulate an attack.
 
 Go back to Postman and send the **Attack: Illegal Filetype** request. 
 
-**SCREENSHOT** 
+.. figure:: _figures/170.png
 
-All the attacks can be seen in the "VIEW EVENTS" section of the F5 Cloud Services portal.
+You can see the status of the attack in the **VIEW EVENTS** section of the F5 Cloud Services portal.
 
 .. figure:: _figures/138.png
 
-As you can see, our "Illegal file type" attack has appeared on the list and its status is "Not blocked" for now.  
+As you see, our "Illegal file type" attack has appeared on the list and its status is "Not blocked" for now.  
 
 6. Update Monitoring to Blocking via UI 
 *************************************** 
 
-By default, all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via UI or via Postman. In order to do so via Postman, proceed to the following section. 
+For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via UI or via Postman. In order to do so via Postman, proceed to the following section. 
 
 `a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open each type of attack one by one and toggle **Blocking Mode** on. Click **Update** for each attack type to save the settings:  
 
@@ -329,15 +352,19 @@ By default, all the threats of your app are only monitored without any actions t
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attack with the "Blocked" status:
+Now that the protection mode is "blocking", you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new attack with the "Blocked" status:
 
 .. figure:: _figures/119.png
 
-You may send the **Attack: Threat Campaign** and **Attack: SQL Injection** requests in Postman as well. 
+You may send the **Attack: Threat Campaign** and  
 
-**SCREeNSHOT OF POSTMAN**
+.. figure:: _figures/171.png
 
-Then go back to the F5 UI, "VIEW EVENTS" section and see that their status is "blocked": 
+the **Attack: SQL Injection** requests in Postman as well.
+
+.. figure:: _figures/172.png
+
+Then go back to the F5 UI, **VIEW EVENTS** to see them on the list with "Blocked" status: 
 
 .. figure:: _figures/141.png
 
@@ -347,11 +374,11 @@ Then go back to the F5 UI, "VIEW EVENTS" section and see that their status is "b
 
 `a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved in steps above. 
 
-**SCREENSHOT** 
+.. figure:: _figures/173.png
 
-You will see the new "blocked" status of attacks in the response. 
+You will see the updated "blocked" status of attacks in the response. 
 
-**SCREENSHOT** 
+.. figure:: _figures/174.png
 
 You can also notice that their status changed in the F5 UI:
 
@@ -359,85 +386,72 @@ You can also notice that their status changed in the F5 UI:
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** and **Attack: SQL Injection** requests in Postman. 
+Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** and
 
-**SCREENSHOT** 
+.. figure:: _figures/171.png
 
-After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attacks with the "Blocked" status:
+the **Attack: SQL Injection** requests in Postman.
 
-.. figure:: _figures/140.png
+.. figure:: _figures/172.png
+
+After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new attacks with the "Blocked" status:
+
+.. figure:: _figures/175.png
 
 8. Geolocation Enforcement via UI
 ****************************
 
-You can create a list of countries whose traffic is to be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
+You can create a list of countries traffic from which will be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
 
-`a)` Go back to F5 UI, "PROTECT APPLICATION", then go to the **High-risk Attack Mitigation** tab and click **Manage countries**. 
+`a)` Go back to F5 UI, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click **Manage countries**. 
 
 .. figure:: _figures/142.png
 
-`b)` Add "France"  as a country whose requests you want to deny and click **Update**.
+`b)` Add "United States"  as a country whose requests you want to deny and click **Update**.
 
 .. figure:: _figures/143.png
 
-`c)` Test via the Opera Browser 
+`c)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in F5 Cloud Servcies UI and **Update**.
 
-   `1.` Let's now see how the new rule for geolocation enforcement works. Open the Opera browser, click **VPN** and select **Europe**: 
-
-   .. figure:: _figures/144.png
-
-   `2.` Copy your domain in the **General** tab of "PROTECT APPLICATION" in F5 UI:
-
-   .. figure:: _figures/147.png
-
-   `3.` And paste it to the Opera browser to see the following response:
-
-   .. figure:: _figures/148.png
-
-   `4.` Let's go back to F5 UI, "VIEW EVENTS" and see the attack:
-
-   .. figure:: _figures/145.png
-   
-   As you can see, the reason for being blocked is "Access from disallowed Geolocation".
+.. figure:: _figures/140.png
  
-   
 9. Geolocation Enforcement via Postman
 ****************************
 
-`a)` If you would like to block requests on a country-basis via Postman, then sent the **Block country list** request which will use your "account_id" and "EAP record":
+`a)` If you would like to block requests on a country-basis via Postman, then send the **Block country list** request which will use your "account_id" and "EAP record":
 
-**SCREENSHOT** 
+.. figure:: _figures/176.png 
 
 The response will show the countries blocked: 
 
 .. figure:: _figures/149.png
 
-`b)` Let's go to F5 UI and see the updated geolocation enforcemenet:
+`b)` Let's go to F5 UI and see the updated geolocation enforcement:
 
-.. figure:: _figures/121.png  
+.. figure:: _figures/120.png  
 
 Click **Manage countries** to see the countries that are blocked: 
 
-.. figure:: _figures/120.png
+.. figure:: _figures/121.png
 
 `c)` Let's test how country-base blocking works. Go back to Postman and send the **Test Country Blocking (lab)** request which uses your "EAP record". 
 
-**SCREENSHOT** 
+.. figure:: _figures/177.png
 
-Let's open the F5 UI and go to VIEW EVENTS section to see the newly blocked attack based on geolocation: 
+Let's open the F5 UI and go to **VIEW EVENTS** section to see the newly blocked attack based on geolocation: 
 
-.. figure:: _figures/122.png
+.. figure:: _figures/178.png
 
 10. Update IP Enforcement Rules via UI  
 ********************************
 
 If you need to block specific IP addresses or add them to the whitelist, you can do it in two way: via Postman or UI. If you prefer to do it via Postman, then proceed to the next section. If your choice is UI, then follow the steps below: 
 
-`a)` Go to "PROTECT APPLICATION" -> the **High-risk Attack Mitigation** tab and click **Manage rules**. 
+`a)` Go to **PROTECT APPLICATION**-> the **High-risk Attack Mitigation** tab and click **Manage rules**. 
 
 .. figure:: _figures/150.png
 
-`b)` Add "127.0.0.1", "11.11.11.10", "192.168.1.10", "12.23.34.59" IPs for blocking and "192.168.100.50" to the whitelist Click **Update**. 
+`b)` Add "127.0.0.1", "11.11.11.10", "192.168.1.10", "12.23.34.59" IPs for blocking and "192.168.100.50" to the whitelist. Add a short description for each, tick those which you prefer to be logged and click **Update**. 
 
 .. figure:: _figures/151.png
 
@@ -446,9 +460,9 @@ If you need to block specific IP addresses or add them to the whitelist, you can
 
 `a)` Go to Postman and send the **Update IP Enforcement Rules** request which uses your "account_id" and "EAP record".
 
-**SCREENSHOT** 
+.. figure:: _figures/122.png
 
-In the response you will see four blocked IPs and one allowed IP. 
+In the response you will see four blocked and one allowed IPs. 
 
 .. figure:: _figures/152.png
 
@@ -457,38 +471,42 @@ In the response you will see four blocked IPs and one allowed IP.
 
 If you prefer to customize your blocked page, you can do it using Postman. 
 
-`a)` First, let's see the page prior to sending the request. To do that, let's simulate an attack. Paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser. The result will be the following:
+`a)` First, let's see the page prior to sending the request. To do that, let's simulate an attack via the browser. Paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser. The result will be the following:
 
 .. figure:: _figures/124.png 
 
 `b)` Go back to Postman and send the **Customize blocked page** request which uses your **account_id** and **EAP record**. 
  
-**SCREENSHOT** 
+.. figure:: _figures/179.png 
 
 `c)` Refresh the page in the browser opened one step above and you will see:
 
 .. figure:: _figures/125.png 
 
-**Note**: It may take up to a few minutes due to updating the service. 
+**Note**: It may take  some time due to updating the service. 
 
 13. Add New Endpoints 
 *********************
 
-Let's imagine your website is active both in the USA and in Europe. But for now, you have only one IP endpoint added to Essential App Protect - in North America, US East (N. Virginia). If you need to add the second one, you can do it via Postman.
+Let's imagine your website is to function both in the USA and in Europe. But for now, you have only one IP endpoint added to Essential App Protect - North America, US East (N. Virginia). 
 
-Send the **Add new endpoints** request in Postman which uses your **account_id** and **EAP record**. 
+.. figure:: _figures/180.png 
 
-**SCREENSHOT** 
+If you need to add the second one, say, in Europe, you can do it via Postman.
 
-You will see the Endpoint added in the returned response located in Europe (Frankfurt) and deployed on AWS:
+Send the **Add new endpoints** request in Postman: 
 
-**SCREENSHOT from postman** 
+.. figure:: _figures/181.png 
+
+You will see the Endpoint added in the returned response located in Europe (Paris) and deployed on AWS:
+
+.. figure:: _figures/182.png 
 
 You will also see the new endpoint in the F5 UI:
 
-**SCREENSHOT from UI** 
+.. figure:: _figures/183.png 
 
-Note that this operation may take up to a few minutes due to service deployment. 
+Note that this operation may take up to a few minutes due to its deployment. 
 
 14. Test New Endpoint via Postman
 ***********************************
