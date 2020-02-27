@@ -37,7 +37,7 @@ Lab Environment Setup
 
 In order to use F5 Cloud Services, you need to be logged in with a valid user account. If you need to sign up, or if you already have one, proceed to the `F5 Cloud Services portal <http://bit.ly/f5csreg>`_.  
 
-.. figure:: _figures/1.png  
+.. figure:: _figures/1-1.png  
 
 Once you've logged in with an account, you will be using the user name and password values in the lab to authenticate with the F5 Cloud Services and the API.
 
@@ -226,33 +226,33 @@ As you can see, it's not successful. We will update DNS settings using Postman t
 
 `b)` Go back to Postman to change the DNS settings. Send the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
 
-**SCREENSHOT**
+.. figure:: _figures/164.png
 
 The response will return all information on your instance which we have created via UI: 
 
-**SCREENSHOT**
+.. figure:: _figures/165.png
 
-The retrieved ID and CNAME are then stored for subsequent calls using a function inside Postman to set environment variables. You can see the test function in the **Tests** tab:
+The retrieved CNAME will be used to update DNS settings:
 
-**SCREENSHOT**
+.. figure:: _figures/166.png
 
-`c)` Send the **Update EAP DNS Record (lab)** to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
+`c)` Send the **Update CNAME Record (lab)** request to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
 
-**SCREENSHOT** 
+.. figure:: _figures/167.png
 
 The response will show the updated type (""CNAME") and value: 
 
-**SCREENSHOT** 
+.. figure:: _figures/168.png
 
-`d)` Let’s now test if CNAME change is completed correctly.   
+`d)` Test CNAME change via UI   
 
-Return to the F5 Cloud Services portal, open **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open **DNS Settings** tab and click **Test updated DNS**.  
+Return to the F5 Cloud Services portal, open the **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open the **DNS Settings** tab and click **Test updated DNS**.  
 
 .. figure:: _figures/106.png 
 
 You will see successful status of testing.
 
-`e)` Let's now go back to Postman and re-send the **Get EAP record (lab)** request to see the current type of the record. 
+`e)` Let's now go back to Postman and re-send the **Get FQDN Record type (lab)** request to see the current type of the record. 
 
 .. figure:: _figures/129.png
 
