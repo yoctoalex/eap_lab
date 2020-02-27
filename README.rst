@@ -411,53 +411,36 @@ You can create a list of countries traffic from which will be blocked via UI or 
 
 .. figure:: _figures/143.png
 
-`c)` Test via the Opera Browser 
+`c)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in F5 Cloud Servcies UI and **Update**.
 
-   `1.` Let's now see how the new rule for geolocation enforcement works. Open the Opera browser, click **VPN** and select **Americas**: 
-
-   .. figure:: _figures/144.png
-
-   `2.` Copy your DNS updated with CNAME in the **DNS Settings** tab of **PROTECT APPLICATION** in F5 UI:
-
-   .. figure:: _figures/147.png
-
-   `3.` And paste it to the Opera browser to see the following response:
-
-   .. figure:: _figures/148.png
-
-   `4.` Let's go back to F5 UI, **VIEW EVENTS** and see the attack:
-
-   .. figure:: _figures/145.png
-   
-   As you can see, the reason for being blocked is "Access from disallowed Geolocation".
+.. figure:: _figures/140.png
  
-   
 9. Geolocation Enforcement via Postman
 ****************************
 
-`a)` If you would like to block requests on a country-basis via Postman, then sent the **Block country list** request which will use your "account_id" and "EAP record":
+`a)` If you would like to block requests on a country-basis via Postman, then send the **Block country list** request which will use your "account_id" and "EAP record":
 
-**SCREENSHOT** 
+.. figure:: _figures/176.png 
 
 The response will show the countries blocked: 
 
 .. figure:: _figures/149.png
 
-`b)` Let's go to F5 UI and see the updated geolocation enforcemenet:
+`b)` Let's go to F5 UI and see the updated geolocation enforcement:
 
-.. figure:: _figures/121.png  
+.. figure:: _figures/120.png  
 
 Click **Manage countries** to see the countries that are blocked: 
 
-.. figure:: _figures/120.png
+.. figure:: _figures/121.png
 
 `c)` Let's test how country-base blocking works. Go back to Postman and send the **Test Country Blocking (lab)** request which uses your "EAP record". 
 
-**SCREENSHOT** 
+.. figure:: _figures/177.png
 
-Let's open the F5 UI and go to VIEW EVENTS section to see the newly blocked attack based on geolocation: 
+Let's open the F5 UI and go to **VIEW EVENTS** section to see the newly blocked attack based on geolocation: 
 
-.. figure:: _figures/122.png
+.. figure:: _figures/178.png
 
 10. Update IP Enforcement Rules via UI  
 ********************************
