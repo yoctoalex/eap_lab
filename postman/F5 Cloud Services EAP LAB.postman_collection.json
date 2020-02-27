@@ -1115,7 +1115,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}/suspend",
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{WAF_SUBSCRIPTION_ID}}/activate",
 							"protocol": "https",
 							"host": [
 								"{{HOSTNAME}}"
@@ -1125,7 +1125,7 @@
 								"svc-subscription",
 								"subscriptions",
 								"{{WAF_SUBSCRIPTION_ID}}",
-								"suspend"
+								"activate"
 							]
 						}
 					},
