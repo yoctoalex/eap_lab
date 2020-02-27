@@ -621,16 +621,70 @@ You can also set some specific rules for each attack and its IP individually:
 
 .. figure:: _figures/111.png 
 
-**20. Specify SSL Certificate via Postman** **TBD**
+20. Specify SSL Certificate via Postman
 ***************************
 
-`a)` Get SSL Certificate 
+When creating Essential App Protect instance in one of the steps above, we skipped providing a SSL/TLS certificate. Let's not get and use it via Postman. 
 
-`b)` Upload 
+`a)` Let's send the **Get SSL Certificate (lab)** request:
 
-`c)` Update 
+.. figure:: _figures/204.png 
 
-17.  Clean Up  
+You will get the certificate information in the response:
+
+.. figure:: _figures/205.png 
+
+The retrieved certificate details are then stored for subsequent calls using a function inside Postman. You can see the test function in the Tests tab:
+
+.. figure:: _figures/206.png 
+
+`b)` Now we'll upload the certificate to the F5 Cloud Services portal. In order to do that, send the **Upload SSL Certificate** request:
+
+.. figure:: _figures/207.png 
+
+The response will return the certificate ID which will be used for updating the certificate in the portal:
+
+.. figure:: _figures/208.png 
+
+`c)` One step left - updating the certificate. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
+
+.. figure:: _figures/209.png 
+
+The response shows all the information regrading instance the certificate is connected to:
+
+.. figure:: _figures/210.png 
+
+`d)` Check SSL Certificate via UI
+
+Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to the **General** tab. You will see the uploaded and updated certificate: 
+
+.. figure:: _figures/211.png 
+
+`e)` Now we need to restart our instance for the certificate to become active. 
+
+   `1.` In order to do that, go back to Postman and send the **Suspend EAP Subscription** request:
+   
+   .. figure:: _figures/212.png 
+   
+   In the response you will see new "disabled" status:
+   
+   .. figure:: _figures/213.png 
+   
+   `2.` Let's now activate the service with the SSL certificate. Send the **Activate EAP Subscription** request:
+   
+   .. figure:: _figures/214.png 
+   
+   And the response will return the updated status
+   
+   .. figure:: _figures/.png 
+   
+   Note that this operation may take up to a few minutes. 
+   
+`f)` Now we can check our app with the SSL certificate via browser:
+
+
+
+21.  Clean Up  
 ********** 
 
 In order to delete Essential App Protect instance, go to **Essential App Protect** tab, select **All my applications** in the dropdown menu, tick your application and click **Delete**. Now just confirm your choice. 
