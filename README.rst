@@ -236,6 +236,8 @@ The retrieved CNAME will be used to update DNS settings:
 
 .. figure:: _figures/166.png
 
+More detailed information on this API request can be found `here <http://bit.ly/38xUHjc>`_.  
+
 `c)` Send the **Update CNAME Record (lab)** request to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
 
 .. figure:: _figures/167.png
@@ -289,7 +291,7 @@ In the "application" section, we can see our instance domain, region it belongs 
 
 .. figure:: _figures/134.png
 
-We can also learn all the information about our protection and its settings, as well as about each attack type in ""policy" section:
+We can also learn all the information about our protection and its settings, as well as about each attack type in "policy" section:
 
 .. figure:: _figures/135.png
 
@@ -302,11 +304,13 @@ If your prefer to use Postman to review the JSON, go back to Postman and send th
 
 .. figure:: _figures/136.png
 
-You will see the JSON in the response: 
+The response will retrieve the JSON containing all the Essential App Protect instance information: 
 
 .. figure:: _figures/137.png
 
-The returned JSON provides information on subcription_id and user_id, instance name, as well as all configuration details (CNAME, domain, etc) and protection settings. 
+The returned JSON provides some general information on subcription_id, user_id, and instance name, as well as all configuration details (CNAME, domain, etc) and protection settings. 
+
+.. figure:: _figures/169.png
 
 5. Attacks  
 *********** 
@@ -329,18 +333,18 @@ Let’s now simulate an attack.
 
 Go back to Postman and send the **Attack: Illegal Filetype** request. 
 
-**SCREENSHOT** 
+.. figure:: _figures/170.png
 
-All the attacks can be seen in the "VIEW EVENTS" section of the F5 Cloud Services portal.
+You can see the status of the attack in the **VIEW EVENTS** section of the F5 Cloud Services portal.
 
 .. figure:: _figures/138.png
 
-As you can see, our "Illegal file type" attack has appeared on the list and its status is "Not blocked" for now.  
+As you see, our "Illegal file type" attack has appeared on the list and its status is "Not blocked" for now.  
 
 6. Update Monitoring to Blocking via UI 
 *************************************** 
 
-By default, all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via UI or via Postman. In order to do so via Postman, proceed to the following section. 
+For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via UI or via Postman. In order to do so via Postman, proceed to the following section. 
 
 `a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open each type of attack one by one and toggle **Blocking Mode** on. Click **Update** for each attack type to save the settings:  
 
@@ -348,15 +352,19 @@ By default, all the threats of your app are only monitored without any actions t
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attack with the "Blocked" status:
+Now that the protection mode is "blocking", you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new attack with the "Blocked" status:
 
 .. figure:: _figures/119.png
 
-You may send the **Attack: Threat Campaign** and **Attack: SQL Injection** requests in Postman as well. 
+You may send the **Attack: Threat Campaign** and  
 
-**SCREeNSHOT OF POSTMAN**
+.. figure:: _figures/171.png
 
-Then go back to the F5 UI, "VIEW EVENTS" section and see that their status is "blocked": 
+the **Attack: SQL Injection** requests in Postman as well.
+
+.. figure:: _figures/172.png
+
+Then go back to the F5 UI, **VIEW EVENTS** to see them on the list with "Blocked" status: 
 
 .. figure:: _figures/141.png
 
@@ -366,11 +374,11 @@ Then go back to the F5 UI, "VIEW EVENTS" section and see that their status is "b
 
 `a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved in steps above. 
 
-**SCREENSHOT** 
+.. figure:: _figures/173.png
 
-You will see the new "blocked" status of attacks in the response. 
+You will see the updated "blocked" status of attacks in the response. 
 
-**SCREENSHOT** 
+.. figure:: _figures/174.png
 
 You can also notice that their status changed in the F5 UI:
 
@@ -378,13 +386,17 @@ You can also notice that their status changed in the F5 UI:
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** and **Attack: SQL Injection** requests in Postman. 
+Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** and
 
-**SCREENSHOT** 
+.. figure:: _figures/171.png
 
-After that go back to the F5 UI, open "VIEW EVENTS" section and you will see the new attacks with the "Blocked" status:
+the **Attack: SQL Injection** requests in Postman.
 
-.. figure:: _figures/140.png
+.. figure:: _figures/172.png
+
+After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new attacks with the "Blocked" status:
+
+.. figure:: _figures/175.png
 
 8. Geolocation Enforcement via UI
 ****************************
