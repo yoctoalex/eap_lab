@@ -447,11 +447,11 @@ Let's open the F5 UI and go to **VIEW EVENTS** section to see the newly blocked 
 
 If you need to block specific IP addresses or add them to the whitelist, you can do it in two way: via Postman or UI. If you prefer to do it via Postman, then proceed to the next section. If your choice is UI, then follow the steps below: 
 
-`a)` Go to "PROTECT APPLICATION" -> the **High-risk Attack Mitigation** tab and click **Manage rules**. 
+`a)` Go to **PROTECT APPLICATION**-> the **High-risk Attack Mitigation** tab and click **Manage rules**. 
 
 .. figure:: _figures/150.png
 
-`b)` Add "127.0.0.1", "11.11.11.10", "192.168.1.10", "12.23.34.59" IPs for blocking and "192.168.100.50" to the whitelist Click **Update**. 
+`b)` Add "127.0.0.1", "11.11.11.10", "192.168.1.10", "12.23.34.59" IPs for blocking and "192.168.100.50" to the whitelist. Add a short description for each, tick those which you prefer to be logged and click **Update**. 
 
 .. figure:: _figures/151.png
 
@@ -460,9 +460,9 @@ If you need to block specific IP addresses or add them to the whitelist, you can
 
 `a)` Go to Postman and send the **Update IP Enforcement Rules** request which uses your "account_id" and "EAP record".
 
-**SCREENSHOT** 
+.. figure:: _figures/122.png
 
-In the response you will see four blocked IPs and one allowed IP. 
+In the response you will see four blocked and one allowed IPs. 
 
 .. figure:: _figures/152.png
 
@@ -471,38 +471,42 @@ In the response you will see four blocked IPs and one allowed IP.
 
 If you prefer to customize your blocked page, you can do it using Postman. 
 
-`a)` First, let's see the page prior to sending the request. To do that, let's simulate an attack. Paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser. The result will be the following:
+`a)` First, let's see the page prior to sending the request. To do that, let's simulate an attack via the browser. Paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser. The result will be the following:
 
 .. figure:: _figures/124.png 
 
 `b)` Go back to Postman and send the **Customize blocked page** request which uses your **account_id** and **EAP record**. 
  
-**SCREENSHOT** 
+.. figure:: _figures/179.png 
 
 `c)` Refresh the page in the browser opened one step above and you will see:
 
 .. figure:: _figures/125.png 
 
-**Note**: It may take up to a few minutes due to updating the service. 
+**Note**: It may take  some time due to updating the service. 
 
 13. Add New Endpoints 
 *********************
 
-Let's imagine your website is active both in the USA and in Europe. But for now, you have only one IP endpoint added to Essential App Protect - in North America, US East (N. Virginia). If you need to add the second one, you can do it via Postman.
+Let's imagine your website is to function both in the USA and in Europe. But for now, you have only one IP endpoint added to Essential App Protect - North America, US East (N. Virginia). 
 
-Send the **Add new endpoints** request in Postman which uses your **account_id** and **EAP record**. 
+.. figure:: _figures/180.png 
 
-**SCREENSHOT** 
+If you need to add the second one, say, in Europe, you can do it via Postman.
 
-You will see the Endpoint added in the returned response located in Europe (Frankfurt) and deployed on AWS:
+Send the **Add new endpoints** request in Postman: 
 
-**SCREENSHOT from postman** 
+.. figure:: _figures/181.png 
+
+You will see the Endpoint added in the returned response located in Europe (Paris) and deployed on AWS:
+
+.. figure:: _figures/182.png 
 
 You will also see the new endpoint in the F5 UI:
 
-**SCREENSHOT from UI** 
+.. figure:: _figures/183.png 
 
-Note that this operation may take up to a few minutes due to service deployment. 
+Note that this operation may take up to a few minutes due to its deployment. 
 
 14. Test New Endpoint via Postman
 ***********************************
