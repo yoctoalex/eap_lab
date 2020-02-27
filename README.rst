@@ -670,6 +670,7 @@ Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to t
    
    .. figure:: _figures/213.png 
    
+   **TO BE DONE** 
    `2.` Let's now activate the service with the SSL certificate. Send the **Activate EAP Subscription** request:
    
    .. figure:: _figures/214.png 
@@ -683,12 +684,43 @@ Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to t
 `f)` Now we can check our app with the SSL certificate via browser:
 
 
-
 21.  Clean Up  
 ********** 
+
+`a)` Retire Essential App Protect Subscription via UI 
 
 In order to delete Essential App Protect instance, go to **Essential App Protect** tab, select **All my applications** in the dropdown menu, tick your application and click **Delete**. Now just confirm your choice. 
 
 .. figure:: _figures/112.png 
 
+`b)` Retire Essential App Protect Subscription via Postman
+
+In order to clean up Essential App Protect instance we've created and remove subscriptions, send the **Retire EAP Subscription** request:
+
+ .. figure:: _figures/.png
+
+`c)` Remove SSL Certificate 
+
+Let's send the **Remove certificate** request via Postman to remove it from the F5 Cloud Services portal:
+
+ .. figure:: _figures/.png
+
+`d)` Reset Essential App Protect Record (lab) 
+
+Let's send the **Reset EAP Record (lab)** request to change record type from CNAME to A back:
+
+ .. figure:: _figures/.png
+
+`e)` Logout from Postman 
  
+ After all operations are done, you need to logout from Postman. Send the **Logout** request, which uses your ACCESS_TOKEN:
+ 
+ .. figure:: _figures/.png
+ 
+ You will get the following response with the status showing "200 OK":
+ 
+ .. figure:: _figures/.png
+ 
+ Your ACCESS_TOKEN will be considered invalid:
+ 
+  .. figure:: _figures/.png
