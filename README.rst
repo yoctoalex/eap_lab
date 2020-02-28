@@ -739,6 +739,7 @@ The request will show the reset type and IP value:
 .. figure:: _figures/223.png
 
 `3.` Clear Tokens from the Lab Service API
+******************************************
  
 We recommend that you clear your tokens from the Lab Service API for security purposes. In order to do that, send the Logout request, which uses your ACCESS_TOKEN:
  
