@@ -53,7 +53,7 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
    .. figure:: _figures/3.png  
 
-   After successful subscribing, your services will appear in the **Your F5 Cloud** tab. You will also see their current status.   
+   After successfully subscribing, your services will appear in the **Your F5 Cloud** tab. You will also see their current status.   
 
    .. figure:: _figures/4.png  
 
