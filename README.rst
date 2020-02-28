@@ -302,6 +302,8 @@ The returned JSON provides some general information on subcription_id, user_id, 
 
 .. figure:: _figures/169.png
 
+More detailed information on this API request can be found `here <http://bit.ly/38xUHjc>`_.  
+
 5. Attacks  
 *********** 
 
