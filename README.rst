@@ -712,38 +712,42 @@ In order to delete Essential App Protect instance, go to the **Essential App Pro
 
 `a)` In order to clean up Essential App Protect instance we've created and remove the subscription, send the **Retire EAP Subscription** request which uses the relevant “subscription_id”:
 
- .. figure:: _figures/219.png
+.. figure:: _figures/219.png
  
- You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
+You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
  
-  .. figure:: _figures/220.png
+.. figure:: _figures/220.png
   
- More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_.  
+More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_.  
 
 `b)` Remove SSL Certificate 
 
 Let's send the **Remove certificate** request via Postman to remove it from the F5 Cloud Services portal:
 
- .. figure:: _figures/.png
+.. figure:: _figures/221.png
  
- Note that this operation may take some time. 
+Note that this operation may take some time. 
 
-`c)` Reset Essential App Protect Record (lab) 
+`c)` Change Essential App Protect Record type 
 
 Let's send the **Reset EAP Record (lab)** request to change record type from CNAME to A back:
 
- .. figure:: _figures/.png
+.. figure:: _figures/222.png
+ 
+The request will show the reset type and IP value:
 
-`d)` Logout from Postman 
+.. figure:: _figures/223.png
+
+`3.` Clear Tokens from the Lab Service API
  
- After all operations are done, you need to logout from Postman. Send the **Logout** request, which uses your ACCESS_TOKEN:
+We recommend that you clear your tokens from the Lab Service API for security purposes. In order to do that, send the Logout request, which uses your ACCESS_TOKEN:
  
- .. figure:: _figures/.png
+.. figure:: _figures/224.png
  
- You will get the following response with the status showing "200 OK":
+You will get the following response with the status showing "200 OK":
  
- .. figure:: _figures/.png
+.. figure:: _figures/225.png
  
- Your ACCESS_TOKEN will be considered invalid:
+Your ACCESS_TOKEN will be considered invalid:
  
-  .. figure:: _figures/.png
+.. figure:: _figures/226.png
