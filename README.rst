@@ -486,7 +486,7 @@ If you prefer to customize your blocked page acc to your wish, you can do it usi
 13. Add New Endpoints 
 *********************
 
-Let's imagine your website is to function both in the USA and in Europe. But for now, you have only one IP endpoint added to Essential App Protect - North America, US East (N. Virginia). 
+Let's imagine your website is to function both in the USA and in Europe which requires two endpoints. But for now, you have only one IP endpoint added to Essential App Protect - North America, US East (N. Virginia). 
 
 .. figure:: _figures/180.png 
 
