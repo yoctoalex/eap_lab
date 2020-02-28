@@ -724,6 +724,10 @@ More detailed information on these API requests can be found `here <http://bit.l
 
 Let's send the **Remove certificate** request via Postman to remove it from the F5 Cloud Services portal:
 
+.. figure:: _figures/227.png
+
+You will see the following response:
+
 .. figure:: _figures/221.png
  
 Note that this operation may take some time. 
