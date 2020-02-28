@@ -630,7 +630,7 @@ You can also set some specific rules for each attack and its IP individually:
 20. Specify SSL Certificate via Postman
 ***************************
 
-When creating Essential App Protect instance in one of the steps above, we skipped providing a SSL/TLS certificate. Let's now get and implement it via Postman. 
+When creating Essential App Protect instance in one of the steps above, we skipped providing an SSL/TLS certificate. Let's now get and implement it via Postman. 
 
 `a)` Let's send the **Get SSL Certificate (lab)** request:
 
