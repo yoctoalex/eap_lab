@@ -420,6 +420,8 @@ The response will show the countries blocked:
 
 .. figure:: _figures/149.png
 
+More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
+
 `b)` Let's go to F5 UI and see the updated geolocation enforcement:
 
 .. figure:: _figures/120.png  
@@ -460,6 +462,8 @@ In the response you will see four blocked and one allowed IPs.
 
 .. figure:: _figures/152.png
 
+More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
+
 12. Customize Blocked Page 
 ***************************
 
@@ -495,6 +499,8 @@ Send the **Add new endpoints** request in Postman:
 You will see the Endpoint added in the returned response located in Europe and deployed on AWS:
 
 .. figure:: _figures/182.png 
+
+More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
 
 You will also see the new endpoint in the F5 UI:
 
@@ -609,6 +615,8 @@ Now return to Postman to get more detailed information on the simulated attacks.
 You can see different attack characteristics in the response, including number, type, country, source IPs, etc.
 
 .. figure:: _figures/196.png
+
+More detailed information on this request can be found `here <https://bit.ly/2VttrPh>`_. 
 
 19. View Events via UI  
 **************************** 
@@ -739,7 +747,7 @@ The request will show the reset type and IP value:
 `3.` Clear Tokens from the Lab Service API
 ******************************************
  
-We recommend that you clear your tokens from the Lab Service API for security purposes. In order to do that, send the Logout request, which uses your ACCESS_TOKEN:
+We recommend that you clear your tokens from the Lab Service API for security purposes. In order to do that, send the **Logout** request, which uses your ACCESS_TOKEN:
  
 .. figure:: _figures/224.png
  
@@ -750,3 +758,5 @@ You will get the following response with the status showing "200 OK":
 Your ACCESS_TOKEN will be considered invalid:
  
 .. figure:: _figures/226.png
+
+More detailed information on these API requests can be found `here <https://bit.ly/2VttrPh>`_.  
