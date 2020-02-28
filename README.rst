@@ -300,7 +300,7 @@ More detailed information on attack types can be found in one of the following s
 4. Review the JSON via Postman 
 *******************************
 
-If your prefer to use Postman to review the JSON, go back to Postman and send the **Get JSON** request:
+If you prefer to use Postman to review the JSON, go back to Postman and send the **Get JSON** request:
 
 .. figure:: _figures/136.png
 
