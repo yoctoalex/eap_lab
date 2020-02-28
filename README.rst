@@ -445,7 +445,7 @@ Let's open the F5 UI and go to **VIEW EVENTS** section to see the newly blocked 
 10. Update IP Enforcement Rules via UI  
 ********************************
 
-If you need to block specific IP addresses or add them to the whitelist, you can do it in two way: via Postman or UI. If you prefer to do it via Postman, then proceed to the next section. If your choice is UI, then follow the steps below: 
+If you need to block specific IP addresses or add them to the whitelist, you can do it in two ways: via Postman or UI. If you prefer to do it via Postman, then proceed to the next section. If your choice is UI, then follow the steps below: 
 
 `a)` Go to **PROTECT APPLICATION**-> the **High-risk Attack Mitigation** tab and click **Manage rules**. 
 
