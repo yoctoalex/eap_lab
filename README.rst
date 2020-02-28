@@ -242,7 +242,7 @@ More detailed information on this API request can be found `here <http://bit.ly/
 
 .. figure:: _figures/167.png
 
-The response will show the updated type (""CNAME") and value: 
+The response will show the updated type ("CNAME") and value: 
 
 .. figure:: _figures/168.png
 
