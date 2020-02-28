@@ -277,7 +277,7 @@ Paste it into your browser and you will see the NA2 instance of the Auction webs
 
 If you would like to see the full configuration of your Essential App Protect or edit some properties, you can review the JSON either via UI or via Postman. If you prefer to do that via Postman, then proceed to the next section. 
 
-In order to view the JSON via the F5 Cloud Servcies portal, open **PROTECT APPLICATION** and go to the **JSON configuration** tab. 
+In order to view the JSON via the F5 Cloud Services portal, open **PROTECT APPLICATION** and go to the **JSON configuration** tab. 
 
 .. figure:: _figures/132.png
 
