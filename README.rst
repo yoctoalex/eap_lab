@@ -8,6 +8,7 @@ Pre-Requisites
 
 - Any modern browser: for working with the UI (and this document)
 - Postman: for working with the API of the F5 Cloud Services
+- Opera browser: for simulating geo-location specific traffic
 
 Lab Environment Overview
 ###############################
@@ -166,6 +167,15 @@ The retrieved IDs are then stored for subsequent calls using a function inside P
 .. figure:: _figures/162.png
 
 More detailed information on this API request can be found `here <http://bit.ly/36j1Yl4>`_. 
+
+4. Opera with VPN to Test New Endpoints 
+****************************************
+
+You will need the Opera browser to test proximity rules we will set later.
+
+Open the Opera browser, click **Settings, Advanced, Features** and then **Enable VPN**.
+
+.. figure:: _figures/163.png
 
 Essential App Protect 
 ##################### 
@@ -685,34 +695,46 @@ You can see that the connection is safe. Now let's click the **Certificate** and
 
 .. figure:: _figures/218.png 
 
-21.  Clean Up  
-********** 
+Clean Up  
+######## 
 
-`a)` Retire Essential App Protect Subscription via UI 
+At this point feel free to explore and repeat any of the previous steps of the lab, but should you want to clean up the resources you've created and remove your services, then choose the way to do so (via Postman or the F5 Cloud Services portal) and follow the steps below.
 
-In order to delete Essential App Protect instance, go to **Essential App Protect** tab, select **All my applications** in the dropdown menu, tick your application and click **Delete**. Now just confirm your choice. 
+`1.` Clean Up via the F5 Cloud Services Portal  
+*********************************************
+
+In order to delete Essential App Protect instance, go to the **Essential App Protect** tab, select **All my applications** in the dropdown menu, tick your application and click **Delete**. Now just confirm your choice. 
 
 .. figure:: _figures/112.png 
 
-`b)` Retire Essential App Protect Subscription via Postman
+`2.` Clean Up via Postman
+*************************
 
-In order to clean up Essential App Protect instance we've created and remove subscriptions, send the **Retire EAP Subscription** request:
+`a)` In order to clean up Essential App Protect instance we've created and remove the subscription, send the **Retire EAP Subscription** request which uses the relevant “subscription_id”:
 
- .. figure:: _figures/.png
+ .. figure:: _figures/219.png
+ 
+ You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
+ 
+  .. figure:: _figures/220.png
+  
+ More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_.  
 
-`c)` Remove SSL Certificate 
+`b)` Remove SSL Certificate 
 
 Let's send the **Remove certificate** request via Postman to remove it from the F5 Cloud Services portal:
 
  .. figure:: _figures/.png
+ 
+ Note that this operation may take some time. 
 
-`d)` Reset Essential App Protect Record (lab) 
+`c)` Reset Essential App Protect Record (lab) 
 
 Let's send the **Reset EAP Record (lab)** request to change record type from CNAME to A back:
 
  .. figure:: _figures/.png
 
-`e)` Logout from Postman 
+`d)` Logout from Postman 
  
  After all operations are done, you need to logout from Postman. Send the **Logout** request, which uses your ACCESS_TOKEN:
  
