@@ -376,13 +376,15 @@ You can also notice that their status changed in the F5 UI:
 
 .. figure:: _figures/139.png
 
+More detailed information can be found `here <https://bit.ly/3ckOJVA>`_. 
+
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** and
+Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** request:
 
 .. figure:: _figures/171.png
 
-the **Attack: SQL Injection** requests in Postman.
+And you can also send the **Attack: SQL Injection** request in Postman:
 
 .. figure:: _figures/172.png
 
