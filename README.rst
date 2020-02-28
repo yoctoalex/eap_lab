@@ -376,7 +376,7 @@ You can also notice that their status changed in the F5 UI:
 
 .. figure:: _figures/139.png
 
-More detailed information can be found `here <https://bit.ly/3ckOJVA>`_. 
+More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
 
 `b)` Testing the status 
 
