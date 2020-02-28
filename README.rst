@@ -538,7 +538,7 @@ You can see the type of attack and some more detailed information in the **VIEW 
 
 .. figure:: _figures/155.png 
 
-`b)` Let's now simulate SQL Injection attack via browser and our "BuyTime Auction" app. Copy your FQDN from F5 Cloud Services portal and paste to your browser. 
+`b)` Let's now simulate SQL Injection attack via browser and our "BuyTime Auction" app. Copy your FQDN from the F5 Cloud Services portal and paste to your browser. 
 
 .. figure:: _figures/188.png 
 
@@ -557,7 +557,7 @@ You can see the details of this attack in the **VIEW EVENTS** tab in the F5 Clou
 16. Check the Map
 ****************
 
-Now let’s see the map of our attacks on the F5 Cloud Services portal. You need to select the **Monitor Application** tab where you will see the dashboard.
+Now let’s see the map of our attacks on the F5 Cloud Services portal. You need to select the **MONITOR APPLICATION** tab where you will see the dashboard.
 
 You can see our latest attacks on the map:
 
@@ -567,6 +567,12 @@ If you wish to see more detailed information, you can hover over a specific atta
 
 .. figure:: _figures/192.png 
 
+To the left of the map, you can the the legend showing number of application endpoints and their details, as well as different types of attacks shown on the map. 
+
+.. figure:: _figures/215.png 
+
+The yellow lines on the map show the attacks within the last five minutes. 
+
 17. Start Attacks via Postman 
 *************************
 
@@ -574,13 +580,13 @@ If you wish to see more detailed information, you can hover over a specific atta
 
 .. figure:: _figures/193.png 
 
-And the response will be "ok" which means that atackes have been activated:
+And the response will be "ok" which means that attacks have been activated:
 
 .. figure:: _figures/194.png 
 
 `b)` Check the map
 
-Let’s go back to the F5 Cloud Services portal and check the map in the **Monitor Application** tab. 
+Let’s go back to the F5 Cloud Services portal and check the map in the **MONITOR APPLICATION** tab. 
 
 You can see our two endpoints and the latest attacks on the map:
 
@@ -624,7 +630,7 @@ You can also set some specific rules for each attack and its IP individually:
 20. Specify SSL Certificate via Postman
 ***************************
 
-When creating Essential App Protect instance in one of the steps above, we skipped providing a SSL/TLS certificate. Let's not get and use it via Postman. 
+When creating Essential App Protect instance in one of the steps above, we skipped providing a SSL/TLS certificate. Let's now get and implement it via Postman. 
 
 `a)` Let's send the **Get SSL Certificate (lab)** request:
 
@@ -650,17 +656,12 @@ The response will return the certificate ID which will be used for updating the 
 
 .. figure:: _figures/209.png 
 
-The response shows all the information regrading instance the certificate is connected to:
+The response shows all the information regarding instance the certificate is connected to:
 
 .. figure:: _figures/210.png 
 
-`d)` Check SSL Certificate via UI
 
-Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to the **General** tab. You will see the uploaded and updated certificate: 
-
-.. figure:: _figures/211.png 
-
-`e)` Now we need to restart our instance for the certificate to become active. 
+`d)` Now we need to restart our instance for the certificate to become active. 
 
    `1.` In order to do that, go back to Postman and send the **Suspend EAP Subscription** request:
    
@@ -670,19 +671,29 @@ Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to t
    
    .. figure:: _figures/213.png 
    
-   **TO BE DONE** 
    `2.` Let's now activate the service with the SSL certificate. Send the **Activate EAP Subscription** request:
    
    .. figure:: _figures/214.png 
    
-   And the response will return the updated status
+   And the response will return the updated status:
    
-   .. figure:: _figures/.png 
+   .. figure:: _figures/216.png 
    
    Note that this operation may take up to a few minutes. 
    
-`f)` Now we can check our app with the SSL certificate via browser:
+`e)` Check SSL Certificate via UI
 
+Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to the **General** tab. You will see the uploaded and updated certificate: 
+
+.. figure:: _figures/211.png 
+
+`f)` Now we can check our "BuyTime Auction" app with the SSL certificate via browser. Copy your FQDN from the **General** tab in the F5 Cloud Services portal and paste to your browser. 
+
+.. figure:: _figures/217.png 
+
+You can see that the connection is safe. Now let's click the **Certificate** and see its details:
+
+.. figure:: _figures/218.png 
 
 21.  Clean Up  
 ********** 
