@@ -8,7 +8,6 @@ Pre-Requisites
 
 - Any modern browser: for working with the UI (and this document)
 - Postman: for working with the API of the F5 Cloud Services
-- Opera browser: for simulating geo-location specific traffic
 
 Lab Environment Overview
 ###############################
@@ -167,15 +166,6 @@ The retrieved IDs are then stored for subsequent calls using a function inside P
 .. figure:: _figures/162.png
 
 More detailed information on this API request can be found `here <http://bit.ly/36j1Yl4>`_. 
-
-4. Opera with VPN to Test New Endpoints 
-****************************************
-
-You will need the Opera browser to test proximity rules we will set later.
-
-Open the Opera browser, click **Settings, Advanced, Features** and then **Enable VPN**.
-
-.. figure:: _figures/163.png
 
 Essential App Protect 
 ##################### 
