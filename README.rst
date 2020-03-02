@@ -422,7 +422,7 @@ The response will show the countries blocked:
 
 More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
 
-`b)` Let's go to F5 UI and see the updated geolocation enforcement:
+`b)` Let's now go to the F5 Cloud Services portal and see the updated geolocation enforcement:
 
 .. figure:: _figures/120.png  
 
