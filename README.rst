@@ -542,7 +542,7 @@ You can see the type of attack and some more detailed information in the **VIEW 
 
 .. figure:: _figures/188.png 
 
-Fill in **' OR 1=1; '** as login email and fill in any password. Click **Login**.
+Fill in **' OR 1=1; '** as login  and fill in any password. Click **Login**.
 
 .. figure:: _figures/184.png 
 
