@@ -191,7 +191,7 @@ Using record IP, the system will look for the nearest instance, gather app endpo
 
 As you can see, the endpoint belongs to North America, US East (N. Virginia) and is deployed on Amazon AWS.  
 
-`d)` The system will ask you to provide a SSL/TLS certificate. Let’s tick “I will provide certificate details later” and **Save & Continue**.  
+`d)` The system will ask you to provide an SSL/TLS certificate. Let’s tick “I will provide certificate details later” and **Save & Continue**.  
 
 .. figure:: _figures/99.png 
 
