@@ -364,7 +364,7 @@ Then go back to the F5 UI, **VIEW EVENTS** to see them on the list with "Blocked
 7. Update Monitoring to Blocking via Postman 
 ******************************************** 
 
-`a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved in steps above. 
+`a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved a few steps above. 
 
 .. figure:: _figures/173.png
 
