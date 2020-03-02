@@ -348,11 +348,11 @@ Now that the protection mode is "blocking", you can re-send the **Attack: Illega
 
 .. figure:: _figures/119.png
 
-You may send the **Attack: Threat Campaign** request:  
+You may  send a few more attacks. Go back to Postman and send the **Attack: Threat Campaign** request:  
 
 .. figure:: _figures/171.png
 
-And you may also send the **Attack: SQL Injection** request in Postman.
+Also send the **Attack: SQL Injection** request.
 
 .. figure:: _figures/172.png
 
