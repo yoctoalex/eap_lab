@@ -405,7 +405,7 @@ You can create a list of countries traffic from which will be blocked via UI or 
 
 .. figure:: _figures/143.png
 
-`c)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in F5 Cloud Servcies UI and **Update**.
+`c)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in the F5 Cloud Servcies portal and **Update**.
 
 .. figure:: _figures/140.png
  
