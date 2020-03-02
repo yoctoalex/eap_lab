@@ -530,7 +530,7 @@ Let's now simulate some attacks via browser and follow them in the dashboard of 
 
 .. figure:: _figures/153.png 
 
-Now let's go back to F5 Ui and see the dashboard with the new attack:
+Now let's go back to the F5 Cloud Services portal and see the dashboard with the new attack:
 
 .. figure:: _figures/154.png 
 
