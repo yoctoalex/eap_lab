@@ -401,7 +401,7 @@ You can create a list of countries traffic from which will be blocked via UI or 
 
 .. figure:: _figures/142.png
 
-`b)` Add "United States"  as a country whose requests you want to deny and click **Update**.
+`b)` Add any country as a country whose requests you want to deny and click **Update**.
 
 .. figure:: _figures/143.png
 
