@@ -118,7 +118,7 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <http://bit.ly/37hyQw3>`_.  
 
-`d)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in F5 Cloud Services UI.  
+`d)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in the F5 Cloud Services portal.  
 Request:  
 
 .. figure:: _figures/74.png  
