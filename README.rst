@@ -228,7 +228,7 @@ The retrieved CNAME will be used to update DNS settings:
 
 More detailed information on this API request can be found `here <http://bit.ly/38xUHjc>`_.  
 
-`c)` Send the **Update CNAME Record (lab)** request to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
+`c)` Send the **Update CNAME Record (lab)** request to update DNS Settings with CNAME generated when creating Essential App Protect instance in the F5 Cloud Services portal and retrieved in the step above:
 
 .. figure:: _figures/167.png
 
