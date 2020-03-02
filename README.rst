@@ -502,7 +502,7 @@ You will see the Endpoint added in the returned response located in Europe and d
 
 More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
 
-You will also see the new endpoint in the F5 UI:
+You will also see the new endpoint in the F5 Cloud Services portal:
 
 .. figure:: _figures/183.png 
 
