@@ -397,7 +397,7 @@ After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new a
 
 You can create a list of countries traffic from which will be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
 
-`a)` Go back to F5 UI, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click **Manage countries**. 
+`a)` Go back to the F5 Cloud Services portal, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click **Manage countries**. 
 
 .. figure:: _figures/142.png
 
