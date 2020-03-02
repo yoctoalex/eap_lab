@@ -524,7 +524,7 @@ Here's what you should see in the response:
 15. Attacks via Browser 
 *************************
 
-Let's now simulate some attacks via browser and follow them in the dashboard of F5 Cloud Services portal. 
+Let's now simulate some attacks via browser and follow them in the dashboard of the F5 Cloud Services portal. 
 
 `a)` In order to simulate Illegal File type, paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser and the page will be blocked:
 
