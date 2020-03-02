@@ -567,7 +567,7 @@ If you wish to see more detailed information, you can hover over a specific atta
 
 .. figure:: _figures/192.png 
 
-To the left of the map, you can the legend showing the number of application endpoints and their details, as well as different types of attacks shown on the map. 
+To the left of the map, you can see the legend showing the number of application endpoints and their details, as well as different types of attacks shown on the map. 
 
 .. figure:: _figures/215.png 
 
