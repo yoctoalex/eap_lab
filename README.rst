@@ -336,7 +336,7 @@ As you see, our "Illegal file type" attack has appeared on the list and its stat
 6. Update Monitoring to Blocking via UI 
 *************************************** 
 
-For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via UI or via Postman. In order to do so via Postman, proceed to the following section. 
+For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via F5 Cloud Services portal or via Postman. In order to do so via Postman, proceed to the following section. 
 
 `a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open each type of attack one by one and toggle **Blocking Mode** on. Click **Update** for each attack type to save the settings:  
 
