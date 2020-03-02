@@ -380,11 +380,11 @@ More detailed information on this request can be found `here <https://bit.ly/3ck
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** request:
+Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** request in Postman:
 
 .. figure:: _figures/171.png
 
-And you can also send the **Attack: SQL Injection** request in Postman:
+Also send the **Attack: SQL Injection** request:
 
 .. figure:: _figures/172.png
 
