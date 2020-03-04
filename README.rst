@@ -56,9 +56,6 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
    .. figure:: _figures/4.png  
 
-   If you need to check your payment information, it is available in the **Accounts** tab, **Payment** section.   
-
-   .. figure:: _figures/5.png 
 
 2. Postman Configuration  
 ********************* 
