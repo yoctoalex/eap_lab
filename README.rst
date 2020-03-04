@@ -701,19 +701,8 @@ You will see “retired” status in the response body which means that it’s n
   
 More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_.  
 
-`b)` Remove SSL Certificate 
 
-Let's send the **Remove certificate** request via Postman to remove it from the F5 Cloud Services portal:
-
-.. figure:: _figures/227.png
-
-You will see the following response:
-
-.. figure:: _figures/221.png
- 
-Note that this operation may take some time. 
-
-`c)` Change Essential App Protect Record type 
+`b)` Change Essential App Protect Record type 
 
 Let's send the **Reset EAP Record (lab)** request to change record type from CNAME to A back:
 
