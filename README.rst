@@ -675,7 +675,7 @@ Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to t
 
 .. figure:: _figures/211.png 
 
-`f)` Now we can check our "BuyTime Auction" app with the SSL certificate via browser. Copy your FQDN from the **General** tab in the F5 Cloud Services portal and paste to your browser. 
+`f)` Now we can check our "BuyTime Auction" app with the SSL certificate via browser. Copy your FQDN from the **General** tab in the F5 Cloud Services portal and paste to your browser starting with **https://**. 
 
 .. figure:: _figures/217.png 
 
