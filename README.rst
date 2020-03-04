@@ -336,27 +336,15 @@ As you see, our "Illegal file type" attack has appeared on the list and its stat
 
 For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via F5 Cloud Services portal or via Postman. In order to do so via Postman, proceed to the following section. 
 
-`a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open each type of attack one by one and toggle **Blocking Mode** on. Click **Update** for each attack type to save the settings:  
+`a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open **High-risk Attack Mitigation** and toggle **Blocking Mode** on. Click **Update**:  
 
 .. figure:: _figures/105.png 
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new attack with the "Blocked" status:
+Now that the protection mode is "blocking" for **High-risk Attack Mitigation**, you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new attack with the "Blocked" status:
 
 .. figure:: _figures/119.png
-
-You may  send a few more attacks. Go back to Postman and send the **Attack: Threat Campaign** request:  
-
-.. figure:: _figures/171.png
-
-Also send the **Attack: SQL Injection** request.
-
-.. figure:: _figures/172.png
-
-Then go back to the F5 UI, **VIEW EVENTS** to see them on the list with "Blocked" status: 
-
-.. figure:: _figures/141.png
 
 
 7. Update Monitoring to Blocking via Postman 
