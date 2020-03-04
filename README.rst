@@ -686,16 +686,9 @@ You can see that the connection is safe. Now let's click the **Certificate** and
 Clean Up  
 ######## 
 
-At this point feel free to explore and repeat any of the previous steps of the lab, but should you want to clean up the resources you've created and remove your services, then choose the way to do so (via Postman or the F5 Cloud Services portal) and follow the steps below.
+At this point feel free to explore and repeat any of the previous steps of the lab, but should you want to clean up the resources you've created and remove your services, then follow the steps below.
 
-`1.` Clean Up via the F5 Cloud Services Portal  
-*********************************************
-
-In order to delete Essential App Protect instance, go to the **Essential App Protect** tab, select **All my applications** in the dropdown menu, tick your application and click **Delete**. Now just confirm your choice. 
-
-.. figure:: _figures/112.png 
-
-`2.` Clean Up via Postman
+`1.` Clean Up via Postman
 *************************
 
 `a)` In order to clean up Essential App Protect instance we've created and remove the subscription, send the **Retire EAP Subscription** request which uses the relevant “subscription_id”:
@@ -730,7 +723,7 @@ The request will show the reset type and IP value:
 
 .. figure:: _figures/223.png
 
-`3.` Clear Tokens from the Lab Service API
+`2.` Clear Tokens from the Lab Service API
 ******************************************
  
 We recommend that you clear your tokens from the Lab Service API for security purposes. In order to do that, send the **Logout** request, which uses your ACCESS_TOKEN:
