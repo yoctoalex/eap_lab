@@ -233,7 +233,15 @@ The response will show the updated type ("CNAME") and value:
 
 .. figure:: _figures/168.png
 
-`d)` Test CNAME change via UI   
+`d)` Let's now re-send the **Get FQDN Record type (lab)** request to see the current type of the record. 
+
+.. figure:: _figures/129.png
+
+The response will show that record type is changed from "A" to "CNAME" (see step 3.d) above), as well as "value" is updated, which means that app traffic now goes through Essential App Protect instance and is actively protected.   
+
+.. figure:: _figures/128.png
+
+`e)` Test CNAME change via UI   
 
 Return to the F5 Cloud Services portal, open the **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open the **DNS Settings** tab and click **Test updated DNS**.  
 
@@ -241,13 +249,6 @@ Return to the F5 Cloud Services portal, open the **Essential App Protect** tab, 
 
 You will see successful status of testing.
 
-`e)` Let's now go back to Postman and re-send the **Get FQDN Record type (lab)** request to see the current type of the record. 
-
-.. figure:: _figures/129.png
-
-The response will show that record type is changed from "A" to "CNAME" (see step 3.d) above), as well as "value" is updated, which means that app traffic now goes through Essential App Protect instance and is actively protected.   
-
-.. figure:: _figures/128.png
 
 `f)` Test via Browser
 
