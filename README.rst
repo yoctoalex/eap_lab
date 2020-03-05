@@ -210,6 +210,20 @@ As you can see, the endpoint belongs to North America, US East (N. Virginia) and
 
 .. figure:: _figures/101.png  
 
+Note that this process may take some time. You can check the status in the **All my applications** option of the dropdown menu: 
+
+.. figure:: _figures/231.png 
+
+`g)` Test via Browser 
+
+Now that your instance is active, let's test it. Go to the **PROTECT APPLICATION** tab, then **DNS Settings**  and copy the CNAME.
+
+.. figure:: _figures/232.png 
+
+Paste it into your browser and you will get to the instance:
+
+.. figure:: _figures/233.png 
+
 Now that your Essential App Protect instance is created, we need to change DNS settings using CNAME and start routing the traffic through Essential App Protect. In order to do that follow the steps below.  
 
 2. Update DNS Settings using CNAME  
