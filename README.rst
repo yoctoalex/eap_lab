@@ -132,7 +132,7 @@ Sending this request will automatically capture of the Record variables:
 
 This record name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
 
-`e)`Test via Browser
+`e)` Test via Browser
 
 Let's now test our app using the FQDN we have just got.  Copy the "record" name from the Postman response and paste into your browser.
 
