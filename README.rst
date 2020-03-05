@@ -438,7 +438,7 @@ If you need to block specific IP addresses or add them to the whitelist, you can
 
 .. figure:: _figures/150.png
 
-`b)` Add "127.0.0.1" IP for blocking and "192.168.100.50" to the whitelist. Add a short description for each, tick those which you prefer to be logged and click **Update**. 
+`b)` Add "34.229.48.248" IP for blocking and "77.120.157.224" IP to the whitelist. Add a short description for each, tick those which you prefer to be logged and click **Update**. 
 
 .. figure:: _figures/151.png
 
