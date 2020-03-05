@@ -8,7 +8,6 @@ Pre-Requisites
 
 - Any modern browser: for working with the UI (and this document)
 - Postman: for working with the API of the F5 Cloud Services
-- Opera browser: for simulating geo-location specific traffic
 
 Lab Environment Overview
 ###############################
@@ -53,13 +52,10 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
    .. figure:: _figures/3.png  
 
-   After successful subscribing, your services will appear in the **Your F5 Cloud** tab. You will also see their current status.   
+   After successfully subscribing, your services will appear in the **Your F5 Cloud** tab. You will also see their current status.   
 
    .. figure:: _figures/4.png  
 
-   If you need to check your payment information, it is available in the **Accounts** tab, **Payment** section.   
-
-   .. figure:: _figures/5.png 
 
 2. Postman Configuration  
 ********************* 
@@ -119,7 +115,7 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <http://bit.ly/37hyQw3>`_.  
 
-`d)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in F5 Cloud Services UI.  
+`d)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in the F5 Cloud Services portal.  
 Request:  
 
 .. figure:: _figures/74.png  
@@ -168,15 +164,6 @@ The retrieved IDs are then stored for subsequent calls using a function inside P
 
 More detailed information on this API request can be found `here <http://bit.ly/36j1Yl4>`_. 
 
-4. Opera with VPN to Test New Endpoints 
-****************************************
-
-You will need the Opera browser to test proximity rules we will set later.
-
-Open the Opera browser, click **Settings, Advanced, Features** and then **Enable VPN**.
-
-.. figure:: _figures/163.png
-
 Essential App Protect 
 ##################### 
 
@@ -201,7 +188,7 @@ Using record IP, the system will look for the nearest instance, gather app endpo
 
 As you can see, the endpoint belongs to North America, US East (N. Virginia) and is deployed on Amazon AWS.  
 
-`d)` The system will ask you to provide a SSL/TLS certificate. Let’s tick “I will provide certificate details later” and **Save & Continue**.  
+`d)` The system will ask you to provide an SSL/TLS certificate. Let’s tick “I will provide certificate details later” and **Save & Continue**.  
 
 .. figure:: _figures/99.png 
 
@@ -238,15 +225,23 @@ The retrieved CNAME will be used to update DNS settings:
 
 More detailed information on this API request can be found `here <http://bit.ly/38xUHjc>`_.  
 
-`c)` Send the **Update CNAME Record (lab)** request to update DNS Settings with CNAME generated when creating Essential App Protect instance in F5 UI and retrieved in the step above:
+`c)` Send the **Update CNAME Record (lab)** request to update DNS Settings with CNAME generated when creating Essential App Protect instance in the F5 Cloud Services portal and retrieved in the step above:
 
 .. figure:: _figures/167.png
 
-The response will show the updated type (""CNAME") and value: 
+The response will show the updated type ("CNAME") and value: 
 
 .. figure:: _figures/168.png
 
-`d)` Test CNAME change via UI   
+`d)` Let's now re-send the **Get FQDN Record type (lab)** request to see the current type of the record. 
+
+.. figure:: _figures/129.png
+
+The response will show that record type is changed from "A" to "CNAME" (see step 3.d) above), as well as "value" is updated, which means that app traffic now goes through Essential App Protect instance and is actively protected.   
+
+.. figure:: _figures/128.png
+
+`e)` Test CNAME change via UI   
 
 Return to the F5 Cloud Services portal, open the **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open the **DNS Settings** tab and click **Test updated DNS**.  
 
@@ -254,13 +249,6 @@ Return to the F5 Cloud Services portal, open the **Essential App Protect** tab, 
 
 You will see successful status of testing.
 
-`e)` Let's now go back to Postman and re-send the **Get FQDN Record type (lab)** request to see the current type of the record. 
-
-.. figure:: _figures/129.png
-
-The response will show that record type is changed from "A" to "CNAME" (see step 3.d) above), as well as "value" is updated, which means that app traffic now goes through Essential App Protect instance and is actively protected.   
-
-.. figure:: _figures/128.png
 
 `f)` Test via Browser
 
@@ -277,7 +265,7 @@ Paste it into your browser and you will see the NA2 instance of the Auction webs
 
 If you would like to see the full configuration of your Essential App Protect or edit some properties, you can review the JSON either via UI or via Postman. If you prefer to do that via Postman, then proceed to the next section. 
 
-In order to view the JSON via the F5 Cloud Servcies portal, open **PROTECT APPLICATION** and go to the **JSON configuration** tab. 
+In order to view the JSON via the F5 Cloud Services portal, open **PROTECT APPLICATION** and go to the **JSON configuration** tab. 
 
 .. figure:: _figures/132.png
 
@@ -300,7 +288,7 @@ More detailed information on attack types can be found in one of the following s
 4. Review the JSON via Postman 
 *******************************
 
-If your prefer to use Postman to review the JSON, go back to Postman and send the **Get JSON** request:
+If you prefer to use Postman to review the JSON, go back to Postman and send the **Get JSON** request:
 
 .. figure:: _figures/136.png
 
@@ -311,6 +299,8 @@ The response will retrieve the JSON containing all the Essential App Protect ins
 The returned JSON provides some general information on subcription_id, user_id, and instance name, as well as all configuration details (CNAME, domain, etc) and protection settings. 
 
 .. figure:: _figures/169.png
+
+More detailed information on this API request can be found `here <http://bit.ly/38xUHjc>`_.  
 
 5. Attacks  
 *********** 
@@ -344,35 +334,23 @@ As you see, our "Illegal file type" attack has appeared on the list and its stat
 6. Update Monitoring to Blocking via UI 
 *************************************** 
 
-For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via UI or via Postman. In order to do so via Postman, proceed to the following section. 
+For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via F5 Cloud Services portal or via Postman. In order to do so via Postman, proceed to the following section. 
 
-`a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open each type of attack one by one and toggle **Blocking Mode** on. Click **Update** for each attack type to save the settings:  
+`a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open **High-risk Attack Mitigation** and toggle **Blocking Mode** on. Click **Update**:  
 
 .. figure:: _figures/105.png 
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new attack with the "Blocked" status:
+Now that the protection mode is "blocking" for **High-risk Attack Mitigation**, you can re-send the **Attack: Illegal Filetype** request in Postman. After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new attack with the "Blocked" status:
 
 .. figure:: _figures/119.png
-
-You may send the **Attack: Threat Campaign** and  
-
-.. figure:: _figures/171.png
-
-the **Attack: SQL Injection** requests in Postman as well.
-
-.. figure:: _figures/172.png
-
-Then go back to the F5 UI, **VIEW EVENTS** to see them on the list with "Blocked" status: 
-
-.. figure:: _figures/141.png
 
 
 7. Update Monitoring to Blocking via Postman 
 ******************************************** 
 
-`a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved in steps above. 
+`a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved a few steps above. 
 
 .. figure:: _figures/173.png
 
@@ -384,13 +362,15 @@ You can also notice that their status changed in the F5 UI:
 
 .. figure:: _figures/139.png
 
+More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
+
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** and
+Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** request in Postman:
 
 .. figure:: _figures/171.png
 
-the **Attack: SQL Injection** requests in Postman.
+Also send the **Attack: SQL Injection** request:
 
 .. figure:: _figures/172.png
 
@@ -403,15 +383,15 @@ After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new a
 
 You can create a list of countries traffic from which will be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
 
-`a)` Go back to F5 UI, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click **Manage countries**. 
+`a)` Go back to the F5 Cloud Services portal, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click **Manage countries**. 
 
 .. figure:: _figures/142.png
 
-`b)` Add "United States"  as a country whose requests you want to deny and click **Update**.
+`b)` Let's add France as a country whose requests you want to deny and click **Update**.
 
 .. figure:: _figures/143.png
 
-`c)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in F5 Cloud Servcies UI and **Update**.
+`c)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in the F5 Cloud Servcies portal and **Update**.
 
 .. figure:: _figures/140.png
  
@@ -426,7 +406,9 @@ The response will show the countries blocked:
 
 .. figure:: _figures/149.png
 
-`b)` Let's go to F5 UI and see the updated geolocation enforcement:
+More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
+
+`b)` Let's now go to the F5 Cloud Services portal and see the updated geolocation enforcement:
 
 .. figure:: _figures/120.png  
 
@@ -445,13 +427,13 @@ Let's open the F5 UI and go to **VIEW EVENTS** section to see the newly blocked 
 10. Update IP Enforcement Rules via UI  
 ********************************
 
-If you need to block specific IP addresses or add them to the whitelist, you can do it in two way: via Postman or UI. If you prefer to do it via Postman, then proceed to the next section. If your choice is UI, then follow the steps below: 
+If you need to block specific IP addresses or add them to the whitelist, you can do it in two ways: via Postman or UI. If you prefer to do it via Postman, then proceed to the next section. If your choice is UI, then follow the steps below: 
 
 `a)` Go to **PROTECT APPLICATION**-> the **High-risk Attack Mitigation** tab and click **Manage rules**. 
 
 .. figure:: _figures/150.png
 
-`b)` Add "127.0.0.1", "11.11.11.10", "192.168.1.10", "12.23.34.59" IPs for blocking and "192.168.100.50" to the whitelist. Add a short description for each, tick those which you prefer to be logged and click **Update**. 
+`b)` Add "127.0.0.1" IP for blocking and "192.168.100.50" to the whitelist. Add a short description for each, tick those which you prefer to be logged and click **Update**. 
 
 .. figure:: _figures/151.png
 
@@ -465,6 +447,8 @@ If you need to block specific IP addresses or add them to the whitelist, you can
 In the response you will see four blocked and one allowed IPs. 
 
 .. figure:: _figures/152.png
+
+More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
 
 12. Customize Blocked Page 
 ***************************
@@ -488,7 +472,7 @@ If you prefer to customize your blocked page acc to your wish, you can do it usi
 13. Add New Endpoints 
 *********************
 
-Let's imagine your website is to function both in the USA and in Europe. But for now, you have only one IP endpoint added to Essential App Protect - North America, US East (N. Virginia). 
+Let's imagine your website is to function both in the USA and in Europe which requires two endpoints. But for now, you have only one IP endpoint added to Essential App Protect - North America, US East (N. Virginia). 
 
 .. figure:: _figures/180.png 
 
@@ -502,7 +486,9 @@ You will see the Endpoint added in the returned response located in Europe and d
 
 .. figure:: _figures/182.png 
 
-You will also see the new endpoint in the F5 UI:
+More detailed information on this request can be found `here <https://bit.ly/3ckOJVA>`_. 
+
+You will also see the new endpoint in the F5 Cloud Services portal:
 
 .. figure:: _figures/183.png 
 
@@ -524,13 +510,13 @@ Here's what you should see in the response:
 15. Attacks via Browser 
 *************************
 
-Let's now simulate some attacks via browser and follow them in the dashboard of F5 Cloud Services portal. 
+Let's now simulate some attacks via browser and follow them in the dashboard of the F5 Cloud Services portal. 
 
 `a)` In order to simulate Illegal File type, paste "**Fully Qualified Domain Name (FQDN)**/nginx.config" address to your browser and the page will be blocked:
 
 .. figure:: _figures/153.png 
 
-Now let's go back to F5 Ui and see the dashboard with the new attack:
+Now let's go back to the F5 Cloud Services portal and see the dashboard with the new attack:
 
 .. figure:: _figures/154.png 
 
@@ -538,11 +524,11 @@ You can see the type of attack and some more detailed information in the **VIEW 
 
 .. figure:: _figures/155.png 
 
-`b)` Let's now simulate SQL Injection attack via browser and our "BuyTime Auction" app. Copy your FQDN from F5 Cloud Services portal and paste to your browser. 
+`b)` Let's now simulate SQL Injection attack via browser and our "BuyTime Auction" app. Copy your FQDN from the F5 Cloud Services portal and paste to your browser. 
 
 .. figure:: _figures/188.png 
 
-Fill in **' OR 1=1; '** as login email and fill in any password. Click **Login**.
+Fill in **' OR 1=1; '** as login  and fill in any password. Click **Login**.
 
 .. figure:: _figures/184.png 
 
@@ -557,7 +543,7 @@ You can see the details of this attack in the **VIEW EVENTS** tab in the F5 Clou
 16. Check the Map
 ****************
 
-Now let’s see the map of our attacks on the F5 Cloud Services portal. You need to select the **Monitor Application** tab where you will see the dashboard.
+Now let’s see the map of our attacks on the F5 Cloud Services portal. You need to select the **MONITOR APPLICATION** tab where you will see the dashboard.
 
 You can see our latest attacks on the map:
 
@@ -567,6 +553,12 @@ If you wish to see more detailed information, you can hover over a specific atta
 
 .. figure:: _figures/192.png 
 
+To the left of the map, you can see the legend showing the number of application endpoints and their details, as well as different types of attacks shown on the map. 
+
+.. figure:: _figures/215.png 
+
+The yellow lines on the map show the attacks within the last five minutes. 
+
 17. Start Attacks via Postman 
 *************************
 
@@ -574,13 +566,13 @@ If you wish to see more detailed information, you can hover over a specific atta
 
 .. figure:: _figures/193.png 
 
-And the response will be "ok" which means that atackes have been activated:
+And the response will be "ok" which means that attacks have been activated:
 
 .. figure:: _figures/194.png 
 
 `b)` Check the map
 
-Let’s go back to the F5 Cloud Services portal and check the map in the **Monitor Application** tab. 
+Let’s go back to the F5 Cloud Services portal and check the map in the **MONITOR APPLICATION** tab. 
 
 You can see our two endpoints and the latest attacks on the map:
 
@@ -610,6 +602,8 @@ You can see different attack characteristics in the response, including number, 
 
 .. figure:: _figures/196.png
 
+More detailed information on this request can be found `here <https://bit.ly/2VttrPh>`_. 
+
 19. View Events via UI  
 **************************** 
 
@@ -624,7 +618,7 @@ You can also set some specific rules for each attack and its IP individually:
 20. Specify SSL Certificate via Postman
 ***************************
 
-When creating Essential App Protect instance in one of the steps above, we skipped providing a SSL/TLS certificate. Let's not get and use it via Postman. 
+When creating Essential App Protect instance in one of the steps above, we skipped providing an SSL/TLS certificate. Let's now get and implement it via Postman. 
 
 `a)` Let's send the **Get SSL Certificate (lab)** request:
 
@@ -646,21 +640,16 @@ The response will return the certificate ID which will be used for updating the 
 
 .. figure:: _figures/208.png 
 
-`c)` One step left - updating the certificate. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
+`c)` The next step is updating the certificate. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
 
 .. figure:: _figures/209.png 
 
-The response shows all the information regrading instance the certificate is connected to:
+The response shows all the information regarding instance the certificate is connected to:
 
 .. figure:: _figures/210.png 
 
-`d)` Check SSL Certificate via UI
 
-Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to the **General** tab. You will see the uploaded and updated certificate: 
-
-.. figure:: _figures/211.png 
-
-`e)` Now we need to restart our instance for the certificate to become active. 
+`d)` Now we need to restart our instance for the certificate to become active. 
 
    `1.` In order to do that, go back to Postman and send the **Suspend EAP Subscription** request:
    
@@ -670,57 +659,72 @@ Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to t
    
    .. figure:: _figures/213.png 
    
-   **TO BE DONE** 
    `2.` Let's now activate the service with the SSL certificate. Send the **Activate EAP Subscription** request:
    
    .. figure:: _figures/214.png 
    
-   And the response will return the updated status
+   And the response will return the updated status:
    
-   .. figure:: _figures/.png 
+   .. figure:: _figures/216.png 
    
    Note that this operation may take up to a few minutes. 
    
-`f)` Now we can check our app with the SSL certificate via browser:
+`e)` Check SSL Certificate via UI
+
+Let's now check the certificate via UI. Open **PROTECT APPLICATION** and go to the **General** tab. You will see the uploaded and updated certificate: 
+
+.. figure:: _figures/211.png 
+
+`f)` Now we can check our "BuyTime Auction" app with the SSL certificate via browser. Copy your FQDN from the **General** tab in the F5 Cloud Services portal and paste to your browser starting with "**https://**". 
+
+.. figure:: _figures/217.png 
+
+You can see that the connection is safe. Now let's click the **Certificate** and see its details:
+
+.. figure:: _figures/218.png 
+
+Clean Up  
+######## 
+
+At this point feel free to explore and repeat any of the previous steps of the lab, but should you want to clean up the resources you've created and remove your services, then follow the steps below.
+
+`1.` Clean Up via Postman
+*************************
+
+`a)` In order to clean up Essential App Protect instance we've created and remove the subscription, send the **Retire EAP Subscription** request which uses the relevant “subscription_id”:
+
+.. figure:: _figures/219.png
+ 
+You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
+ 
+.. figure:: _figures/220.png
+  
+More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_.  
 
 
-21.  Clean Up  
-********** 
-
-`a)` Retire Essential App Protect Subscription via UI 
-
-In order to delete Essential App Protect instance, go to **Essential App Protect** tab, select **All my applications** in the dropdown menu, tick your application and click **Delete**. Now just confirm your choice. 
-
-.. figure:: _figures/112.png 
-
-`b)` Retire Essential App Protect Subscription via Postman
-
-In order to clean up Essential App Protect instance we've created and remove subscriptions, send the **Retire EAP Subscription** request:
-
- .. figure:: _figures/.png
-
-`c)` Remove SSL Certificate 
-
-Let's send the **Remove certificate** request via Postman to remove it from the F5 Cloud Services portal:
-
- .. figure:: _figures/.png
-
-`d)` Reset Essential App Protect Record (lab) 
+`b)` Change Essential App Protect Record type 
 
 Let's send the **Reset EAP Record (lab)** request to change record type from CNAME to A back:
 
- .. figure:: _figures/.png
+.. figure:: _figures/222.png
+ 
+The request will show the reset type and IP value:
 
-`e)` Logout from Postman 
+.. figure:: _figures/223.png
+
+`2.` Clear Tokens from the Lab Service API
+******************************************
  
- After all operations are done, you need to logout from Postman. Send the **Logout** request, which uses your ACCESS_TOKEN:
+We recommend that you clear your tokens from the Lab Service API for security purposes. In order to do that, send the **Logout** request, which uses your ACCESS_TOKEN:
  
- .. figure:: _figures/.png
+.. figure:: _figures/224.png
  
- You will get the following response with the status showing "200 OK":
+You will get the following response with the status showing "200 OK":
  
- .. figure:: _figures/.png
+.. figure:: _figures/225.png
  
- Your ACCESS_TOKEN will be considered invalid:
+Your ACCESS_TOKEN will be considered invalid:
  
-  .. figure:: _figures/.png
+.. figure:: _figures/226.png
+
+More detailed information on these API requests can be found `here <https://bit.ly/2VttrPh>`_.  
