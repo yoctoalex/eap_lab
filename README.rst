@@ -136,11 +136,11 @@ This record name will be used for creating Essential App Protect service in the 
 
 Let's now test our app using the FQDN we have just got.  Copy the "record" name from the Postman response and paste into your browser.
 
-.. figure:: _figures/229.jpg 
+.. figure:: _figures/229.png 
 
 You will see your app which is not protected for now and goes directly to its server.  
 
-.. figure:: _figures/230.jpg 
+.. figure:: _figures/230.png 
 
 `f)` Get User Membership to F5 Cloud Services accounts
 
