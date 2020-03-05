@@ -132,7 +132,17 @@ Sending this request will automatically capture of the Record variables:
 
 This record name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
 
-`e)` Get User Membership to F5 Cloud Services accounts
+`e)`Test via Browser
+
+Let's now test our app using the FQDN we have just got.  Copy the "record" name from the Postman response and paste into your browser.
+
+.. figure:: _figures/229.jpg 
+
+You will see your app which is not protected for now and goes directly to its server.  
+
+.. figure:: _figures/230.jpg 
+
+`f)` Get User Membership to F5 Cloud Services accounts
 
 In Postman, send the **Get User Membership (optional)** request which returns info on your user’s access to Cloud Services accounts.
 
@@ -148,7 +158,7 @@ Your "account_id" will be retrieved using "account_name" and used in the subsequ
 
 More detailed information on this API request can be found `here <http://bit.ly/2Gfu1r3>`_. 
 
-`f)` Retrieve information on available catalogs and their IDs
+`g)` Retrieve information on available catalogs and their IDs
 
 Select the **Get Catalogs** request and click **Send** to retrieve data about the available Catalogs and their IDs.
 
