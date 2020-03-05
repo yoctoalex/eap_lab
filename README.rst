@@ -383,15 +383,20 @@ After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new a
 
 You can create a list of countries traffic from which will be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
 
-`a)` Go back to the F5 Cloud Services portal, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click **Manage countries**. 
+`a)` Go back to the F5 Cloud Services portal, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click 
+**Deny requests from specific countries**. This will activate the **Manage countries** button.   
 
 .. figure:: _figures/142.png
 
-`b)` Let's add France as a country whose requests you want to deny and click **Update**.
+`b)` Now click **Manage countries**:
+
+.. figure:: _figures/228.png
+
+`c)` Let's add France as a country whose requests you want to deny and click **Update**.
 
 .. figure:: _figures/143.png
 
-`c)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in the F5 Cloud Servcies portal and **Update**.
+`d)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in the F5 Cloud Servcies portal and **Update**.
 
 .. figure:: _figures/140.png
  
