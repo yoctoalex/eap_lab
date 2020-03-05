@@ -647,7 +647,7 @@ The response will return the certificate ID which will be used for updating the 
 
 .. figure:: _figures/208.png 
 
-`c)` The next step is updating the certificate. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
+`c)` The next step will associate the certificate with the EAP app. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
 
 .. figure:: _figures/209.png 
 
