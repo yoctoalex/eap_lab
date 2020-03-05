@@ -279,7 +279,7 @@ In the "application" section, we can see our instance domain, region it belongs 
 
 .. figure:: _figures/134.png
 
-We can also learn all the information about our protection and its settings, as well as about each attack type in "policy" section:
+In the "policy" section, we can learn all the information about our protection and its settings, as well as about each attack type.
 
 .. figure:: _figures/135.png
 
