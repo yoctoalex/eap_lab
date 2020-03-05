@@ -283,7 +283,7 @@ We can also learn all the information about our protection and its settings, as 
 
 .. figure:: _figures/135.png
 
-More detailed information on attack types can be found in one of the following sections. 
+More detailed information on attack types can be found in Section 5 below. 
 
 4. Review the JSON via Postman 
 *******************************
