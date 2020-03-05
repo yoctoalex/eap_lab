@@ -334,7 +334,7 @@ As you see, our "Illegal file type" attack has appeared on the list and its stat
 6. Update Monitoring to Blocking via UI 
 *************************************** 
 
-For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via F5 Cloud Services portal or via Postman. In order to do so via Postman, proceed to the following section. 
+For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking both via the F5 Cloud Services portal and via Postman. Let's change monitoring to blocking for High-risk Attack Mitigation via the F5 Cloud Services portal, and for Malicious IP and Threat Campaigns via Postman in the next section. 
 
 `a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open **High-risk Attack Mitigation** and toggle **Blocking Mode** on. Click **Update**:  
 
@@ -349,6 +349,8 @@ Now that the protection mode is "blocking" for **High-risk Attack Mitigation**, 
 
 7. Update Monitoring to Blocking via Postman 
 ******************************************** 
+
+Let's now change monitoring to blocking for Malicious IP and Threat Campaigns via Postman.
 
 `a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved a few steps above. 
 
