@@ -390,7 +390,7 @@ You can create a list of countries traffic from which will be blocked via UI or 
 
 .. figure:: _figures/142.png
 
-`b)` Now click **Manage countries**:
+`b)` Now click the **Manage countries** button:
 
 .. figure:: _figures/228.png
 
