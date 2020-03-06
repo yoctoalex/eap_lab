@@ -394,7 +394,7 @@ More detailed information on this request can be found `here <https://bit.ly/3ck
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** request in Postman:
+Now that the protection mode is "blocking" for all the attacks, you can send the **Attack: Threat Campaign** request in Postman:
 
 .. figure:: _figures/171.png
 
