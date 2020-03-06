@@ -216,7 +216,7 @@ Note that this process may take some time. You can check the status in the **All
 
 `g)` Test via Browser 
 
-Now that your instance is active, let's test it. Go to the **PROTECT APPLICATION** tab, then **DNS Settings**  and copy the CNAME.
+When the system shows that your instance is active, let's test it. Go to the **PROTECT APPLICATION** tab, then **DNS Settings**  and copy the CNAME.
 
 .. figure:: _figures/232.png 
 
