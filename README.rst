@@ -692,6 +692,10 @@ The response shows all the information regarding instance the certificate is con
    
    .. figure:: _figures/213.png 
    
+   Note that this operation may take some time. Proceed to the next step after the status of your instance is changed to "Inactive" in the F5 Cloud Services portal. The status can be seen in the **All my applications** option of the dropdown menu.
+   
+   .. figure:: _figures/235.png
+   
    `2.` Let's now activate the service with the SSL certificate. Send the **Activate EAP Subscription** request:
    
    .. figure:: _figures/214.png 
@@ -700,7 +704,9 @@ The response shows all the information regarding instance the certificate is con
    
    .. figure:: _figures/216.png 
    
-   Note that this operation may take up to a few minutes. 
+   Note that this operation may take some time. Proceed to the next step after the status of your instance is changed to "Active" in the F5 Cloud Services portal. The status can be seen in the **All my applications** option of the dropdown menu.
+   
+   .. figure:: _figures/236.png 
    
 `e)` Check SSL Certificate via UI
 
