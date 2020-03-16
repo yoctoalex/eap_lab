@@ -62,7 +62,7 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in.  
 
-`b)` Import collection – **F5 Cloud Services EAP LAB.postman_collection.json** and environment – **F5 Cloud Services EAP LAB.postman_environment.json**.  
+`b)` Download collection **F5 Cloud Services EAP LAB.postman_collection.json** and environment **F5 Cloud Services EAP LAB.postman_environment.json** for Postman `here <https://bit.ly/2PK0z1J>`_. Import them to your Postman.  
 
 .. figure:: _figures/1.jpg  
 
@@ -132,7 +132,17 @@ Sending this request will automatically capture of the Record variables:
 
 This record name will be used for creating Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test applications. 
 
-`e)` Get User Membership to F5 Cloud Services accounts
+`e)` Test via Browser
+
+Let's now test our app using the FQDN we have just got.  Copy the "record" name from the Postman response and paste into your browser.
+
+.. figure:: _figures/115.png 
+
+You will see your app which is not protected for now and goes directly to its server.  
+
+.. figure:: _figures/230.png 
+
+`f)` Get User Membership to F5 Cloud Services accounts
 
 In Postman, send the **Get User Membership (optional)** request which returns info on your user’s access to Cloud Services accounts.
 
@@ -148,7 +158,7 @@ Your "account_id" will be retrieved using "account_name" and used in the subsequ
 
 More detailed information on this API request can be found `here <http://bit.ly/2Gfu1r3>`_. 
 
-`f)` Retrieve information on available catalogs and their IDs
+`g)` Retrieve information on available catalogs and their IDs
 
 Select the **Get Catalogs** request and click **Send** to retrieve data about the available Catalogs and their IDs.
 
@@ -199,6 +209,20 @@ As you can see, the endpoint belongs to North America, US East (N. Virginia) and
 `f)` Click **Done** and Essential App Protect service will be created and ready for use.  
 
 .. figure:: _figures/101.png  
+
+Note that this process may take some time. You can check the status in the **All my applications** option of the dropdown menu: 
+
+.. figure:: _figures/231.png 
+
+`g)` Test via Browser 
+
+When the system shows that your instance is active, let's test it. Select your instance in the dropdown menu, go to the **PROTECT APPLICATION** tab, then **DNS Settings**  and copy the CNAME.
+
+.. figure:: _figures/232.png 
+
+Paste it into your browser and you will get to the instance:
+
+.. figure:: _figures/233.png 
 
 Now that your Essential App Protect instance is created, we need to change DNS settings using CNAME and start routing the traffic through Essential App Protect. In order to do that follow the steps below.  
 
@@ -252,11 +276,11 @@ You will see successful status of testing.
 
 `f)` Test via Browser
 
-Let's now test the updated DNS setting via browser. Return to the F5 Cloud Services portal, open the **DNS Settings** tab and copy the CNAME.
+Let's now test the updated DNS setting via browser. Return to the F5 Cloud Services portal, open the **General** tab and copy the FQDN.
 
-.. figure:: _figures/130.png
+.. figure:: _figures/234.png
 
-Paste it into your browser and you will see the NA2 instance of the Auction website and all of the requests will now be flowing through the Essential App Protect. However, any malicious requests will not be blocked, as we have not turned on "Blocking" mode yet.
+Paste it into your browser and you will see the NA2 instance of the Auction website and all of the requests will now be flowing through the Essential App Protect, which means your app is now protected. However, any malicious requests will not be blocked, as we have not turned on "Blocking" mode yet.
 
 .. figure:: _figures/131.png
 
@@ -279,11 +303,11 @@ In the "application" section, we can see our instance domain, region it belongs 
 
 .. figure:: _figures/134.png
 
-We can also learn all the information about our protection and its settings, as well as about each attack type in "policy" section:
+In the "policy" section, we can learn all the information about our protection and its settings, as well as about each attack type.
 
 .. figure:: _figures/135.png
 
-More detailed information on attack types can be found in one of the following sections. 
+More detailed information on attack types can be found in Section 5 below. 
 
 4. Review the JSON via Postman 
 *******************************
@@ -334,7 +358,7 @@ As you see, our "Illegal file type" attack has appeared on the list and its stat
 6. Update Monitoring to Blocking via UI 
 *************************************** 
 
-For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking either via F5 Cloud Services portal or via Postman. In order to do so via Postman, proceed to the following section. 
+For now all the threats of your app are only monitored without any actions taken. You can change monitoring to blocking both via the F5 Cloud Services portal and via Postman. Let's change monitoring to blocking for High-risk Attack Mitigation via the F5 Cloud Services portal, and for Malicious IP and Threat Campaigns via Postman in the next section. 
 
 `a)` In order to start blocking attacks, go to the **PROTECT APPLICATION** tab, then open **High-risk Attack Mitigation** and toggle **Blocking Mode** on. Click **Update**:  
 
@@ -346,9 +370,13 @@ Now that the protection mode is "blocking" for **High-risk Attack Mitigation**, 
 
 .. figure:: _figures/119.png
 
+Note that its status is also updated in the **PROTECT AAPLICATION** data card. 
+
 
 7. Update Monitoring to Blocking via Postman 
 ******************************************** 
+
+Let's now change monitoring to blocking for Malicious IP and Threat Campaigns via Postman.
 
 `a)` Go back to Postman and send the **Update Monitor to Block** request which uses your “account_id” and "EAP record" retrieved a few steps above. 
 
@@ -366,7 +394,7 @@ More detailed information on this request can be found `here <https://bit.ly/3ck
 
 `b)` Testing the status 
 
-Now that the protection mode is "blocking", you can send the **Attack: Threat Campaign** request in Postman:
+Now that the protection mode is "blocking" for all the attacks, you can send the **Attack: Threat Campaign** request in Postman:
 
 .. figure:: _figures/171.png
 
@@ -383,15 +411,20 @@ After that go back to the F5 UI, open **VIEW EVENTS** and you will see the new a
 
 You can create a list of countries traffic from which will be blocked via UI or via Postman. If you prefer to do so via Postman, proceed to the next section.
 
-`a)` Go back to the F5 Cloud Services portal, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click **Manage countries**. 
+`a)` Go back to the F5 Cloud Services portal, the **PROTECT APPLICATION** tab, then go to **High-risk Attack Mitigation**  and click 
+**Deny requests from specific countries**. This will activate the **Manage countries** button.   
 
 .. figure:: _figures/142.png
 
-`b)` Let's add France as a country whose requests you want to deny and click **Update**.
+`b)` Now click the **Manage countries** button:
+
+.. figure:: _figures/228.png
+
+`c)` Let's add France as a country whose requests you want to deny and click **Update**.
 
 .. figure:: _figures/143.png
 
-`c)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in the F5 Cloud Servcies portal and **Update**.
+`d)` If you prefer to deny requests from OFAC-sanctioned countries without creating your own list, just tick the option in the F5 Cloud Servcies portal and **Update**.
 
 .. figure:: _figures/140.png
  
@@ -433,7 +466,7 @@ If you need to block specific IP addresses or add them to the whitelist, you can
 
 .. figure:: _figures/150.png
 
-`b)` Add "127.0.0.1" IP for blocking and "192.168.100.50" to the whitelist. Add a short description for each, tick those which you prefer to be logged and click **Update**. 
+`b)` Add "34.229.48.248" IP for blocking and "77.120.157.224" IP to the whitelist. Add a short description for each, tick those which you prefer to be logged and click **Update**. 
 
 .. figure:: _figures/151.png
 
@@ -640,7 +673,7 @@ The response will return the certificate ID which will be used for updating the 
 
 .. figure:: _figures/208.png 
 
-`c)` The next step is updating the certificate. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
+`c)` The next step will associate the certificate with the EAP app. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
 
 .. figure:: _figures/209.png 
 
@@ -659,6 +692,10 @@ The response shows all the information regarding instance the certificate is con
    
    .. figure:: _figures/213.png 
    
+   Note that this operation may take some time. Proceed to the next step after the status of your instance is changed to "Inactive" in the F5 Cloud Services portal. The status can be seen in the **All my applications** option of the dropdown menu.
+   
+   .. figure:: _figures/235.png
+   
    `2.` Let's now activate the service with the SSL certificate. Send the **Activate EAP Subscription** request:
    
    .. figure:: _figures/214.png 
@@ -667,7 +704,9 @@ The response shows all the information regarding instance the certificate is con
    
    .. figure:: _figures/216.png 
    
-   Note that this operation may take up to a few minutes. 
+   Note that this operation may take some time. Proceed to the next step after the status of your instance is changed to "Active" in the F5 Cloud Services portal. The status can be seen in the **All my applications** option of the dropdown menu.
+   
+   .. figure:: _figures/236.png 
    
 `e)` Check SSL Certificate via UI
 
