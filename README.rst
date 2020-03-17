@@ -295,11 +295,11 @@ In order to view the JSON via the F5 Cloud Services portal, open **PROTECT APPLI
 
 Let's take a look at different sections available in the JSON. In order to collapse or expand a section, click the small arrows next to the line numbers. 
 
-The main sections are "application", "event_logging" and "policy".
+The main sections are "application" and "policy".
 
 .. figure:: _figures/133.png
 
-In the "application" section, we can see our instance domain, region it belongs to, IP endpoints  and port. 
+In the "application" section, we can see our FQDN, region our instance belongs to, IP endpoints  and port. 
 
 .. figure:: _figures/134.png
 
@@ -320,7 +320,7 @@ The response will retrieve the JSON containing all the Essential App Protect ins
 
 .. figure:: _figures/137.png
 
-The returned JSON provides some general information on subcription_id, user_id, and instance name, as well as all configuration details (CNAME, domain, etc) and protection settings. 
+The returned JSON provides some general information on subcription_id, user_id, and instance name, as well as all configuration details (CNAME, FQDN, etc) and protection settings. 
 
 .. figure:: _figures/169.png
 
