@@ -299,7 +299,7 @@ The main sections are "application" and "policy".
 
 .. figure:: _figures/133.png
 
-In the "application" section, we can see our instance domain, region it belongs to, IP endpoints  and port. 
+In the "application" section, we can see our FQDN, region our instance belongs to, IP endpoints  and port. 
 
 .. figure:: _figures/134.png
 
