@@ -320,7 +320,7 @@ The response will retrieve the JSON containing all the Essential App Protect ins
 
 .. figure:: _figures/137.png
 
-The returned JSON provides some general information on subcription_id, user_id, and instance name, as well as all configuration details (CNAME, domain, etc) and protection settings. 
+The returned JSON provides some general information on subcription_id, user_id, and instance name, as well as all configuration details (CNAME, FQDN, etc) and protection settings. 
 
 .. figure:: _figures/169.png
 
