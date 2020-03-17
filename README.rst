@@ -370,7 +370,7 @@ Now that the protection mode is "blocking" for **High-risk Attack Mitigation**, 
 
 .. figure:: _figures/119.png
 
-Note that its status is also updated in the **PROTECT AAPLICATION** data card. 
+Note that its status is also updated in the **PROTECT APPLICATION** data card. 
 
 
 7. Update Monitoring to Blocking via Postman 
