@@ -295,7 +295,7 @@ In order to view the JSON via the F5 Cloud Services portal, open **PROTECT APPLI
 
 Let's take a look at different sections available in the JSON. In order to collapse or expand a section, click the small arrows next to the line numbers. 
 
-The main sections are "application", "event_logging" and "policy".
+The main sections are "application" and "policy".
 
 .. figure:: _figures/133.png
 
