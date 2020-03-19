@@ -1,4 +1,4 @@
-Agility LAB: Essential App Protect   
+Agility LAB: F5 Essential App Protect Service  
 =========================================== 
 
 .. contents:: Table of Contents   
@@ -174,7 +174,7 @@ The retrieved IDs are then stored for subsequent calls using a function inside P
 
 More detailed information on this API request can be found `here <http://bit.ly/36j1Yl4>`_. 
 
-Essential App Protect 
+F5 Essential App Protect Service 
 ##################### 
 
 1. Create Essential App Protect Service via the F5 Cloud Services Portal  
