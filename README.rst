@@ -177,7 +177,7 @@ More detailed information on this API request can be found `here <http://bit.ly/
 F5 Essential App Protect Service 
 ##################### 
 
-1. Create Essential App Protect Service via the F5 Cloud Services Portal  
+1. Create F5 Essential App Protect Service via the F5 Cloud Services Portal  
 ************************************************************************ 
 
 `a)` In order to create Essential App Protect service, open the **Get FQDN Record type (lab)** request in Postman and copy "record" name in the response.  
