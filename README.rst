@@ -48,7 +48,7 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
    .. figure:: _figures/2.png  
 
-   `2.` You will be asked to set up your payment method before starting a ten-day free trial. You can set it up in **Accounts** - **Payments**.  
+   `2.` You will be asked to set up your payment method before starting a ten-day free trial. You can set it up in **Accounts** - **Payments** by adding a card or subscribing through AWS Marketplace.    
   
    Note that if you're running this lab at the Agility event, you will be provided with Trial/Free access to the F5 Cloud Servies (speak    to the Lab facilitator if you don't have access).   
 
