@@ -48,7 +48,9 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
    .. figure:: _figures/2.png  
 
-   `2.` You will be asked to add your payment card to cover service usage (you only pay for what you use). Note that if you're running this lab at the Agility event, you will be provided with Trial/Free access to the F5 Cloud Servies (speak to the Lab facilitator if you don't have access).   
+   `2.` You will be asked to set up your payment method before starting a ten-day free trial. You can set it up in **Accounts** - **Payments**.  
+  
+  Note that if you're running this lab at the Agility event, you will be provided with Trial/Free access to the F5 Cloud Servies (speak to the Lab facilitator if you don't have access).   
 
    .. figure:: _figures/3.png  
 
