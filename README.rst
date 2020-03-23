@@ -117,7 +117,7 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <http://bit.ly/37hyQw3>`_.  
 
-`d)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create EAP instance in the F5 Cloud Services portal.  
+`d)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create F5 Essential App Protect instance in the F5 Cloud Services portal.  
 Request:  
 
 .. figure:: _figures/74.png  
@@ -675,7 +675,7 @@ The response will return the certificate ID which will be used for updating the 
 
 .. figure:: _figures/208.png 
 
-`c)` The next step will associate the certificate with the EAP app. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
+`c)` The next step will associate the certificate with the Essential App Protect app. In order to do that, send the **Update EAP SSL Certificate** request from Postman which uses certificate ID retrieved above:
 
 .. figure:: _figures/209.png 
 
