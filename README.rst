@@ -44,7 +44,7 @@ Once you've logged in with an account, you will be using the user name and passw
 
 In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs.
 
-   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to click **Subscribe** to **Essential App Protect** services.   
+   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to subscribe to **Essential App Protect** services.   
 
    .. figure:: _figures/2.png  
 
