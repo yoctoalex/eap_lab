@@ -1,4 +1,4 @@
-Agility LAB: F5 Essential App Protect Service  
+LAB: F5 Essential App Protect Service  
 =========================================== 
 
 .. contents:: Table of Contents   
@@ -34,23 +34,21 @@ Lab Environment Setup
 
 `a)` Login   
 
-In order to use F5 Cloud Services, you need to be logged in with a valid user account. If you need to sign up, or if you already have one, proceed to the `F5 Cloud Services portal <http://bit.ly/f5csreg>`_.  
-
+In order to use F5 Essential App Protect service, you need access to F5 Cloud Services and be logged in with a valid user account. If you need to sign up, or if you already have one, proceed to the `F5 Cloud Services portal <http://bit.ly/f5csreg>`_.  
+˚
 .. figure:: _figures/1-1.png  
 
 Once you've logged in with an account, you will be using the user name and password values in the lab to authenticate with the F5 Cloud Services and the API.
 
 `b)` Subscribe to Catalogs   
 
-In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs.
+In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs. The focus of this lab is on F5 Essential App Protect service, so you will need to subscribe to it. At the time of writing you can take advancate of a 10-day free trial offer to work with this service -- no payment method required!
 
    `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to subscribe to **Essential App Protect** services.   
 
    .. figure:: _figures/2.png  
 
-   `2.` You will be asked to set up your payment method before starting a ten-day free trial. You can set it up in **Accounts** - **Payments** by adding a card or subscribing through AWS Marketplace.    
-  
-   Note that if you're running this lab at the Agility event, you will be provided with Trial/Free access to the F5 Cloud Servies (speak    to the Lab facilitator if you don't have access).   
+   `2.` You can subscribe to the service, or start a free trial (if available). For full subscription you will need to provide payment information in the **Accounts** - **Payments** section, by adding a credit card, or alternatively subscribing through AWS Marketplace.    
 
    .. figure:: _figures/3.png  
 
@@ -60,7 +58,7 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
 
 2. Postman Configuration  
-********************* 
+************************** 
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in.  
 
